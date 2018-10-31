@@ -1,0 +1,30 @@
+{% extends "home/normal_page.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block "page_content" %}
+
+<div class="container contact-content">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="contact-info">
+                <h3>{{ page.title }}</h3>
+                <br/>
+                <p>
+                    <strong>Sähköposti</strong>
+                </p>
+                <p>
+                    {{ page.email }}
+                </p>
+                <br/>
+                <p>
+                    <strong>Osoite</strong>
+                </p>
+                <p>
+                    {{ page.address|linebreaks }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,7 +7,8 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-# Create your models here.
+class EventIndexPage(Page):
+    pass
 
 class EventPage(Page):
     start = models.DateTimeField("Event start date and time")

@@ -128,3 +128,38 @@ margin-bottom: 10px;
 .section-title .pull-right a{
     font-size: 13px;
 }
+
+/****page title*****/
+.page-title{
+    padding: 100px 0;
+    //background:url(../images/bread-bg.jpg) no-repeat fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.page-title h1{
+    font-weight: 300;
+    color:#fff;
+    text-transform: capitalize;
+    font-size: 29px;
+    letter-spacing: 0.05em;
+    margin: 0px;
+    line-height: 30px;
+}
+.page-title .breadcrumb{
+    background-color: transparent;
+    margin: 10px 0 0 0 ;
+    padding: 0px;
+    text-align: right;
+}
+.page-title .breadcrumb li a{
+    color:#b5b5b5;
+}
+.page-title .breadcrumb li.active{
+    color:#0bc8f1;
+}
+@media(max-width:767px){
+    .page-title, .page-title .breadcrumb{
+        text-align: center;
+    }
+}
