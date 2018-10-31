@@ -1,0 +1,37 @@
+/*******************
+social
+*******************/
+
+.social{
+    margin: 0;
+    padding: 0;
+}
+.social li{
+    padding: 0px;
+    margin: 0;
+}
+.social li a{
+    width:40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    color:#777;
+}
+.social li a.fb:hover{
+    background-color:  #3b5998;
+    color:#fff;
+}
+.social li a.twitter:hover{
+    background-color:  #00aced;
+    color:#fff;
+}
+.social li a.in:hover{
+    background-color:  #0e76a8;
+    color:#fff;
+}
+.social li a.dribbble:hover{
+    background-color:  #ea4c89;
+    color:#fff;
+}

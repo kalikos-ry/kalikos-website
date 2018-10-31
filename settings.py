@@ -18,6 +18,9 @@ aldryn_addons.settings.load(locals())
 
 INSTALLED_APPS.extend([
     # add your project specific apps here
+    
+    'wagtail.contrib.settings',
+    
     'kalikos_site',
     'home',
     'sass_processor',
@@ -32,3 +35,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 STATICFILES_FINDERS.extend([
     'compressor.finders.CompressorFinder',
     ])
+    
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+                'wagtail.contrib.settings.context_processors.settings')
