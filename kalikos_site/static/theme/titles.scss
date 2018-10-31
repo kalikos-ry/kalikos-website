@@ -1,0 +1,130 @@
+/****************
+basic
+*****************/
+a:hover, a:focus{
+    outline: 0;
+}
+
+/***** margin***/
+
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+.margin-bottom-30{
+    margin-bottom: 30px;
+}
+.margin-bottom-40{
+    margin-bottom: 40px;
+}
+.margin-bottom-50{
+    margin-bottom: 50px;
+}
+.margin-bottom-60{
+    margin-bottom: 60px;
+}
+
+
+/****padding****/
+
+.padding-80{
+    padding: 80px 0; 
+}
+.padding-70{
+    padding: 70px 0; 
+}
+.padding-60{
+    padding: 60px 0; 
+}
+.padding-50{
+    padding: 50px 0; 
+}
+.padding-40{
+    padding: 40px 0; 
+}
+
+hr.big{
+    margin: 44px 0px;
+}
+
+/********dividers*********/
+.divided-10{
+    height: 10px;
+    width:100%;
+}
+.divided-20{
+    height: 20px;
+    width:100%;
+}
+.divided-30{
+    height: 30px;
+    width:100%;
+}
+.divided-40{
+    height: 40px;
+    width:100%;
+}
+
+.divided-50{
+    height: 50px;
+    width:100%;
+}
+.divided-60{
+    height: 60px;
+    width:100%;
+}
+.divided-70{
+    height: 70px;
+    width:100%;
+}
+.divided-80{
+    height: 80px;
+    width:100%;
+}
+/*******typography****/
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Oswald', sans-serif; 
+    margin-top: 0px;
+}
+
+p{
+    font-family: 'Arimo', sans-serif; 
+
+}
+.theme-text{
+    color:#0bc8f1;  
+}
+.theme-text:hover{
+
+    color:#0bc8f1; 
+}
+a{
+    transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+}
+a, a:hover, a:focus{
+    text-decoration: none;
+}
+/*****section title****/
+.section-title h1{
+    font-weight: 400;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.17em;
+}
+.section-title h1 small{
+   font-size: 13px;
+text-transform: capitalize;
+color: #555;
+font-weight: 300;
+display: inline-block;
+margin-bottom: 10px;
+}
+.section-title .pull-right a{
+    font-size: 13px;
+}

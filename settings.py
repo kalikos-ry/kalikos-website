@@ -23,6 +23,8 @@ INSTALLED_APPS.extend([
     
     'kalikos_site',
     'home',
+    'event',
+    
     'sass_processor',
 ])
 

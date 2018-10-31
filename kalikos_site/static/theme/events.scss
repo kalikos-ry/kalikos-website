@@ -1,0 +1,114 @@
+.project-full-width-row{
+    text-align: center;
+}
+ .no-paddding{
+    padding: 0px; 
+}
+ .no-margin{
+    margin: 0px; 
+}
+.img-desc {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 13px;
+    position: relative;
+    z-index: 6;
+}
+.img:hover .img-desc h5 {
+    color: #fff;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.img:hover .img-desc p {
+    color: #fff;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.img {
+    position: relative;
+    overflow: hidden;
+}
+.over {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    bottom: 100%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: rgba(11, 200, 241, 0.6);
+    overflow: hidden;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.img:hover {
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.img:hover .over {
+    bottom: 0px;
+    display: block;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.img-desc {
+    top: 0;
+    padding-top: 26%;
+}
+.img-desc h2 {
+    font-size: 22px;
+    line-height: 30px;
+    font-style: normal;
+    width: 100%;
+    color:#fff;
+    display: inline-block;
+    text-align: center;
+    font-weight: 300;
+}
+.img-desc h2 {
+    position: absolute;
+    right: -100%;
+}
+.img-desc h2 span {
+    color: #fff;
+    display: inline-block;
+    width: 100%;
+    font-weight: 300;
+    font-family: 'Arimo', sans-serif;
+    font-style: italic;
+    font-size: 13px;
+}
+.img:hover .over .img-desc h2 {
+    right: 0%;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
+}
+
+.event-date
+{ 
+	background: rgba(231, 232, 235, .9);
+    font-size: 13px;
+    color: #363636;
+    padding-top: 8px;
+    padding-left: 12px;
+    padding-right: 7px;
+    padding-bottom: 8px;
+    margin-top: 0px;
+    width: 100%;
+    max-width: 75%;
+    float: right;
+    position: absolute;
+    bottom: 0px;
+}
