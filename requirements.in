@@ -7,3 +7,4 @@ https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.0.0.1/57910941-9f3f
 libsass==0.15.1
 django-compressor==2.2
 django-sass-processor==0.7.1
+wagtailmenus==2.11.1

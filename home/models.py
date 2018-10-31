@@ -22,6 +22,7 @@ class HomePage(Page):
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         context['events'] = EventPage.objects.exclude(end__lt=timezone.now()).order_by('start')
+        context['menuitems'] = self.get_children().filter(live=True, show_in_menus=True)
         return context
 
 class NormalPage(Page):

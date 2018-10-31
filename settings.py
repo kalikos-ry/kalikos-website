@@ -20,6 +20,8 @@ INSTALLED_APPS.extend([
     # add your project specific apps here
     
     'wagtail.contrib.settings',
+    'wagtail.contrib.modeladmin',
+    'wagtailmenus',
     
     'kalikos_site',
     'home',
@@ -38,5 +40,9 @@ STATICFILES_FINDERS.extend([
     'compressor.finders.CompressorFinder',
     ])
     
-TEMPLATES[0]['OPTIONS']['context_processors'].append(
-                'wagtail.contrib.settings.context_processors.settings')
+LANGUAGE_CODE='fi'
+    
+TEMPLATES[0]['OPTIONS']['context_processors'].extend([
+                'wagtail.contrib.settings.context_processors.settings',
+                'wagtailmenus.context_processors.wagtailmenus',
+                ])
