@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block "content" %}
 Homepage
@@ -25,7 +25,7 @@ Homepage
                 {% for event in events %}
                 <div class="col-sm-3 no-padding">
                     <div class="img">
-                        <img class="img-responsive" src="https://blog.ropecon.fi/wp-content/uploads/2017/03/chess_1940_edit.jpg" alt=""/>
+                        {% image event.image fill-690x460 class="img-responsive" %}
                         <a class="over" href="#">
                             <div class="img-desc">
                                 <h2>{{ event.title }}
