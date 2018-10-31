@@ -1,0 +1,103 @@
+/***************
+
+Footer
+
+****************/
+
+#footer{
+    padding: 100px 0;
+    background-color: #222;
+    border-top: 5px solid #999;
+}
+#footer .social{
+
+
+}
+#footer .social li{
+    padding: 0px 0px;
+}
+#footer .social li a{
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid #777;
+}
+#footer .social li a:hover{
+    border-color: transparent;
+}
+.footer-inner h3{
+    margin-bottom: 30px;
+    color:#fff;
+    font-weight: 400;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.20em;
+    font-family: 'Oswald', sans-serif;
+}
+.footer-inner p{
+    color:#777;
+    font-weight: 400;
+    margin: 0px;
+}
+.copyright{
+    display: block;
+    font-size: 11px;
+    color: #777;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+   
+}
+#footer hr{
+background-image: -webkit-linear-gradient(left, transparent, rgba(255, 255, 255, 0.1), transparent);
+background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+border: 0;
+height: 1px;
+margin: 22px 0 22px 0;
+}
+
+.subscribe-form{
+    margin-top: 20px;
+    position: relative;
+}
+.subscribe-form .form-control{
+    border: 1px solid #777;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: rgba(255,255,255,0);
+    color:#777;
+    height: 40px;
+    font-weight: 300;
+}
+.subscribe-form .form-control:focus{
+    border-color: #0bc8f1;
+}
+.subscribe-form .btn-default{
+    background-color: transparent;
+    color: #0bc8f1;
+    font-size: 35px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    padding: 4px 10px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+.subscribe-form .btn-default i{
+    display: block;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.subscribe-form:hover .form-control{
+    border-color:#0bc8f1;
+}
+.contact-list li{
+    font-size: 16px;
+    line-height: 30px;
+    color:#777;
+}
+.contact-info{
+    margin-bottom: 40px;
+}
