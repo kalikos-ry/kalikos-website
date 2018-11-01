@@ -22,13 +22,18 @@ INSTALLED_APPS.extend([
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
     'wagtailmenus',
+    'wagtailnews',
+    #'wagtail.contrib.routable_page',
     
     'kalikos_site',
     'home',
     'event',
+    'news',
     
     'sass_processor',
 ])
+
+USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (

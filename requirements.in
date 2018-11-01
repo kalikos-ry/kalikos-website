@@ -8,3 +8,4 @@ libsass==0.15.1
 django-compressor==2.2
 django-sass-processor==0.7.1
 wagtailmenus==2.11.1
+wagtailnews

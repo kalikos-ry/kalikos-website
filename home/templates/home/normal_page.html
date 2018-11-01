@@ -2,7 +2,7 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block "content" %}
+{% block content %}
 {% image page.title_image original as title_image %}
 <div class="page-title" style="background-image: url({{ title_image.url }})">
     <div class="container">
@@ -21,7 +21,7 @@
     </div>
 </div>
 <div class="divided-70"></div>
-{% block "page_content" %}
+{% block page_content %}
 
 {% endblock %}
 {% endblock %}
