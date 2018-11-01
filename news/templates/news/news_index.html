@@ -6,20 +6,7 @@
 <div class="container">
     <div class="row">
         {% for news in page.get_newsitems %}
-        <div class="col-sm-4 margin-bottom-30">
-            <div class="post">
-                <div class="post-thumbnail">
-                    <a href="{{ news.full_url }}">
-                        {% image news.image fill-690x460 class="img-responsive" %}
-                    </a>
-                </div><!--post image-->
-                <h3 class="post-title"><a href="{{ news.full_url }}">{{ news.title }}</a></h3>
-                <p>
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.
-                </p>
-                <span class="read-more"><em>{{ news.date }}</em><a href="{{ news.full_url }}" class="theme-text">Lue&nbsp;lisää&nbsp;<i class="ion-ios-arrow-round-forward"></i></a></span>
-            </div><!--post-->
-        </div>
+            {% include "news/news_incl.html" %}
         {% endfor %}
     </div>
 </div>

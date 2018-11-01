@@ -6,6 +6,23 @@
 Homepage
 {{ page.body|richtext }}
 
+{% if newsitems %}
+<div class="container">
+    <div class="row margin-bottom-40">
+        <div class="col-sm-12 section-title">
+            <h1><small>Kalikoksen</small> <br>Uutisia. <span class="pull-right"><a href="{{ newsindex.url }}" class="btn btn-theme-border btn-radius btn-lg wow animated fadeIn animated" data-wow-duration="700ms" data-wow-delay="1800ms" style="visibility: visible; animation-duration: 700ms; animation-delay: 1800ms; animation-name: fadeIn;">Lisää...</a></span></h1> 
+        </div>
+    </div><!--section title row-->
+    <div class="row">
+        {% for news in newsitems %}
+            {% include "news/news_incl.html" %}
+        {% endfor %}
+    </div><!--post row end-->
+</div>
+{% endif %}
+
+<div class="divided-50"></div>
+
 {% if events %}
 <div class="upcoming-events">
     <div class="container">
@@ -14,7 +31,7 @@ Homepage
                 <h1>
                     <small>Tulevat</small>
                     <br/>
-                    Tapahtumat
+                    Tapahtumat.
                 </h1>
             </div>
         </div>
