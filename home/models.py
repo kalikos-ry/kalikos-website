@@ -3,7 +3,9 @@ from django.utils import timezone
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.core.fields import StreamField
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from event.models import EventPage
@@ -15,12 +17,19 @@ from kalikos_site.models import BrandingSettings
 # Create your models here.
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
+        ('paragraph', blocks.RichTextBlock()),
+        ],blank=True)
 
+    text_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    #body = RichTextField(blank=True)
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        ImageChooserPanel('text_image', classname="full"),
+        StreamFieldPanel('body', classname="full"),
+        #FieldPanel('body', classname="full"),
     ]
     
     def get_context(self, request):

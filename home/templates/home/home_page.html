@@ -3,10 +3,19 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-Homepage
-{{ page.body|richtext }}
+{% image page.text_image original as text_image %}
+<div class="homepage_wide" style="background-image: url({{ text_image.url }})">
+    <div class="container normal-content">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ page.body }}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% if newsitems %}
+<div class="divided-50"></div>
 <div class="container">
     <div class="row margin-bottom-40">
         <div class="col-sm-12 section-title">
@@ -21,9 +30,8 @@ Homepage
 </div>
 {% endif %}
 
-<div class="divided-50"></div>
-
 {% if events %}
+<div class="divided-50"></div>
 <div class="upcoming-events">
     <div class="container">
         <div class="row margin-bottom-40">
