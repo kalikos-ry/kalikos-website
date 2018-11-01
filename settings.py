@@ -45,7 +45,7 @@ STATICFILES_FINDERS.extend([
     'compressor.finders.CompressorFinder',
     ])
     
-LANGUAGE_CODE='fi'
+LANGUAGE_CODE='fi-FI'
     
 TEMPLATES[0]['OPTIONS']['context_processors'].extend([
                 'wagtail.contrib.settings.context_processors.settings',

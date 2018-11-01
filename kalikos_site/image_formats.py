@@ -1,0 +1,10 @@
+from wagtail.images.formats import Format, register_image_format, unregister_image_format
+from django.utils.translation import ugettext_lazy as _
+
+unregister_image_format('fullwidth')
+unregister_image_format('left')
+unregister_image_format('right')
+register_image_format(Format('fullwidth', _('Full width'), 'richtext-image img-rounded full-width', 'width-800'))
+register_image_format(Format('left', _('Left-aligned'), 'richtext-image img-responsive img-rounded pull-left', 'width-500'))
+register_image_format(Format('right', _('Right-aligned'), 'richtext-image img-responsive img-rounded pull-right', 'width-500'))
+register_image_format(Format('thumbnail', 'Thumbnail', 'richtext-image thumbnail', 'max-120x120'))

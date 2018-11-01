@@ -10,6 +10,8 @@ from event.models import EventPage
 from .normal_page import NormalPage
 from news.models import NewsItem, NewsIndex
 
+from kalikos_site.models import BrandingSettings
+
 # Create your models here.
 
 class HomePage(Page):
@@ -32,6 +34,10 @@ class HomePage(Page):
 
 class ContactsPage(NormalPage):
     address = models.TextField()
+    
+    @property
+    def email(self):
+        return BrandingSettings.objects.first().email
     
     content_panels = Page.content_panels + [
         ImageChooserPanel('title_image', classname="full"),

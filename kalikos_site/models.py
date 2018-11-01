@@ -13,3 +13,4 @@ class SocialMediaSettings(BaseSetting):
 @register_setting
 class BrandingSettings(BaseSetting):
     logo = models.ImageField()
+    email = models.EmailField()
