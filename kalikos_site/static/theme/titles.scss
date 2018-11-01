@@ -84,6 +84,13 @@ hr.big{
     width:100%;
 }
 /*******typography****/
+.normal-content h3 {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
 h1, h2, h3, h4, h5, h6{
     font-family: 'Oswald', sans-serif; 
     margin-top: 0px;

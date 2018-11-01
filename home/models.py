@@ -33,6 +33,7 @@ class HomePage(Page):
 class ContactsPage(NormalPage):
     address = models.TextField()
     
-    content_panels = NormalPage.content_panels + [
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('title_image', classname="full"),
         FieldPanel('address', classname="full"),
     ]
