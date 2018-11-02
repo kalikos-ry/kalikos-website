@@ -24,9 +24,27 @@
 {% block page_content %}
 <div class="container normal-content">
     <div class="row">
+        {% if page.get_descendants %}
+        <div class="col-md-8">
+        {% else %}
         <div class="col-sm-12">
+        {% endif %}
             {{ page.body }}
         </div>
+        
+        {% if page.get_descendants %}
+        <div class="col-md-3 col-md-offset-1">
+            <div class="sidebar-box">
+                <h3>Katso myös</h3>
+                <ul class="list-unstyled">
+                    {% for p in page.get_descendants %}
+                    <li><a href="{{ p.url }}">{{ p }}</a></li>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 

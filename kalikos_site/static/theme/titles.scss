@@ -170,3 +170,70 @@ margin-bottom: 10px;
         text-align: center;
     }
 }
+
+/*****************
+
+Sidebar
+
+********************/
+
+.sidebar-box{
+    margin-top: 40px;
+    margin-bottom:60px;
+}
+.sidebar-box h3{
+    font-weight: 400;
+    color:#555;
+    font-size: 15px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+.search-widget{
+    position: relative;
+    
+}
+.search-widget .search-btn{
+    border: 0px;
+    background-color: transparent;
+    position: absolute;
+    right: 15px;
+top: 10px;
+font-size: 20px;
+color: #777;
+}
+.search-widget .search-btn:hover, .search-widget .search-btn:focus{
+    color:#0bc8f1;
+    outline: 0;
+}
+.search-widget .form-control{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    height: 45px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+.sidebar-box ul li{
+    line-height: 28px;
+}
+.sidebar-box ul li a{
+    color:#777;
+    font-size: 15px;
+}
+.sidebar-box ul li a:hover{
+    color:#0bc8f1;
+}
+.tag-cloud a{
+    margin: 5px;
+    padding: 5px 7px;
+    display: inline-block;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.3);
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color:#777;
+}
+.tag-cloud a:hover{
+    color:#0bc8f1;
+}

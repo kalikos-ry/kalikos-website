@@ -3,14 +3,14 @@
 <div class="col-sm-4 margin-bottom-30">
     <div class="post">
         <div class="post-thumbnail">
-            <a href="{{ news.full_url }}">
+            <a href="{{ news.url }}">
                 {% image news.image fill-690x460 class="img-responsive" %}
             </a>
         </div><!--post image-->
-        <h3 class="post-title"><a href="{{ news.full_url }}">{{ news.title }}</a></h3>
+        <h3 class="post-title"><a href="{{ news.url }}">{{ news.title }}</a></h3>
         <p>
             {{ news.intro }}
         </p>
-        <span class="read-more"><em>{{ news.date }}</em><a href="{{ news.full_url }}" class="theme-text">Lue&nbsp;lisää&nbsp;<i class="ion-ios-arrow-round-forward"></i></a></span>
+        <span class="read-more"><em>{{ news.date }}</em><a href="{{ news.url }}" class="theme-text">Lue&nbsp;lisää&nbsp;<i class="ion-ios-arrow-round-forward"></i></a></span>
     </div><!--post-->
 </div>
