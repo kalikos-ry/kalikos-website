@@ -1,5 +1,6 @@
 {% load sass_tags %}
 {% load menu_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -64,7 +65,7 @@
 content
 {% endblock %}
 
-
+<a href="{% static 'text.txt' %}" style="color: white;">load text</a>
     <div class="divided-40"></div>
     <!--footer -->
 
