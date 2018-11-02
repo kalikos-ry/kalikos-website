@@ -34,5 +34,6 @@ COPY . /app
 # </GULP>
 
 # <STATIC>
+RUN DJANGO_MODE=build python manage.py compilescss
 RUN DJANGO_MODE=build python manage.py collectstatic --noinput
 # </STATIC>
