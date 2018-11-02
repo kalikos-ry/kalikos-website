@@ -33,6 +33,11 @@ COPY . /app
 # <GULP>
 # </GULP>
 
+RUN DJANGO_MODE=build python manage.py compilescss
 # <STATIC>
 RUN DJANGO_MODE=build python manage.py collectstatic --noinput
 # </STATIC>
+
+# Remove the css files in development environments (in Live they
+# are already collected)
+RUN DJANGO_MODE=build python manage.py compilescss --delete-files
