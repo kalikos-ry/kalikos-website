@@ -35,11 +35,12 @@ INSTALLED_APPS.extend([
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    )
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 
 STATICFILES_FINDERS.extend([
     'compressor.finders.CompressorFinder',
