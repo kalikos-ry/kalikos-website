@@ -29,6 +29,7 @@ INSTALLED_APPS.extend([
     'home',
     'event',
     'news',
+    'wagtail_publications',
     
     'sass_processor',
 ])
