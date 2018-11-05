@@ -1,0 +1,16 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="col-sm-4 margin-bottom-30">
+    <div class="issue">
+        <div class="issue-cover">
+            <a href="{{ issue.url }}">
+                {% image issue.cover height-300 class="img-responsive" %}
+            </a>
+        </div><!--post image-->
+        <h3 class="issue-title"><a href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
+        <p>
+            {{ news.intro }}
+        </p>
+        <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ issue.url }}" class="theme-text">Tutustu<i class="ion-ios-arrow-round-forward"></i></a></span>
+    </div><!--issue-->
+</div>

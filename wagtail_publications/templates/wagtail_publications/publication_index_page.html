@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row margin-bottom-10">
         <div class="col-sm-12 section-title">
-            <h2>{{ pub.title }}
+            <h2><a href="{{ pub.url }}">{{ pub.title }}</a>
             <span class="pull-right">
                 <a href="{{ pub.url }}" class="btn btn-theme-border btn-radius btn-lg wow animated fadeIn animated">
                     Lisää numeroita</a>
@@ -16,8 +16,9 @@
         </div>
     </div>
     <div class="row">
-        
-            {% include "news/news_incl.html" %}
+        {% for issue in pub.get_latest_issues %}
+            {% include "wagtail_publications/issue_incl.html" %}
+        {% endfor %}
     </div>
 </div>
 {% endfor %}

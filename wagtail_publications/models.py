@@ -19,16 +19,24 @@ class PublicationPage(Page):
         ImageChooserPanel('image', classname="full"),
         FieldPanel('description', classname="full"),
     ]
+    
+    def get_issues(self):
+        return self.get_children().live().specific()
+        
+    def get_latest_issues(self):
+        return IssuePage.objects.live().order_by('-publication_date')[:3]
 
 class IssuePage(Page):
     publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
-    name = models.CharField(max_length=250)
     contents = RichTextField(blank=True)
     cover = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
     publication_date = models.DateField(default=timezone.now())
+    number = models.IntegerField()
     
     content_panels = Page.content_panels + [
-        FieldPanel('name', classname="full"),
+        FieldPanel('publication', classname="full"),
+        FieldPanel('number', classname="full"),
+        FieldPanel('publication_date', classname="full"),
         ImageChooserPanel('cover', classname="full"),
         FieldPanel('contents', classname="full"),
     ]
