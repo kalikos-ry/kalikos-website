@@ -237,3 +237,26 @@ color: #777;
 .tag-cloud a:hover{
     color:#0bc8f1;
 }
+
+/****
+Center heading and line
+***/
+
+.center-heading{
+    text-align: center;
+    color:#000;
+    text-transform: uppercase;
+    font-weight:400;
+    letter-spacing: 0.0em;
+    line-height: 40px;
+}
+.center-line{
+    display: block;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 5px;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    width:120px;
+}
