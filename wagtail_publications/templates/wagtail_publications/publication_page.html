@@ -21,17 +21,23 @@
             {{ page.description|richtext }}
         </div>
         <div class="col-md-3 col-md-offset-1">
-            {% image page.image original %}
-        </div>
-        <div class="col-md-8">
-            {{ page.description|richtext }}
+            {% image page.image original class="img-responsive"%}
         </div>
     </div>
+    {% for issue in page.get_issues %}
     <div class="row">
-        {% for issue in pub.get_issues %}
-            {% include "wagtail_publications/issue_incl.html" %}
-        {% endfor %}
+        <div class="col-md-2">
+            <a href="{{ issue.url }}">
+                {% image issue.cover original class="img-responsive" %}
+            </a>
+        </div>
+        <div class="col-md-10">
+            <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
+            {{ issue.contents|richtext }}
+        </div>
     </div>
+    <div class="divided-30"></div>
+    {% endfor %}
 </div>
 
 {% endblock %}

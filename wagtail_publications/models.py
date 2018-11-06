@@ -21,10 +21,10 @@ class PublicationPage(Page):
     ]
     
     def get_issues(self):
-        return self.get_children().live().specific()
+        return IssuePage.objects.live().descendant_of(self).order_by('-publication_date')
         
     def get_latest_issues(self):
-        return IssuePage.objects.live().order_by('-publication_date')[:3]
+        return IssuePage.objects.live().descendant_of(self).order_by('-publication_date')[:3]
 
 class IssuePage(Page):
     publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
@@ -32,6 +32,9 @@ class IssuePage(Page):
     cover = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
     publication_date = models.DateField(default=timezone.now())
     number = models.IntegerField()
+    
+    def url(self):
+        return self.publication.url + "#" + self.title
     
     content_panels = Page.content_panels + [
         FieldPanel('publication', classname="full"),
