@@ -1,6 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="col-sm-4 margin-bottom-30">
+<div class="col-sm-4 margin-bottom-30
+{% if forloop.counter0 %}
+d-none d-sm-block hidden-xs
+{% endif %}
+">
     <div class="issue">
         <div class="issue-cover">
             <a href="{{ issue.url }}">

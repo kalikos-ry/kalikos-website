@@ -1,5 +1,6 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 @register_setting
 class SocialMediaSettings(BaseSetting):
@@ -12,5 +13,11 @@ class SocialMediaSettings(BaseSetting):
         
 @register_setting
 class BrandingSettings(BaseSetting):
-    logo = models.ImageField()
+    footer_logo = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    header_logo = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
     email = models.EmailField()
+    
+    panels = [
+        ImageChooserPanel('header_logo'),
+        ImageChooserPanel('footer_logo'),
+        ]

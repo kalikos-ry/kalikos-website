@@ -1,6 +1,8 @@
 {% load sass_tags %}
 {% load menu_tags %}
 {% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -31,7 +33,9 @@
                         <span class="sr-only">Toggle navigation</span>
                         <i class="ion-ios-menu"></i>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="{{ settings.kalikos_site.BrandingSettings.logo.url }}" alt=""></a>
+                    <a class="navbar-brand" href="/">
+                            {% image settings.kalikos_site.BrandingSettings.header_logo width-180 %}
+                        </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">                
                     {% main_menu %}
@@ -75,7 +79,9 @@ content
             <div class="row margin-bottom-60">
                 <div class="col-sm-4 margin-bottom-30">
                     <div class="footer-inner">
-                        <h3><a href="/"><img src="{{ settings.kalikos_site.BrandingSettings.logo.url }}" alt=""></a> </h3> 
+                        <h3><a href="/">
+                            {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
+                        </a> </h3> 
                         
                         <p>
                         </p>

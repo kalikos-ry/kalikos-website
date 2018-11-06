@@ -96,19 +96,49 @@
     transition: all 1.5s;
 }
 
-.event-date
-{ 
-	background: rgba(231, 232, 235, .9);
-    font-size: 13px;
-    color: #363636;
-    padding-top: 8px;
-    padding-left: 12px;
-    padding-right: 7px;
-    padding-bottom: 8px;
-    margin-top: 0px;
-    width: 100%;
-    max-width: 75%;
-    float: right;
-    position: absolute;
-    bottom: 0px;
+
+.event-inner {
+    background-size: cover;
+    padding: 5px;
+    margin: 5px;
+    padding-top: 100px;
+    padding-left: 30px;
+    color: #fff;
+    padding-bottom: 50px;
+    line-height: 24px;
+    
+    p {
+        display: inline-block;
+        margin-top: 10px;
+    }
+    
+    .red-btn {
+        background: #0bc8f1 !important;
+        font-size: 20px;
+        text-transform: uppercase;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin: 0 auto;
+        float: left;
+        color: #fff;
+        font-family: 'latobold';
+        text-align: center;
+    }
+    
+    .event-date
+    { 
+    	background: rgba(231, 232, 235, .9);
+        font-size: 13px;
+        color: #363636;
+        padding-top: 8px;
+        padding-left: 12px;
+        padding-right: 7px;
+        padding-bottom: 8px;
+        margin-top: 0px;
+        width: 100%;
+        max-width: 75%;
+        float: left;
+        bottom: 0px;
+    }
 }
