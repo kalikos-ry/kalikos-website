@@ -14,8 +14,6 @@ from news.models import NewsItem, NewsIndex
 
 from kalikos_site.models import BrandingSettings
 
-# Create your models here.
-
 class HomePage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),

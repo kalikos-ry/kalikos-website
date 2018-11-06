@@ -30,7 +30,7 @@ class IssuePage(Page):
     publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
     contents = RichTextField(blank=True)
     cover = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    publication_date = models.DateField(default=timezone.now())
+    publication_date = models.DateField(default=timezone.now)
     number = models.IntegerField()
     
     def url(self):
