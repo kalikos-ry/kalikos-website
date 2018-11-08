@@ -26,7 +26,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="event-box event-extra-box">
                     <i class="ion-md-medical"></i>
-                    <h3>Extra</h3>
+                    <h3>&nbsp;</h3>
                     <p>&nbsp;</p>
                 </div>
             </div>
@@ -47,6 +47,14 @@
                 </div>
             </div>
             </div>
+            {% if page.url %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Linkkejä</h3>
+                    {% include_block page.urls %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
