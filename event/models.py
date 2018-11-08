@@ -16,6 +16,8 @@ class EventPage(Page):
     intro = models.CharField(max_length=250)
     description = RichTextField(blank=True)
     image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    location = models.CharField(max_length=250)
+    location_exact = models.CharField(max_length=500)
 
     # Editor panels configuration
 
@@ -23,6 +25,10 @@ class EventPage(Page):
         MultiFieldPanel([
             FieldPanel('start'),
             FieldPanel('end'),
+        ]),
+        MultiFieldPanel([
+            FieldPanel('location'),
+            FieldPanel('location_exact'),
         ]),
         ImageChooserPanel('image'),
         FieldPanel('intro', classname="full"),

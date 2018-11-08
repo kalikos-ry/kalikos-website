@@ -1,0 +1,54 @@
+{% extends "home/normal_page.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title_image %}
+{% image page.image original as title_image %}
+<div class="page-title" style="background-image: url({{ title_image.url }})">
+{% endblock %}
+
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            {{ page.description|richtext }}
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="event-box event-location-box">
+                    <i class="ion-md-locate"></i>
+                    <h3>Sijainti</h3>
+                    <p>{{ page.location_exact }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="event-box event-extra-box">
+                    <i class="ion-md-medical"></i>
+                    <h3>Extra</h3>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="event-box event-start-box">
+                    <i class="ion-md-time"></i>
+                    <h3>Alkaa</h3>
+                    <p>{{ page.start }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="event-box event-end-box">
+                    <i class="ion-md-timer"></i>
+                    <h3>Päättyy</h3>
+                    <p>{{ page.end }}</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
