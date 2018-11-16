@@ -10,6 +10,7 @@ from home.normal_page import NormalPage
 class PublicationIndexPage(NormalPage):
     def get_publications(self):
         return PublicationPage.objects.all()
+    subpage_types = ['PublicationPage']
 
 class PublicationPage(Page):
     image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
@@ -19,6 +20,8 @@ class PublicationPage(Page):
         ImageChooserPanel('image', classname="full"),
         FieldPanel('description', classname="full"),
     ]
+    parent_page_types = ['PublicationIndexPage']
+    subpage_types = ['IssuePage']
     
     def get_issues(self):
         return IssuePage.objects.live().descendant_of(self).order_by('-publication_date')
@@ -43,3 +46,4 @@ class IssuePage(Page):
         ImageChooserPanel('cover', classname="full"),
         FieldPanel('contents', classname="full"),
     ]
+    parent_page_types = ['PublicationPage']
