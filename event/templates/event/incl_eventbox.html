@@ -1,0 +1,13 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+    <div class="event_box text-left">
+        <div class="event_image">
+            {% image event.image fill-300x150 class="img-responsive" %}
+            <div class="event_overlay">
+                <div class="event-city">{{ event.location }}</div>
+                <div class="event-date">{{ event.start|date }}</div>
+            </div>
+        </div>
+        <h4 class="event-title">{{ event.title }}</h4>
+        <p>{{ event.intro }}</p>
+        <a href="{{ event.url }}">Lue lisää...</a>
+    </div>

@@ -32,7 +32,7 @@ class HomePage(Page):
     
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        context['events'] = EventPage.objects.exclude(end__lt=timezone.now()).order_by('start')
+        context['events'] = EventPage.objects.get_upcoming()[:3]
         newsindex = NewsIndex.objects.first()
         context['newsitems'] = NewsItem.objects.live()
         context['newsindex'] = newsindex

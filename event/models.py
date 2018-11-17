@@ -1,13 +1,46 @@
 from django.db import models
+from django.utils import timezone
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from home.normal_page import NormalPage
+
+class UpcomingEventsBlock(blocks.StaticBlock):
+    class Meta:
+        template = 'event/events_block.html'
+       
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context['events'] = EventPage.objects.get_upcoming()[:3]
+        return context
+       
+class PastEventsBlock(blocks.StaticBlock):
+   class Meta:
+       template = 'event/events_block.html'
 
 class EventIndexPage(Page):
-    pass
+    subpage_types=['EventPage']
+    title_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
+        ('paragraph', blocks.RichTextBlock()),
+        ('upcoming_events', UpcomingEventsBlock()),
+        ('past_events', PastEventsBlock()),
+        ])
+        
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('title_image', classname="full"),
+        StreamFieldPanel('body'),
+    ]
+
+from wagtail.core.models import PageManager
+class EventManager(PageManager):
+    def get_upcoming(self):
+        return self.get_queryset().exclude(end__lt=timezone.now()).order_by('start')
 
 class EventPage(Page):
     start = models.DateTimeField("Event start date and time")
@@ -24,6 +57,8 @@ class EventPage(Page):
             ], template="event/urls_block.html"),
         )
     ], blank=True)
+    
+    objects = EventManager()
     
 
     # Editor panels configuration
@@ -42,3 +77,4 @@ class EventPage(Page):
         FieldPanel('description', classname="full"),
         StreamFieldPanel('urls'),
     ]
+    parent_page_types=['EventIndexPage']

@@ -46,19 +46,7 @@
         <div class="row">
             {% for event in events %}
             <div class="col-sm-6 col-md-4">
-                <div class="event_box text-left">
-                    <div class="event_image">
-                        {% image event.image fill-300x150 class="img-responsive" %}
-                        <div class="event_overlay">
-                            <div class="event-city">{{ event.location }}</div>
-                            <div class="event-date">{{ event.start|date }}</div>
-                        </div>
-                    </div>
-                    <h4 class="event-title">{{ event.title }}</h4>
-                    <p>{{ event.intro }}</p>
-                    <a href="{{ event.url }}">Lue lisää...</a>
-                </div>
-                
+                {% include "event/incl_eventbox.html" %}
             </div>
             {% endfor %}
         </div>
