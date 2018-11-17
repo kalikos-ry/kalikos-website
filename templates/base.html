@@ -88,6 +88,11 @@ content
                         <div class="divided-30"></div>
                         <ul class="social list-inline">
                             <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.facebook }}" class="fb"><i class="ion-logo-facebook"></i></a></li> 
+                            {% if settings.kalikos_site.SocialMediaSettings.mewe %}
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.mewe }}" class="mewe">
+                                <img src="{% static 'logos/mewe-logo-white.png' %}" width="28" />
+                            </a></li> 
+                            {% endif %}
                             <!--
                             <li class="list-inline-item"><a href="#" class="twitter"><i class="ion-logo-patreon"></i></a></li> 
                             <li class="list-inline-item"><a href="#" class="in"><i class="ion-social-linkedin-outline"></i></a></li> 
