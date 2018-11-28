@@ -96,8 +96,13 @@
     transition: all 1.5s;
 }
 
+$event-bg: #f7f7f7;
+
 .upcoming-events {
-    background-color: #f7f7f7;
+    background-color: $event-bg;
+    .container {
+        background-color: $event-bg;
+    }
 }
 
 .event_box {
@@ -127,8 +132,8 @@
     padding-right: 7px;
     padding-bottom: 8px;
     text-align: center;
-    width: 100%;
-    max-width: 86px;
+    min-width: 86px;
+    margin-left: 100%;
 	float:right;
 	margin-top:16px;
 	white-space: nowrap;

@@ -15,11 +15,18 @@ class UpcomingEventsBlock(blocks.StaticBlock):
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
         context['events'] = EventPage.objects.get_upcoming()[:3]
+        context['no_events'] = "Ei tulevia tapahtumia tiedossa nyt..."
         return context
        
 class PastEventsBlock(blocks.StaticBlock):
-   class Meta:
+    class Meta:
        template = 'event/events_block.html'
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context['events'] = EventPage.objects.get_past()[:6]
+        context['no_events'] = "Ei menneitä tapahtumia..."
+        return context
 
 class EventIndexPage(Page):
     subpage_types=['EventPage']
@@ -41,6 +48,9 @@ from wagtail.core.models import PageManager
 class EventManager(PageManager):
     def get_upcoming(self):
         return self.get_queryset().exclude(end__lt=timezone.now()).order_by('start')
+
+    def get_past(self):
+        return self.get_queryset().exclude(end__gt=timezone.now()).order_by('-start')
 
 class EventPage(Page):
     start = models.DateTimeField("Event start date and time")
