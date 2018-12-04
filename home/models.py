@@ -7,6 +7,7 @@ from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail import images
 
 from event.models import EventPage
 from .normal_page import NormalPage
@@ -20,7 +21,7 @@ class HomePage(Page):
         ('paragraph', blocks.RichTextBlock()),
         ],blank=True)
 
-    text_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    text_image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     #body = RichTextField(blank=True)
     # Editor panels configuration
 

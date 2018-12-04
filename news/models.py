@@ -7,13 +7,14 @@ from wagtail.core.models import Page
 from home.normal_page import NormalPage
 from wagtailnews.decorators import newsindex
 from wagtailnews.models import NewsIndexMixin
+from wagtail import images
 
 
 class NewsItem(AbstractNewsItem):
     title = models.CharField(max_length=100)
     intro = models.CharField(max_length=250)
     body = RichTextField()
-    image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
 
     panels = [
         FieldPanel('title'),

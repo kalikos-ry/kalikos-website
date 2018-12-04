@@ -5,6 +5,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail import images
 from home.normal_page import NormalPage
 
 class PublicationIndexPage(NormalPage):
@@ -13,7 +14,7 @@ class PublicationIndexPage(NormalPage):
     subpage_types = ['PublicationPage']
 
 class PublicationPage(Page):
-    image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     description = RichTextField(blank=True)
     
     content_panels = Page.content_panels + [
@@ -32,7 +33,7 @@ class PublicationPage(Page):
 class IssuePage(Page):
     publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
     contents = RichTextField(blank=True)
-    cover = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    cover = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     publication_date = models.DateField(default=timezone.now)
     number = models.IntegerField()
     
