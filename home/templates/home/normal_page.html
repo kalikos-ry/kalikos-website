@@ -16,8 +16,19 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb">
+                    {% for page in self.get_ancestors %}
+                    {% if not page.is_root %}
                     <li>
-                        <a href="/"><i class="ion-ios-home"></i></a>
+                    {% if forloop.counter0 == 1 %}
+                        <a href="{% pageurl page %}"><i class="ion-ios-home"></i></a>
+                    {% else %}
+                        <a href="{% pageurl page %}">{{ page.title }}</a>
+                    {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="active">
+                        {{ page.title }}
                     </li>
                 </ol>
             </div>
