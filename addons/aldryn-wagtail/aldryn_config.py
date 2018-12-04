@@ -12,6 +12,7 @@ class Form(forms.BaseForm):
     def to_settings(self, data, settings):
         settings['INSTALLED_APPS'].extend([
             'wagtail.contrib.forms',
+            'wagtail.contrib.modeladmin',
             'wagtail.contrib.redirects',
             'wagtail.embeds',
             'wagtail.sites',
@@ -26,7 +27,7 @@ class Form(forms.BaseForm):
             'modelcluster',
             'taggit',
         ])
-        settings['MIDDLEWARE_CLASSES'].extend([
+        settings['MIDDLEWARE'].extend([
             'wagtail.core.middleware.SiteMiddleware',
             'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         ])
