@@ -1,6 +1,7 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
 @register_setting
 class SocialMediaSettings(BaseSetting):
@@ -21,3 +22,20 @@ class BrandingSettings(BaseSetting):
         ImageChooserPanel('header_logo'),
         ImageChooserPanel('footer_logo'),
         ]
+
+class KalikosImage(AbstractImage):
+    attribution = models.CharField(max_length=500, blank=True)
+    attribution_url = models.URLField(blank=True)
+
+    admin_form_fields = Image.admin_form_fields + (
+        # Then add the field names here to make them appear in the form:
+        'attribution', 'attribution_url'
+    )
+
+class KalikosRendition(AbstractRendition):
+    image = models.ForeignKey(KalikosImage, on_delete=models.CASCADE, related_name='renditions')
+
+    class Meta:
+        unique_together = (
+            ('image', 'filter_spec', 'focal_point_key'),
+        )

@@ -45,3 +45,5 @@ TEMPLATES[0]['OPTIONS']['context_processors'].extend([
                 'wagtail.contrib.settings.context_processors.settings',
                 'wagtailmenus.context_processors.wagtailmenus',
                 ])
+
+WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
