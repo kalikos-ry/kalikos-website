@@ -20,7 +20,6 @@ INSTALLED_APPS.extend([
     # add your project specific apps here
     
     'wagtail.contrib.settings',
-    'wagtail.contrib.modeladmin',
     'wagtailmenus',
     'wagtailnews',
     #'wagtail.contrib.routable_page',

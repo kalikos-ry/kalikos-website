@@ -30,7 +30,7 @@ class NewsItemRevision(AbstractNewsItemRevision):
     # This is the only field you need to define on this model.
     # It must be a foreign key to your NewsItem model,
     # be named 'newsitem', and have a related_name='revisions'
-    newsitem = models.ForeignKey(NewsItem, related_name='revisions')
+    newsitem = models.ForeignKey(NewsItem, related_name='revisions', on_delete=models.CASCADE)
     
 @newsindex
 class NewsIndex(NewsIndexMixin, NormalPage):
