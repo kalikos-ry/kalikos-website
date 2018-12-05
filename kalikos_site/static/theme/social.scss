@@ -9,24 +9,33 @@ social
 .social li{
     padding: 0px;
     margin: 0;
+
+    a {
+        width:40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        display: block;
+        font-size: 20px;
+        color:#777;
+    }
+
+    a.fb:hover{
+        background-color:  #3b5998;
+        color:#fff;
+    }
+    a.mewe img {
+        filter: invert(50%);
+    }
+    a.mewe:hover{
+        background-color:  #2799bd;
+        color:#fff;
+        img {
+            filter: invert(0%);
+        }
+    }
 }
-.social li a{
-    width:40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    display: block;
-    font-size: 20px;
-    color:#777;
-}
-.social li a.fb:hover{
-    background-color:  #3b5998;
-    color:#fff;
-}
-.social li a.mewe:hover{
-    background-color:  #2799bd;
-    color:#fff;
-}
+
 .social li a.twitter:hover{
     background-color:  #00aced;
     color:#fff;
