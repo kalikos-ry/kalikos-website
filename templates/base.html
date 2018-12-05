@@ -115,6 +115,18 @@ content
                 <div class="col-sm-4">
                     <div class="footer-inner">
                         <h3>We are all us</h3>
+                        {% if self.title_image.attribution %}
+                        <h6>Kuvat</h6>
+                        <p class="small">{{ self.title_image.title }} - 
+                            {% if self.title_image.attribution_url %}
+                            <a href="{{ self.title_image.attribution_url }}">
+                            {% endif %}
+                        {{ self.title_image.attribution }}
+                            {% if self.title_image.attribution_url %}
+                            </a>
+                            {% endif %}
+                        </p>
+                        {% endif %}
                         <!--
                         <p>
                             Liity postituslistallemme.
