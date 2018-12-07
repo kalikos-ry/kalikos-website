@@ -9,7 +9,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
 from home.normal_page import NormalPage
 
-class UpcomingEventsBlock(blocks.StaticBlock):
+class UpcomingEventsBlock(blocks.Block):
     class Meta:
         template = 'event/events_block.html'
        
@@ -19,7 +19,7 @@ class UpcomingEventsBlock(blocks.StaticBlock):
         context['no_events'] = "Ei tulevia tapahtumia tiedossa nyt..."
         return context
        
-class PastEventsBlock(blocks.StaticBlock):
+class PastEventsBlock(blocks.Block):
     class Meta:
        template = 'event/events_block.html'
 

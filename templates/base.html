@@ -1,7 +1,8 @@
 {% load sass_tags %}
 {% load menu_tags %}
 {% load static %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
 
 <!DOCTYPE html>
 <html lang="fi">
@@ -115,18 +116,22 @@ content
                 <div class="col-sm-4">
                     <div class="footer-inner">
                         <h3>We are all us</h3>
-                        {% if self.title_image.attribution %}
+                        
                         <h6>Kuvat</h6>
-                        <p class="small">{{ self.title_image.title }} - 
-                            {% if self.title_image.attribution_url %}
-                            <a href="{{ self.title_image.attribution_url }}">
+                        {{ rendered_images }}
+                        {% for image in rendered_images.values %}
+                            {% if image.attribution %}
+                            <p class="small">{{ image.title }} - 
+                                {% if image.attribution_url %}
+                                <a href="{{ self.title_image.attribution_url }}">
+                                {% endif %}
+                            {{ image.attribution }}
+                                {% if image.attribution_url %}
+                                </a>
+                                {% endif %}
+                            </p>
                             {% endif %}
-                        {{ self.title_image.attribution }}
-                            {% if self.title_image.attribution_url %}
-                            </a>
-                            {% endif %}
-                        </p>
-                        {% endif %}
+                        {% endfor %}
                         <!--
                         <p>
                             Liity postituslistallemme.

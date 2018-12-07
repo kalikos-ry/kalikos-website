@@ -42,6 +42,7 @@ STATICFILES_FINDERS.extend([
 LANGUAGE_CODE='fi'
     
 TEMPLATES[0]['OPTIONS']['context_processors'].extend([
+                'kalikos_site.context_processors.image_tracking',
                 'wagtail.contrib.settings.context_processors.settings',
                 'wagtailmenus.context_processors.wagtailmenus',
                 ])

@@ -1,6 +1,7 @@
 {% extends "home/normal_page.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
 
 {% block title_image %}
 {% image page.title_image original as title_image %}
@@ -11,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            {{ page.body }}
+            {% include_block page.body %}
         </div>
     </div>
 </div>
