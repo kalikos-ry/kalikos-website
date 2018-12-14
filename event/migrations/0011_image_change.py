@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('event', '0010_auto_20181204_0514'),
+        ('kalikos_site', '0007_create_kalikosimages'),
     ]
 
     operations = [
