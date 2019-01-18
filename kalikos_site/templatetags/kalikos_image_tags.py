@@ -20,5 +20,6 @@ class KalikosImageNode(template.Node):
         if not 'rendered_images' in context:
             return 'IMAGE TRACK FAILED' 
         imgs = context['rendered_images']
-        imgs[image.id] = image
+        if image:
+            imgs[image.id] = image
         return self._node.render(context)
