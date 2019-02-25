@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='eventindexpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('upcoming_events', event.models.UpcomingEventsBlock()), ('past_events', event.models.PastEventsBlock())]),
+            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('events', event.models.EventsBlock())]),
         ),
     ]

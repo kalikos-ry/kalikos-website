@@ -1,12 +1,12 @@
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
 
-{% if events %}
+{% if value.events %}
 <div class="upcoming-events">
     <div class="container">
         <div class="row">
             
-            {% for event in events %}
+            {% for event in value.events %}
             <div class="col-sm-6 col-md-4">
                 {% include "event/incl_eventbox.html" %}
             </div>
@@ -17,5 +17,5 @@
 </div>
 <div class="divided-30"></div>
 {% else %}
-<p>{{ no_events }}</p>
+<p>{{ value.alt_text }}</p>
 {% endif %}

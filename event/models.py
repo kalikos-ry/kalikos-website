@@ -9,25 +9,17 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
 from home.normal_page import NormalPage
 
-class UpcomingEventsBlock(blocks.Block):
+class EventStructValue(blocks.StructValue):
+    def events(self):
+        return EventPage.objects.get_events(self.get('event_type'))[:3]
+
+class EventsBlock(blocks.StructBlock):
+    event_type = blocks.ChoiceBlock(choices=(('get_past', "Menneet"), ('get_upcoming', "Tulevat")))
+    alt_text = blocks.RichTextBlock()
+
     class Meta:
         template = 'event/events_block.html'
-       
-    def get_context(self, value, parent_context=None):
-        context = super().get_context(value, parent_context=parent_context)
-        context['events'] = EventPage.objects.get_upcoming()[:3]
-        context['no_events'] = "Ei tulevia tapahtumia tiedossa nyt..."
-        return context
-       
-class PastEventsBlock(blocks.Block):
-    class Meta:
-       template = 'event/events_block.html'
-
-    def get_context(self, value, parent_context=None):
-        context = super().get_context(value, parent_context=parent_context)
-        context['events'] = EventPage.objects.get_past()[:6]
-        context['no_events'] = "Ei menneitä tapahtumia..."
-        return context
+        value_class = EventStructValue
 
 class EventIndexPage(Page):
     subpage_types=['EventPage']
@@ -36,8 +28,7 @@ class EventIndexPage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
         ('paragraph', blocks.RichTextBlock()),
-        ('upcoming_events', UpcomingEventsBlock()),
-        ('past_events', PastEventsBlock()),
+        ('events', EventsBlock()),
         ])
         
     content_panels = Page.content_panels + [
@@ -52,6 +43,9 @@ class EventManager(PageManager):
 
     def get_past(self):
         return self.get_queryset().exclude(end__gt=timezone.now()).order_by('-start')
+
+    def get_events(self, events_type):
+        return getattr(self,events_type)()
 
 class EventPage(Page):
     start = models.DateTimeField("Event start date and time")
