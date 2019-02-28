@@ -7,6 +7,7 @@ INSTALLED_ADDONS = [
     'aldryn-django',
     'aldryn-sso',
     'aldryn-google-analytics',
+    'aldryn-sitemap',
     'aldryn-wagtail',
     # </INSTALLED_ADDONS>
 ]
