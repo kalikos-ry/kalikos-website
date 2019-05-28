@@ -24,6 +24,9 @@
     <link href="{% sass_src 'theme/frontpage.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/publications.scss' %}" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_head }}
+    <!-- snake end -->
 </head>
 <body>
 <header>
@@ -153,6 +156,10 @@ content
     </footer>
 
     <!--footer end-->
+    
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_tail }}
+    <!-- snake end -->
 
 </body>
 </html>
