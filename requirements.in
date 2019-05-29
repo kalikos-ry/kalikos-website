@@ -1,7 +1,7 @@
 # <INSTALLED_ADDONS>  # Warning: text inside the INSTALLED_ADDONS tags is auto-generated. Manual changes will be overwritten.
-https://control.divio.com/api/v1/apps/serve/aldryn-addons/1.0.4/5cc40a55-a1e5-4906-a8df-03a1029a62f5/aldryn-addons-1.0.4.tar.gz#egg=aldryn-addons==1.0.4
-https://control.divio.com/api/v1/apps/serve/aldryn-django/2.0.13.1/bfd8ec88-3867-4cca-a8fe-e140dfc17db0/aldryn-django-2.0.13.1.tar.gz#egg=aldryn-django==2.0.13.1
-https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.5.1/4e2eb564-fbf5-4d5f-96e0-4059f3185ffe/aldryn-sso-1.5.1.tar.gz#egg=aldryn-sso==1.5.1
+https://control.divio.com/api/v1/apps/serve/aldryn-addons/1.1.0/7a2d5a44-16e2-4ef8-bfe0-1e61c8601b33/aldryn-addons-1.1.0.tar.gz#egg=aldryn-addons==1.1.0
+https://control.divio.com/api/v1/apps/serve/aldryn-django/2.0.13.2/4eafb93a-5dd0-474b-a856-121ee72d033b/aldryn-django-2.0.13.2.tar.gz#egg=aldryn-django==2.0.13.2
+https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.6.0/6d90e844-d7ef-4faa-b527-5df3d49277be/aldryn-sso-1.6.0.tar.gz#egg=aldryn-sso==1.6.0
 https://control.divio.com/api/v1/apps/serve/aldryn-sitemap/0.0.2/1bfd498d-9d0d-4737-bb0f-25f713007d1e/aldryn-sitemap-0.0.2.tar.gz#egg=aldryn-sitemap==0.0.2
 https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.3.0.1/efed86ad-a986-4aa3-91e2-817411efcdc2/aldryn-wagtail-2.3.0.1.tar.gz#egg=aldryn-wagtail==2.3.0.1
 # </INSTALLED_ADDONS>
