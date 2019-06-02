@@ -21,6 +21,7 @@ INSTALLED_APPS.extend([
     'wagtail.contrib.settings',
     'wagtailmenus',
     'wagtailnews',
+    'aldryn_google_analytics',
     #'wagtail.contrib.routable_page',
     
     'kalikos_site',
