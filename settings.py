@@ -23,7 +23,6 @@ INSTALLED_APPS.extend([
     'wagtailnews',
     "wagtail.contrib.routable_page",
     #'wagtail.contrib.wagtailroutablepage',
-    'aldryn_google_analytics',
     
     'kalikos_site',
     'home',
@@ -50,3 +49,7 @@ TEMPLATES[0]['OPTIONS']['context_processors'].extend([
                 ])
 
 WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
+
+# Do this like this until there is new aldryn_google_analytics
+INSTALLED_APPS.extend(['aldryn_google_analytics'])
+GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
