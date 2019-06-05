@@ -38,12 +38,6 @@ class HomePage(Page):
         StreamFieldPanel('body', classname="full"),
         #FieldPanel('body', classname="full"),
     ]
-    
-    def get_context(self, request):
-        context = super(HomePage, self).get_context(request)
-        context['events'] = EventPage.objects.get_upcoming()[:3]
-        context['menuitems'] = self.get_children().filter(live=True, show_in_menus=True)
-        return context
 
 class ContactsPage(NormalPage):
     address = models.TextField()
