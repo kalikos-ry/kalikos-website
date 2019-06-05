@@ -25,31 +25,6 @@
     </div>
 </div>
 
-{% if events %}
-<div class="divided-50"></div>
-<div class="upcoming-events">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 section-title">
-                <h1>
-                    <small>Tulevat</small>
-                    <br/>
-                    Tapahtumat.
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            {% for event in events %}
-            <div class="col-sm-6 col-md-4">
-                {% include "event/incl_eventbox.html" %}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    
-</div>
-{% endif %}
 <!--
 <div class="divided-70"></div>
 <div class="container">
