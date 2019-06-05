@@ -14,19 +14,25 @@ from .normal_page import NormalPage
 from news.models import NewsItem, NewsIndex
 
 from kalikos_site.models import BrandingSettings
+from news.models import NewsBlock
 
 class HomePage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
         ('paragraph', blocks.RichTextBlock()),
+        ('news', NewsBlock(template='home/blocks/news.html'))
         ],blank=True)
 
     text_image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
+    title_text = models.TextField()
+    title_subtext = models.TextField()
     #body = RichTextField(blank=True)
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('text_image', classname="full"),
+        FieldPanel('title_text', classname="full"),
+        FieldPanel('title_subtext', classname="full"),
         StreamFieldPanel('body', classname="full"),
         #FieldPanel('body', classname="full"),
     ]
@@ -34,9 +40,6 @@ class HomePage(Page):
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         context['events'] = EventPage.objects.get_upcoming()[:3]
-        newsindex = NewsIndex.objects.first()
-        context['newsitems'] = NewsItem.objects.live()
-        context['newsindex'] = newsindex
         context['menuitems'] = self.get_children().filter(live=True, show_in_menus=True)
         return context
 

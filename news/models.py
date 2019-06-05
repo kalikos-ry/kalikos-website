@@ -4,11 +4,27 @@ from wagtailnews.models import AbstractNewsItem, AbstractNewsItemRevision
 from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.models import Page
+from wagtail.core import blocks
 from home.normal_page import NormalPage
 from wagtailnews.decorators import newsindex
 from wagtailnews.models import NewsIndexMixin
 from wagtail import images
 
+class NewsStructValue(blocks.StructValue):
+    def news(self):
+        return NewsItem.objects.live()[:self.get('amount')]
+        
+    def bootstrapcolsm(self):
+        return "col-sm-%d" % (12/self.get('amount'))
+    
+    def news_url(self):
+        return NewsIndex.objects.first().url
+    
+class NewsBlock(blocks.StructBlock):
+    amount = blocks.IntegerBlock()
+    
+    class Meta:
+        value_class = NewsStructValue
 
 class NewsItem(AbstractNewsItem):
     title = models.CharField(max_length=100)
