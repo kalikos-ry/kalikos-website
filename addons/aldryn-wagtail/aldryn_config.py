@@ -12,8 +12,8 @@ class Form(forms.BaseForm):
     def to_settings(self, data, settings):
         settings['INSTALLED_APPS'].extend([
             'wagtail.contrib.forms',
-            'wagtail.contrib.modeladmin',
             'wagtail.contrib.redirects',
+            'wagtail.contrib.modeladmin',
             'wagtail.embeds',
             'wagtail.sites',
             'wagtail.users',
