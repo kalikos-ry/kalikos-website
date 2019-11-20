@@ -18,7 +18,7 @@ class KalikosImageNode(template.Node):
     def render(self, context):
         image = self._node.image_expr.resolve(context)
         if not 'rendered_images' in context:
-            return 'KALIKOS IMAGE TRACK FAILED' 
+            return 'KALIKOS IMAGE TRACK FAILED (use include_block)' 
         imgs = context['rendered_images']
         if image:
             imgs[image.id] = image
