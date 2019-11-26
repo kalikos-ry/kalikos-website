@@ -5,10 +5,10 @@ https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.6.0/6d90e844-d7ef-4faa-
 https://control.divio.com/api/v1/apps/serve/aldryn-sitemap/0.0.2/1bfd498d-9d0d-4737-bb0f-25f713007d1e/aldryn-sitemap-0.0.2.tar.gz#egg=aldryn-sitemap==0.0.2
 https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.7.0.1/5dde4d05-d4b4-4f80-ac01-2ac8d0fdad45/aldryn-wagtail-2.7.0.1.tar.gz#egg=aldryn-wagtail==2.7.0.1
 # </INSTALLED_ADDONS>
-#-e /app/addons-dev/aldryn-google-analytics
 https://github.com/jrutila/aldryn-google-analytics/archive/2.0.0.zip#egg=aldryn-google-analytics==2.0.0
 libsass==0.15.1
 django-compressor==2.2
 django-sass-processor==0.7.1
 wagtailmenus==2.11.1
-https://files.pythonhosted.org/packages/3b/d0/bf3e5fcd16421112114672c0e80050adc0f8934871b4ccf4d9d8e01e17e3/wagtailnews-2.1.2-py3-none-any.whl#sha256=c2763ca8a39457600e4fb9344443f16ffc1725180cdbbaaefdac027f31e3f393
+#https://files.pythonhosted.org/packages/1e/8e/e3fd225f48647d1d55c93232c33059b9cae5569d6f370b90b6a465c9efee/wagtailnews-2.3.0-py3-none-any.whl#egg=wagtailnews-2.3.0
+https://github.com/jrutila/wagtailnews/archive/master.zip#egg=wagtailnews-2.3.999
