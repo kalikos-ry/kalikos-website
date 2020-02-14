@@ -3,7 +3,7 @@ https://control.divio.com/api/v1/apps/serve/aldryn-addons/1.1.0/7a2d5a44-16e2-4e
 https://control.divio.com/api/v1/apps/serve/aldryn-django/2.0.13.2/4eafb93a-5dd0-474b-a856-121ee72d033b/aldryn-django-2.0.13.2.tar.gz#egg=aldryn-django==2.0.13.2
 https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.7.0/3ef75ae5-729a-4c44-ac3e-fa5950511e90/aldryn-sso-1.7.0.tar.gz#egg=aldryn-sso==1.7.0
 https://control.divio.com/api/v1/apps/serve/aldryn-sitemap/0.0.2/1bfd498d-9d0d-4737-bb0f-25f713007d1e/aldryn-sitemap-0.0.2.tar.gz#egg=aldryn-sitemap==0.0.2
-https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.7.0.1/5dde4d05-d4b4-4f80-ac01-2ac8d0fdad45/aldryn-wagtail-2.7.0.1.tar.gz#egg=aldryn-wagtail==2.7.0.1
+https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.7.1.1/583bdd52-c2ca-4066-ad36-cdc3e8e21a75/aldryn-wagtail-2.7.1.1.tar.gz#egg=aldryn-wagtail==2.7.1.1
 # </INSTALLED_ADDONS>
 https://github.com/jrutila/aldryn-google-analytics/archive/2.0.0.zip#egg=aldryn-google-analytics==2.0.0
 libsass==0.15.1
