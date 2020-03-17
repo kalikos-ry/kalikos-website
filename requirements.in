@@ -6,9 +6,8 @@ https://control.divio.com/api/v1/apps/serve/aldryn-sitemap/0.0.2/1bfd498d-9d0d-4
 https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.8.0.1/22ed06ac-95c5-48a4-b950-c4c0d728653f/aldryn-wagtail-2.8.0.1.tar.gz#egg=aldryn-wagtail==2.8.0.1
 # </INSTALLED_ADDONS>
 https://github.com/jrutila/aldryn-google-analytics/archive/2.0.0.zip#egg=aldryn-google-analytics==2.0.0
-libsass==0.15.1
-django-compressor==2.2
-django-sass-processor==0.7.1
-wagtailmenus==2.11.1
-#https://files.pythonhosted.org/packages/1e/8e/e3fd225f48647d1d55c93232c33059b9cae5569d6f370b90b6a465c9efee/wagtailnews-2.3.0-py3-none-any.whl#egg=wagtailnews-2.3.0
-https://github.com/jrutila/wagtailnews/archive/master.zip#egg=wagtailnews-2.3.999
+libsass==0.19.4
+django-compressor==2.4
+django-sass-processor==0.8
+wagtailmenus==3.0.1
+wagtailnews==2.7.1
