@@ -198,6 +198,8 @@ class Form(forms.BaseForm):
 
         settings['SITE_ID'] = env('SITE_ID', 1)
 
+        settings['X_FRAME_OPTIONS'] = env('X_FRAME_OPTIONS', 'SAMEORIGIN')
+
         settings['ADDON_URLS_I18N_LAST'] = 'aldryn_django.urls_redirect'
 
         self.domain_settings(data, settings, env=env)
@@ -242,7 +244,7 @@ class Form(forms.BaseForm):
                 if d.strip()
             ]
             domains = {
-                1: {
+                env("SITE_ID", 1): {
                     'name': env('SITE_NAME', ''),
                     'domain': domain,
                     'aliases': domain_aliases,
