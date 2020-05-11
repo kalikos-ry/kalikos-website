@@ -1,0 +1,8 @@
+<div>
+    <h2>{{ value.podcast }}</h2>
+    <p>{{ value.description }}</p>
+    <h4>Viimeisimmät jaksot:</h4>
+    {% for e in value.podcast.episodes.all %}
+        {{ e.title }}
+    {% endfor %}
+</div>
