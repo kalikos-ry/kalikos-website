@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
+
+{% if value.events %}
+<div class="upcoming-events">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 section-title">
+                <h1>
+                    <small>Tulevat</small>
+                    <br/>
+                    Tapahtumat.
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            
+            {% for event in value.events %}
+            <div class="col-sm-6 col-md-4">
+                {% include "event/incl_eventbox.html" %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="divided-30"></div>
+{% else %}
+<p>{{ value.alt_text }}</p>
+{% endif %}

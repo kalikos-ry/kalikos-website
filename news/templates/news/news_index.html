@@ -7,7 +7,9 @@
 <div class="container">
     <div class="row">
         {% for news in page.get_newsitems %}
+            <div class="col-sm-4 margin-bottom-30">
             {% include "news/news_incl.html" %}
+            </div>
         {% endfor %}
     </div>
 </div>

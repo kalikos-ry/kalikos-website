@@ -24,6 +24,9 @@
     <link href="{% sass_src 'theme/frontpage.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/publications.scss' %}" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_head }}
+    <!-- snake end -->
 </head>
 <body>
 <header>
@@ -40,28 +43,6 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">                
                     {% main_menu %}
-                        <!--
-                    <ul class="nav navbar-nav navbar-right">
-                        {% for menu in menuitems %}
-                        <li class=""><a href="{{ menu.url }}">{{ menu.title }}</a></li>
-                        {% endfor %}
-                        <li class="active"><a href="index.html">Home </a></li>
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pages <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="services.html">Services</a></li>                             
-                                <li><a href="login-reg.html">Login / Register</a></li>
-                                <li><a href="error.html">Error - 404</a></li>
-                                <li><a href="page-blank.html">Blank page</a></li>
-                                <li><a href="elements.html">Elements</a></li>
-
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact us </a></li>
-                    </ul>-->
                 </div><!--/.nav-collapse -->
             </div><!--/.container -->
         </nav> <!--main navigation ends up-->
@@ -71,7 +52,6 @@
 content
 {% endblock %}
 
-<a href="{% static 'kalikos_test/kalikos_text.txt' %}" style="color: white;">load text</a>
     <div class="divided-40"></div>
     <!--footer -->
 
@@ -122,7 +102,7 @@ content
                             {% if image.attribution %}
                             <p class="small">{{ image.title }} - 
                                 {% if image.attribution_url %}
-                                <a href="{{ self.title_image.attribution_url }}">
+                                <a href="{{ image.attribution_url }}">
                                 {% endif %}
                             {{ image.attribution }}
                                 {% if image.attribution_url %}
@@ -153,6 +133,10 @@ content
     </footer>
 
     <!--footer end-->
+    
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_tail }}
+    <!-- snake end -->
 
 </body>
 </html>

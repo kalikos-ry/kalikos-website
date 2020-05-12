@@ -6,9 +6,6 @@ import sys
 from aldryn_client import forms
 
 
-SYSTEM_FIELD_WARNING = 'WARNING: this field is auto-written. Please do not change it here.'
-
-
 class CachedLoader(list):
     """
     A list subclass to be used for the template loaders option
@@ -44,7 +41,6 @@ class Form(forms.BaseForm):
         'Languages',
         required=True,
         initial='["en", "de"]',
-        help_text=SYSTEM_FIELD_WARNING,
     )
     use_manifeststaticfilesstorage = forms.CheckboxField(
         'Hash static file names',
@@ -102,8 +98,6 @@ class Form(forms.BaseForm):
         settings['DATA_ROOT'] = env('DATA_ROOT', os.path.join(settings['BASE_DIR'], 'data'))
         settings['SECRET_KEY'] = env('SECRET_KEY', 'this-is-not-very-random')
         settings['DEBUG'] = boolean_ish(env('DEBUG', False))
-        settings['ENABLE_SYNCING'] = boolean_ish(
-            env('ENABLE_SYNCING', settings['DEBUG']))
         settings['DISABLE_TEMPLATE_CACHE'] = boolean_ish(
             env('DISABLE_TEMPLATE_CACHE', settings['DEBUG']))
 
@@ -154,7 +148,7 @@ class Form(forms.BaseForm):
             'aldryn_django',
         ])
 
-        if settings['ENABLE_SYNCING'] or settings['DISABLE_TEMPLATE_CACHE']:
+        if settings['DISABLE_TEMPLATE_CACHE']:
             loader_list_class = list
         else:
             loader_list_class = CachedLoader
@@ -204,6 +198,8 @@ class Form(forms.BaseForm):
 
         settings['SITE_ID'] = env('SITE_ID', 1)
 
+        settings['X_FRAME_OPTIONS'] = env('X_FRAME_OPTIONS', 'SAMEORIGIN')
+
         settings['ADDON_URLS_I18N_LAST'] = 'aldryn_django.urls_redirect'
 
         self.domain_settings(data, settings, env=env)
@@ -248,7 +244,7 @@ class Form(forms.BaseForm):
                 if d.strip()
             ]
             domains = {
-                1: {
+                env("SITE_ID", 1): {
                     'name': env('SITE_NAME', ''),
                     'domain': domain,
                     'aliases': domain_aliases,
@@ -309,6 +305,7 @@ class Form(forms.BaseForm):
         settings['DJANGO_WEB_WORKERS'] = env('DJANGO_WEB_WORKERS', 3)
         settings['DJANGO_WEB_MAX_REQUESTS'] = env('DJANGO_WEB_MAX_REQUESTS', 500)
         settings['DJANGO_WEB_TIMEOUT'] = env('DJANGO_WEB_TIMEOUT', 120)
+        settings['IS_RUNNING_DEVSERVER'] = 'runserver' in sys.argv
 
         # https://docs.djangoproject.com/en/1.8/ref/settings/#use-x-forwarded-host
         settings['USE_X_FORWARDED_HOST'] = env('USE_X_FORWARDED_HOST', False)
@@ -363,16 +360,16 @@ class Form(forms.BaseForm):
         sentry_dsn = env('SENTRY_DSN')
 
         if sentry_dsn:
-            settings['INSTALLED_APPS'].append('raven.contrib.django')
-            settings['RAVEN_CONFIG'] = {
-                'dsn': sentry_dsn,
-                'release': env('GIT_COMMIT', 'develop'),
-                'environment': env('STAGE', 'local'),
-            }
-            settings['LOGGING']['handlers']['sentry'] = {
-                'level': 'ERROR',
-                'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            }
+            import sentry_sdk
+            from sentry_sdk.integrations.django import DjangoIntegration
+
+            sentry_sdk.init(
+                dsn=sentry_dsn,
+                integrations=[DjangoIntegration()],
+                debug=settings['DEBUG'],
+                release=env('GIT_COMMIT', 'develop'),
+                environment=env('STAGE', 'local'),
+            )
 
     def storage_settings_for_media(self, settings, env):
         import yurl

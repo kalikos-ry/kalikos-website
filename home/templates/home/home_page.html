@@ -9,53 +9,22 @@
     <div class="container normal-content">
         <div class="row">
             <div class="col-sm-12">
-                {{ page.body }}
+                <h1>{{ page.title_text }}</h1>
+                <p>{{ page.title_subtext }}</p>
             </div>
         </div>
     </div>
 </div>
 
-{% if newsitems %}
 <div class="divided-50"></div>
 <div class="container">
-    <div class="row margin-bottom-40">
-        <div class="col-sm-12 section-title">
-            <h1><small>Kalikoksen</small> <br>Uutisia. <span class="pull-right"><a href="{{ newsindex.url }}" class="btn btn-theme-border btn-radius btn-lg wow animated fadeIn animated" data-wow-duration="700ms" data-wow-delay="1800ms" style="visibility: visible; animation-duration: 700ms; animation-delay: 1800ms; animation-name: fadeIn;">Lisää...</a></span></h1> 
-        </div>
-    </div><!--section title row-->
-    <div class="row">
-        {% for news in newsitems %}
-            {% include "news/news_incl.html" %}
-        {% endfor %}
-    </div><!--post row end-->
-</div>
-{% endif %}
-
-{% if events %}
-<div class="divided-50"></div>
-<div class="upcoming-events">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 section-title">
-                <h1>
-                    <small>Tulevat</small>
-                    <br/>
-                    Tapahtumat.
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            {% for event in events %}
-            <div class="col-sm-6 col-md-4">
-                {% include "event/incl_eventbox.html" %}
-            </div>
-            {% endfor %}
+    <div class="row margin-bottom-30">
+        <div class="col-sm-12">
+            {% include_block page.body %}
         </div>
     </div>
-    <div class="clearfix"></div>
-    
 </div>
-{% endif %}
+
 <!--
 <div class="divided-70"></div>
 <div class="container">
