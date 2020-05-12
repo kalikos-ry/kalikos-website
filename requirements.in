@@ -11,3 +11,4 @@ django-compressor==2.4
 django-sass-processor==0.8
 wagtailmenus==3.0.1
 wagtailnews==2.7.1
+feedparser==5.2.1
