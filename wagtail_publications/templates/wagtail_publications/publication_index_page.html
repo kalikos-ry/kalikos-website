@@ -4,9 +4,11 @@
 {% load kalikos_image_tags %}
 
 {% block page_content %}
-<div class="container">
-<button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
-</div>
+{% if settings.home.SnipcartSettings.api_key %}
+    <div class="container">
+    <button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
+    </div>
+{% endif %}
 {% for pub in page.get_publications %}
 <div class="container">
     <div class="row margin-bottom-10">
@@ -36,7 +38,7 @@
             </div>
             <div class="col-sm-9">
                 {{ pub.description|richtext }}
-                <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ pub.url }}" class="theme-text">Tutustu {% if pub.price or pub.pdf_price %}ja Osta {% endif %}<i class="ion-ios-arrow-round-forward"></i></a></span>
+                <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ pub.url }}" class="theme-text">Tutustu {% if pub.price or pub.pdf_price %}ja osta {% endif %}<i class="ion-ios-arrow-round-forward"></i></a></span>
             </div>
         </div>
     {% endif %}

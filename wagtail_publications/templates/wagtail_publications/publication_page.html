@@ -11,9 +11,11 @@
 
 
 {% block page_content %}
-<div class="container">
-<button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
-</div>
+{% if settings.home.SnipcartSettings.api_key %}
+    <div class="container">
+    <button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
+    </div>
+{% endif %}
 
 <div class="container">
     <div class="row margin-bottom-10">
