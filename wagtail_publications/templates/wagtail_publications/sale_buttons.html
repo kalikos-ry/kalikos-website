@@ -1,4 +1,5 @@
 {% load kalikos_image_tags %}
+{% load kalikos_tags %}
 {% load l10n %}
 
 {% if settings.home.SnipcartSettings.api_key %}
@@ -19,18 +20,39 @@
         </button>
     {% endif %}
     {% if item.price %}
-        <button class="snipcart-add-item btn btn-primary"
-            data-item-name="{{ item.shop_title }}"
-            data-item-id="{{ item.sku }}"
-            data-item-url="{% firstof url item.get_url %}"
-            data-item-price="{{ item.price|unlocalize }}"
-            data-item-description="{{ item.shop_title }}"
-            data-item-image="{{ item_image.url }}"
-        >
-            Osta tuote ({{ item.price }} €)
-        </button>
+        {% with stocks|get_stock:item.sku as stock %}
+            <button class="snipcart-add-item btn
+                {% if stock.stock < -1 and stock.allowOutOfStockPurchases %}
+                    btn-danger
+                {% else %}
+                    btn-primary
+                {% endif %}
+                "
+                data-item-name="{{ item.shop_title }}"
+                data-item-id="{{ item.sku }}"
+                data-item-url="{% firstof url item.get_url %}"
+                data-item-price="{{ item.price|unlocalize }}"
+                data-item-description="{{ item.shop_title }}"
+                data-item-image="{{ item_image.url }}"
+                {% if stock.stock < 1 and not stock.allowOutOfStockPurchases %}
+                disabled
+                {% endif %}
+            >
+                {% if stock.stock < 1 and stock.allowOutOfStockPurchases %}
+                    Ennakkotilaa ({{ item.price }} €)
+                {% else %}
+                    Osta tuote ({{ item.price }} €)
+                {% endif %}
+            </button>
+                {% if stock.stock < 1 %}
+        <p>
+            <b>Painos loppu.</b>
+            {% if stock.allowOutOfStockPurchases %}<small class="text-danger">Voit kuitenkin tilata tuotteen seuraavasta lisäpainoksesta. Teemme lisäpainoksia tilausten perusteella tai palautamme rahat.</small>{% endif %}
+        </p>
+                {% endif %}
+        {% endwith %}
     {% endif %}
-    {% if item.pdf_price %}
+    {% if stock.stock > 0 and item.pdf_price %}
         <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
     {% endif %}
 {% endif %}

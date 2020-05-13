@@ -24,6 +24,12 @@ class SnipcartSettings(BaseSetting):
         max_length=255,
         help_text='Your Snipcart public API key'
     )
+    secret_api_key = models.CharField(
+        max_length=255,
+        help_text='Your Snipcart secret API key',
+        null=True,
+        blank=True
+    )
 
 class HomePage(Page):
     body = StreamField([

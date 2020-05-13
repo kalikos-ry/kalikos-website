@@ -7,6 +7,9 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
 from home.normal_page import NormalPage
+from home.models import SnipcartSettings
+
+import requests
 
 class PublicationIndexPage(NormalPage):
     def get_publications(self):
@@ -44,6 +47,22 @@ class PublicationPage(Page):
         
     def get_latest_issues(self):
         return IssuePage.objects.live().descendant_of(self).order_by('-publication_date')[:3]
+        
+    def get_context(self, request):
+        context = super().get_context(request)
+        api_key = SnipcartSettings.for_site(request.site).secret_api_key
+        if api_key:
+            headers = { 'Accept' : 'application/json' }
+            products = requests.get('https://app.snipcart.com/api/products', auth=(api_key,''), headers=headers)
+            if products.status_code == 200:
+                stocks = {}
+                for p in products.json()['items']:
+                    stocks[p['userDefinedId']] = {
+                        'stock': p['stock'] if 'stock' in p else 0,
+                        'allowOutOfStockPurchases': p['allowOutOfStockPurchases'] if 'allowOutOfStockPurchases' in p else False
+                        }
+                context['stocks'] = stocks
+        return context
 
 class IssuePage(Page):
     publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
