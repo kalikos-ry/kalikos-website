@@ -26,18 +26,29 @@
         </div>
     </div>
     {% for issue in page.get_issues %}
-    <div class="row">
-        <div class="col-md-2">
-            <a href="{{ issue.url }}">
-                {% image issue.cover original class="img-responsive" %}
-            </a>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="{{ issue.url }}">
+                    {% image issue.cover original class="img-responsive" %}
+                </a>
+            </div>
+            <div class="col-md-10">
+                <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
+                {{ issue.contents|richtext }}
+            </div>
+            <button class="snipcart-add-item btn btn-primary"
+                data-item-name="{{ issue.title }}"
+                data-item-id="{{ page.sku }}-{{ issue.number }}"
+                data-item-url="{{ issue.get_full_url }}"
+                data-item-price="6"
+                data-item-description="{{ page.title }} - {{ issue.number }}"
+                data-item-image="{{ issue.cover }}"
+            >
+                <i class="icon icon-plus"></i>
+                Osta PDF
+            </button>
         </div>
-        <div class="col-md-10">
-            <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
-            {{ issue.contents|richtext }}
-        </div>
-    </div>
-    <div class="divided-30"></div>
+        <div class="divided-30"></div>
     {% endfor %}
 </div>
 

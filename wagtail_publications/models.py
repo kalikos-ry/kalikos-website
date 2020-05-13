@@ -16,10 +16,12 @@ class PublicationIndexPage(NormalPage):
 class PublicationPage(Page):
     image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     description = RichTextField(blank=True)
+    sku = models.CharField(max_length=10)
     
     content_panels = Page.content_panels + [
         ImageChooserPanel('image', classname="full"),
         FieldPanel('description', classname="full"),
+        FieldPanel('sku', classname="full"),
     ]
     parent_page_types = ['PublicationIndexPage']
     subpage_types = ['IssuePage']
