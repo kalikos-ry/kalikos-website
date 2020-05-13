@@ -1,0 +1,36 @@
+{% load kalikos_image_tags %}
+{% load l10n %}
+
+{% if settings.home.SnipcartSettings.api_key %}
+    {% image image original as item_image %}
+    {% if item.pdf_price %}
+        <button class="snipcart-add-item btn btn-primary"
+            data-item-name="{{ item.shop_title }} (PDF)"
+            data-item-id="{{ item.sku }}-pdf"
+            data-item-url="{% firstof url item.get_url %}"
+            data-item-price="{{ item.pdf_price|unlocalize }}"
+            data-item-description="{{ item.shop_title }}, pdf"
+            data-item-image="{{ item_image.url }}"
+            {% if issue.snipcart_digital_id %}
+                data-item-file-guid="{{ item.snipcart_digital_id }}"
+            {% endif %}
+        >
+            Osta PDF ({{ item.pdf_price }} €)
+        </button>
+    {% endif %}
+    {% if item.price %}
+        <button class="snipcart-add-item btn btn-primary"
+            data-item-name="{{ item.shop_title }}"
+            data-item-id="{{ item.sku }}"
+            data-item-url="{% firstof url item.get_url %}"
+            data-item-price="{{ item.price|unlocalize }}"
+            data-item-description="{{ item.shop_title }}"
+            data-item-image="{{ item_image.url }}"
+        >
+            Osta tuote ({{ item.price }} €)
+        </button>
+    {% endif %}
+    {% if item.pdf_price %}
+        <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
+    {% endif %}
+{% endif %}

@@ -35,6 +35,10 @@ class PublicationPage(Page):
     parent_page_types = ['PublicationIndexPage']
     subpage_types = ['IssuePage']
     
+    @property
+    def shop_title(self):
+        return "%s" % (self.title)
+    
     def get_issues(self):
         return IssuePage.objects.live().descendant_of(self).order_by('-publication_date')
         
@@ -51,6 +55,14 @@ class IssuePage(Page):
     price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     snipcart_digital_id = models.UUIDField(blank=True, null=True)
+    
+    @property
+    def sku(self):
+        return "%s-%s" % (self.publication.sku, self.number)
+        
+    @property
+    def shop_title(self):
+        return "%s #%s" % (self.publication.title, self.number)
     
     def url(self):
         return self.publication.url + "#" + self.title

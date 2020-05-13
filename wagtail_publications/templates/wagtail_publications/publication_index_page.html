@@ -38,7 +38,13 @@
             </div>
             <div class="col-sm-9">
                 {{ pub.description|richtext }}
-                <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ pub.url }}" class="theme-text">Tutustu {% if pub.price or pub.pdf_price %}ja osta {% endif %}<i class="ion-ios-arrow-round-forward"></i></a></span>
+                <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ pub.url }}" class="theme-text">
+                {% if settings.home.SnipcartSettings.api_key %}
+                    Tutustu {% if pub.price or pub.pdf_price %}ja osta {% endif %}<i class="ion-ios-arrow-round-forward"></i>
+                {% else %}
+                    Tutustu <i class="ion-ios-arrow-round-forward"></i>
+                {% endif %}
+                    </a></span>
             </div>
         </div>
     {% endif %}
