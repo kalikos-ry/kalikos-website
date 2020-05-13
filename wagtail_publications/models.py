@@ -3,7 +3,7 @@ from django.utils import timezone
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
 from home.normal_page import NormalPage
@@ -16,12 +16,21 @@ class PublicationIndexPage(NormalPage):
 class PublicationPage(Page):
     image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     description = RichTextField(blank=True)
+    
     sku = models.CharField(max_length=10)
+    price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    snipcart_digital_id = models.UUIDField(blank=True, null=True)
     
     content_panels = Page.content_panels + [
         ImageChooserPanel('image', classname="full"),
         FieldPanel('description', classname="full"),
         FieldPanel('sku', classname="full"),
+        FieldRowPanel([
+            FieldPanel('price', classname="col12"),
+            FieldPanel('pdf_price', classname="col6"),
+            FieldPanel('snipcart_digital_id', classname="col6"),
+            ])
     ]
     parent_page_types = ['PublicationIndexPage']
     subpage_types = ['IssuePage']
@@ -39,6 +48,10 @@ class IssuePage(Page):
     publication_date = models.DateField(default=timezone.now)
     number = models.IntegerField()
     
+    price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    snipcart_digital_id = models.UUIDField(blank=True, null=True)
+    
     def url(self):
         return self.publication.url + "#" + self.title
     
@@ -48,5 +61,10 @@ class IssuePage(Page):
         FieldPanel('publication_date', classname="full"),
         ImageChooserPanel('cover', classname="full"),
         FieldPanel('contents', classname="full"),
+        FieldRowPanel([
+            FieldPanel('price', classname="col12"),
+            FieldPanel('pdf_price', classname="col6"),
+            FieldPanel('snipcart_digital_id', classname="col6"),
+            ])
     ]
     parent_page_types = ['PublicationPage']

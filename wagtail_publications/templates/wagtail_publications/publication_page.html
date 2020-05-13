@@ -2,6 +2,7 @@
 
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
+{% load l10n %}
 
 {% block title_image %}
 {% image page.image original as title_image %}
@@ -10,6 +11,9 @@
 
 
 {% block page_content %}
+<div class="container">
+<button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
+</div>
 
 <div class="container">
     <div class="row margin-bottom-10">
@@ -20,6 +24,39 @@
     <div class="row">
         <div class="col-md-8">
             {{ page.description|richtext }}
+            <div>
+            {% image page.image original as item_image %}
+            {% if page.pdf_price %}
+                <button class="snipcart-add-item btn btn-primary"
+                    data-item-name="{{ page.title }} (PDF)"
+                    data-item-id="{{ page.sku }}-pdf"
+                    data-item-url="{{ page.get_url }}"
+                    data-item-price="{{ page.pdf_price|unlocalize }}"
+                    data-item-description="{{ page.title }}"
+                    data-item-image="{{ item_image.url }}"
+                    {% if issue.snipcart_digital_id %}
+                        data-item-file-guid="{{ page.snipcart_digital_id }}"
+                    {% endif %}
+                >
+                    Osta PDF ({{ page.pdf_price }} €)
+                </button>
+            {% endif %}
+            {% if page.price %}
+                <button class="snipcart-add-item btn btn-primary"
+                    data-item-name="{{ page.title }}"
+                    data-item-id="{{ page.sku }}"
+                    data-item-url="{{ page.get_url }}"
+                    data-item-price="{{ page.price|unlocalize }}"
+                    data-item-description="{{ page.title }}"
+                    data-item-image="{{ item_image.url }}"
+                >
+                    Osta tuote ({{ page.price }} €)
+                </button>
+            {% endif %}
+            {% if page.pdf_price %}
+                <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
+            {% endif %}
+            </div>
         </div>
         <div class="col-md-3 col-md-offset-1">
             {% image page.image original class="img-responsive"%}
@@ -27,26 +64,50 @@
     </div>
     {% for issue in page.get_issues %}
         <div class="row">
+            <div class="col-xs-12">
+                <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
+            </div>
             <div class="col-md-2">
                 <a href="{{ issue.url }}">
                     {% image issue.cover original class="img-responsive" %}
                 </a>
             </div>
             <div class="col-md-10">
-                <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
                 {{ issue.contents|richtext }}
             </div>
-            {% image issue.cover original as issue_cover %}
-            <button class="snipcart-add-item btn btn-primary"
-                data-item-name="{{ issue.title }}"
-                data-item-id="{{ page.sku }}-{{ issue.number }}"
-                data-item-url="{{ page.get_url }}"
-                data-item-price="6.00"
-                data-item-description="{{ page.title }} - {{ issue.number }}"
-                data-item-image="{{ issue_cover.url }}"
-            >
-                Osta PDF
-            </button>
+            <div class="col-xs-12" style="margin-top: 1rem;">
+                {% image issue.cover original as issue_cover %}
+                {% if issue.pdf_price %}
+                    <button class="snipcart-add-item btn btn-primary"
+                        data-item-name="{{ issue.publication }} #{{ issue.number }} (PDF)"
+                        data-item-id="{{ page.sku }}-{{ issue.number }}-pdf"
+                        data-item-url="{{ page.get_url }}"
+                        data-item-price="{{ issue.pdf_price|unlocalize }}"
+                        data-item-description="{{ page.title }} #{{ issue.number }}, pdf"
+                        data-item-image="{{ issue_cover.url }}"
+                        {% if issue.snipcart_digital_id %}
+                        data-item-file-guid="{{ issue.snipcart_digital_id }}"
+                        {% endif %}
+                    >
+                        Osta PDF ({{ issue.pdf_price }} €)
+                    </button>
+                {% endif %}
+                {% if issue.price %}
+                    <button class="snipcart-add-item btn btn-primary"
+                        data-item-name="{{ issue.publication }} #{{ issue.number }}"
+                        data-item-id="{{ page.sku }}-{{ issue.number }}"
+                        data-item-url="{{ page.get_url }}"
+                        data-item-price="{{ issue.price|unlocalize }}"
+                        data-item-description="{{ page.title }} #{{ issue.number }}"
+                        data-item-image="{{ issue_cover.url }}"
+                    >
+                        Osta lehti ({{ issue.price }} €)
+                    </button>
+                {% endif %}
+                {% if issue.pdf_price %}
+                    <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
+                {% endif %}
+            </div>
         </div>
         <div class="divided-30"></div>
     {% endfor %}

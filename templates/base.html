@@ -26,6 +26,7 @@
     <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
     {% if settings.home.SnipcartSettings.api_key %}
         <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.css" />
+        <link href="{% sass_src 'theme/tweaks.scss' %}" rel="stylesheet" type="text/css" />
     {% endif %}
     <!-- snake start -->
     {{ ALDRYN_SNAKE.render_head }}
@@ -33,10 +34,6 @@
 </head>
 <body>
 <header>
-        {% if settings.home.SnipcartSettings.api_key %}
-            <div hidden id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></div>
-            <script src="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.js"></script>
-        {% endif %}
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -54,6 +51,11 @@
             </div><!--/.container -->
         </nav> <!--main navigation ends up-->
     </header>
+    
+    {% if settings.home.SnipcartSettings.api_key %}
+        <div hidden id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></div>
+        <script src="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.js"></script>
+    {% endif %}
     
 {% block content %}
 content
