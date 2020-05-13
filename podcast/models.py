@@ -41,6 +41,9 @@ class Episode(models.Model):
     link = models.URLField()
     date = models.DateField()
     
+    class Meta:
+        ordering = ['-date']
+    
 class PodcastChooserBlock(blocks.ChooserBlock):
     target_model=Podcast
     widget=forms.Select
