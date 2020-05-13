@@ -25,7 +25,8 @@
     <link href="{% sass_src 'theme/publications.scss' %}" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
     {% if settings.home.SnipcartSettings.api_key %}
-        <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></script>
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.css" />
+        <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key=""></script>
         <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
     {% endif %}
     <!-- snake start -->
@@ -34,6 +35,10 @@
 </head>
 <body>
 <header>
+        {% if settings.home.SnipcartSettings.api_key %}
+            <div hidden id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></div>
+            <script src="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.js"></script>
+        {% endif %}
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
