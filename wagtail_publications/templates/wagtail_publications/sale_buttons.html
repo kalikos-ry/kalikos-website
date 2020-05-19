@@ -32,7 +32,14 @@
                 data-item-id="{{ item.sku }}"
                 data-item-url="{% firstof url item.get_url %}"
                 data-item-price="{{ item.price|unlocalize }}"
-                data-item-description="{{ item.shop_title }}"
+                data-item-description="{{ item.shop_title }}
+                {% if stock.stock < 1 and stock.allowOutOfStockPurchases %}
+                ennakkotilaus. Toimitus voi kestää kauemmin.
+                {% endif %}
+                {% if item.pdf_price and stock.pdfDiscount %}
+                Muista lisätä PDF ostoskoriin!
+                {% endif %}
+                "
                 data-item-image="{{ item_image.url }}"
                 {% if stock.stock < 1 and not stock.allowOutOfStockPurchases %}
                 disabled
@@ -52,7 +59,11 @@
                 {% endif %}
         {% endwith %}
     {% endif %}
-    {% if stock.stock > 0 and item.pdf_price %}
-        <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
-    {% endif %}
+    {% with stocks|get_stock:item.sku as stock %}
+        {% if stock.stock > 0 or stock.allowOutOfStockPurchases %}
+            {% if item.pdf_price and stock.pdfDiscount %}
+                <p><small>Lisää molemmat ostoskoriin, niin saat PDF:n ilmaiseksi!</small></p>
+            {% endif %}
+        {% endif %}
+    {% endwith %}
 {% endif %}
