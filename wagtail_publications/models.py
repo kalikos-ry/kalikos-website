@@ -11,6 +11,11 @@ from home.models import SnipcartSettings
 
 import requests
 
+WEIGHT_TYPES = (
+    (200, 'lehti'),
+    (1500, 'kirja'),
+    )
+
 class PublicationIndexPage(NormalPage):
     def get_publications(self):
         return PublicationPage.objects.all()
@@ -24,6 +29,7 @@ class PublicationPage(Page):
     price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     snipcart_digital_id = models.UUIDField(blank=True, null=True)
+    weight = models.IntegerField(choices=WEIGHT_TYPES, blank=True, null=True)
     
     content_panels = Page.content_panels + [
         ImageChooserPanel('image', classname="full"),
@@ -33,6 +39,7 @@ class PublicationPage(Page):
             FieldPanel('price', classname="col12"),
             FieldPanel('pdf_price', classname="col6"),
             FieldPanel('snipcart_digital_id', classname="col6"),
+            FieldPanel('weight', classname="col6"),
             ])
     ]
     parent_page_types = ['PublicationIndexPage']
@@ -80,6 +87,7 @@ class IssuePage(Page):
     price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     snipcart_digital_id = models.UUIDField(blank=True, null=True)
+    weight = models.IntegerField(choices=WEIGHT_TYPES, blank=True, null=True)
     
     @property
     def sku(self):
@@ -102,6 +110,7 @@ class IssuePage(Page):
             FieldPanel('price', classname="col12"),
             FieldPanel('pdf_price', classname="col6"),
             FieldPanel('snipcart_digital_id', classname="col6"),
+            FieldPanel('weight', classname="col6"),
             ])
     ]
     parent_page_types = ['PublicationPage']
