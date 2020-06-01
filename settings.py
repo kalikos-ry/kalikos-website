@@ -35,6 +35,7 @@ INSTALLED_APPS.extend([
 ])
 
 USE_TZ = True
+TIME_ZONE = 'Europe/Helsinki'
 
 STATICFILES_FINDERS.extend([
     'compressor.finders.CompressorFinder',
