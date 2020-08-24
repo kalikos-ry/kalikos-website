@@ -3,20 +3,21 @@
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
 
-{% block content %}
-{% image page.text_image original as text_image %}
-<div class="homepage_wide" style="background-image: url({{ text_image.url }})">
-    <div class="container normal-content">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>{{ page.title_text }}</h1>
-                <p>{{ page.title_subtext }}</p>
+{% block page_title %}
+    {% image page.text_image original as text_image %}
+    <div class="homepage_wide" style="background-image: url({{ text_image.url }})">
+        <div class="container normal-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>{{ page.title_text }}</h1>
+                    <p>{{ page.title_subtext }}</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+{% endblock page_title %}
 
-<div class="divided-50"></div>
+{% block content %}
 <div class="container">
     <div class="row margin-bottom-30">
         <div class="col-sm-12">

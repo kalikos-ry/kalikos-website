@@ -1,15 +1,20 @@
-{% extends "home/normal_page.html" %}
+{% extends "base.html" %}
 
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
+{% load l10n %}
 
-{% block title_image %}
-{% image page.image original as title_image %}
-<div class="page-title" style="background-image: url({{ title_image.url }})">
-{% endblock %}
+{% block page_title %}
+    {% image page.image original as title_image %}
+    {{ block.super }}
+{% endblock page_title %}
 
-
-{% block page_content %}
+{% block content %}
+{% if settings.home.SnipcartSettings.api_key %}
+    <div class="container">
+    <button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
+    </div>
+{% endif %}
 
 <div class="container">
     <div class="row margin-bottom-10">
@@ -19,25 +24,34 @@
     </div>
     <div class="row">
         <div class="col-md-8">
+            {{ foo }}
             {{ page.description|richtext }}
+            <div>
+                {% include "wagtail_publications/sale_buttons.html" with item=page image=page.image %}
+            </div>
         </div>
         <div class="col-md-3 col-md-offset-1">
             {% image page.image original class="img-responsive"%}
         </div>
     </div>
     {% for issue in page.get_issues %}
-    <div class="row">
-        <div class="col-md-2">
-            <a href="{{ issue.url }}">
-                {% image issue.cover original class="img-responsive" %}
-            </a>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ issue.url }}">
+                    {% image issue.cover original class="img-responsive" %}
+                </a>
+            </div>
+            <div class="col-md-10">
+                {{ issue.contents|richtext }}
+            </div>
+            <div class="col-xs-12" style="margin-top: 1rem;">
+                {% include "wagtail_publications/sale_buttons.html" with item=issue url=page.get_url image=issue.cover %}
+            </div>
         </div>
-        <div class="col-md-10">
-            <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
-            {{ issue.contents|richtext }}
-        </div>
-    </div>
-    <div class="divided-30"></div>
+        <div class="divided-30"></div>
     {% endfor %}
 </div>
 

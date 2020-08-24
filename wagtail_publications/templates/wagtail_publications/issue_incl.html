@@ -16,6 +16,12 @@ d-none d-sm-block hidden-xs
         <p>
             {{ news.intro }}
         </p>
-        <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ issue.url }}" class="theme-text">Tutustu<i class="ion-ios-arrow-round-forward"></i></a></span>
+        <span class="read-more"><em>{{ issue.publication_date|date:'F Y' }}</em><a href="{{ issue.url }}" class="theme-text">
+            {% if settings.home.SnipcartSettings.api_key %}
+                Tutustu {% if issue.price or issue.pdf_price %}ja osta {% endif %}<i class="ion-ios-arrow-round-forward"></i>
+            {% else %}
+                Tutustu <i class="ion-ios-arrow-round-forward"></i>
+            {% endif %}
+        </a></span>
     </div><!--issue-->
 </div>

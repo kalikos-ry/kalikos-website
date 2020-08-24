@@ -16,8 +16,11 @@ Thumbs.db
 # Aldryn
 /.env
 .aldryn
+.divio
 /data
 /data.tar.gz
 /static_collected
 /node_modules
 # </DEFAULT>
+#
+venv36/

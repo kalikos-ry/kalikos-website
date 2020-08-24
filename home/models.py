@@ -8,6 +8,7 @@ from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from event.models import EventPage
 from .normal_page import NormalPage
@@ -16,6 +17,19 @@ from event.models import EventsBlock
 
 from kalikos_site.models import BrandingSettings
 from news.models import NewsBlock
+
+@register_setting
+class SnipcartSettings(BaseSetting):
+    api_key = models.CharField(
+        max_length=255,
+        help_text='Your Snipcart public API key'
+    )
+    secret_api_key = models.CharField(
+        max_length=255,
+        help_text='Your Snipcart secret API key',
+        null=True,
+        blank=True
+    )
 
 class HomePage(Page):
     body = StreamField([

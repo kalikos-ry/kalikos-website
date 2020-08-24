@@ -3,66 +3,37 @@
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
 
+{% block page_title %}
+    {% image page.title_image original as title_image %}
+    {{ block.super }}
+{% endblock page_title %}
+
 {% block content %}
-
-{% block title_image %}
-{% image page.title_image original as title_image %}
-<div class="page-title" style="background-image: url({{ title_image.url }})">
-{% endblock %}
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>{{ page.title }}</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb">
-                    {% for page in self.get_ancestors %}
-                    {% if not page.is_root %}
-                    <li>
-                    {% if forloop.counter0 == 1 %}
-                        <a href="{% pageurl page %}"><i class="ion-ios-home"></i></a>
-                    {% else %}
-                        <a href="{% pageurl page %}">{{ page.title }}</a>
-                    {% endif %}
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                    <li class="active">
-                        {{ page.title }}
-                    </li>
-                </ol>
+    {% block page_content %}
+        <div class="container normal-content">
+            <div class="row">
+                {% if page.get_descendants %}
+                <div class="col-md-8">
+                {% else %}
+                <div class="col-sm-12">
+                {% endif %}
+                    {{ page.body }}
+                </div>
+                
+                {% if page.get_descendants %}
+                <div class="col-md-3 col-md-offset-1">
+                    <div class="sidebar-box">
+                        <h3>Katso myös</h3>
+                        <ul class="list-unstyled">
+                            {% for p in page.get_descendants %}
+                            <li><a href="{{ p.url }}">{{ p }}</a></li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
-    </div>
-</div>
-<div class="divided-70"></div>
-{% block page_content %}
-<div class="container normal-content">
-    <div class="row">
-        {% if page.get_descendants %}
-        <div class="col-md-8">
-        {% else %}
-        <div class="col-sm-12">
-        {% endif %}
-            {{ page.body }}
-        </div>
-        
-        {% if page.get_descendants %}
-        <div class="col-md-3 col-md-offset-1">
-            <div class="sidebar-box">
-                <h3>Katso myös</h3>
-                <ul class="list-unstyled">
-                    {% for p in page.get_descendants %}
-                    <li><a href="{{ p.url }}">{{ p }}</a></li>
-                    {% endfor %}
-                    
-                </ul>
-            </div>
-        </div>
-        {% endif %}
-    </div>
-</div>
-
-{% endblock %}
+    {% endblock %}
 {% endblock %}

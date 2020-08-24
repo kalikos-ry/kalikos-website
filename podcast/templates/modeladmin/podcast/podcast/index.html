@@ -1,0 +1,6 @@
+{% extends "modeladmin/index.html" %}
+
+{% block header_extra %}
+    {% include 'modeladmin/includes/button.html' with button=view.button_helper.refresh_button %}
+    {{ block.super }}
+{% endblock %}
