@@ -6,6 +6,7 @@ import aldryn_addons.urls
 from wagtail.contrib.sitemaps.views import sitemap
 from puput.views import *
 from puput.feeds import BlogPageFeed
+from podcast import urls as podcast_urls
 
 # Puput urls are here manually as the original entry_page_serve_slug
 # is not compatible with wagtailnews
@@ -40,6 +41,7 @@ puput_urls = [
 urlpatterns = [
     # add your own patterns here
     url('^sitemap\.xml$', sitemap),
+    url('podcast/', include(podcast_urls)),
 ] + puput_urls + aldryn_addons.urls.patterns() + [
 ] + i18n_patterns(
     # add your own i18n patterns here
