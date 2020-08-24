@@ -1,15 +1,14 @@
-{% extends "home/normal_page.html" %}
+{% extends "base.html" %}
 
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
 
-{% block title_image %}
-{% image page.image original as title_image %}
-<div class="page-title" style="background-image: url({{ title_image.url }})">
+{% block page_title %}
+    {% image page.image original as title_image %}
+    {{ block.super }}
 {% endblock %}
 
-
-{% block page_content %}
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-sm-12">

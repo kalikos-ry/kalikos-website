@@ -28,12 +28,19 @@
         <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.css" />
         <link href="{% sass_src 'theme/tweaks.scss' %}" rel="stylesheet" type="text/css" />
     {% endif %}
+    <title>
+        {% block title %}
+            {{ page.title }}
+        {% endblock title %}
+    </title>
+    {% block extra_head %}
+    {% endblock extra_head %}
     <!-- snake start -->
     {{ ALDRYN_SNAKE.render_head }}
     <!-- snake end -->
 </head>
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -57,9 +64,42 @@
         <script src="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.js"></script>
     {% endif %}
     
-{% block content %}
-content
-{% endblock %}
+    {% block page_title %}
+        <div class="page-title" style="background-image: url({{ title_image.url }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>{{ page.title }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb">
+                            {% for page in self.get_ancestors %}
+                            {% if not page.is_root %}
+                            <li>
+                            {% if forloop.counter0 == 1 %}
+                                <a href="{% pageurl page %}"><i class="ion-ios-home"></i></a>
+                            {% else %}
+                                <a href="{% pageurl page %}">{{ page.title }}</a>
+                            {% endif %}
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            <li class="active">
+                                {{ page.title }}
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock page_title %}
+    
+    <div class="divided-50"></div>
+{% block outer_content %}
+    {% block content %}
+    content
+    {% endblock %}
+{% endblock outer_content %}
 
     <div class="divided-40"></div>
     <!--footer -->
@@ -143,6 +183,8 @@ content
 
     <!--footer end-->
     
+    {% block extra_tail %}
+    {% endblock %}
     <!-- snake start -->
     {{ ALDRYN_SNAKE.render_tail }}
     <!-- snake end -->
