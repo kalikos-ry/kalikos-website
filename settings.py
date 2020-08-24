@@ -31,6 +31,10 @@ INSTALLED_APPS.extend([
     'podcast',
     'wagtail_publications',
     
+    'django_social_share',
+    'puput',
+    'colorful',
+
     'sass_processor',
 ])
 
@@ -55,3 +59,5 @@ WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 # Do this like this until there is new aldryn_google_analytics
 INSTALLED_APPS.extend(['aldryn_google_analytics'])
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
+
+PUPUT_AS_PLUGIN = True
