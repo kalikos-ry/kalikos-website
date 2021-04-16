@@ -61,3 +61,12 @@ INSTALLED_APPS.extend(['aldryn_google_analytics'])
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
 
 PUPUT_AS_PLUGIN = True
+
+if DEBUG:
+    ALLOWED_HOSTS = [ '347caa2e67f24f97b79f80ef2eeaaa1c.vfs.cloud9.eu-west-1.amazonaws.com', '*' ]
+    CSRF_TRUSTED_ORIGINS = [ '*.amazon.com' ]
+    CSRF_COOKIE_SAMESITE = 'lax'
+    SESSION_COOKIE_SAMESITE = 'lax'
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'ALLOW-FROM https://347caa2e67f24f97b79f80ef2eeaaa1c.vfs.cloud9.eu-west-1.amazonaws.com'
