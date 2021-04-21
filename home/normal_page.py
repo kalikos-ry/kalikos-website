@@ -10,8 +10,13 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail import images
 
-class NormalPage(Page):
+class KalikosPage(models.Model):
+    class Meta:
+        abstract = True
+
     title_image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
+
+class NormalPage(Page, KalikosPage):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
         ('paragraph', blocks.RichTextBlock()),
