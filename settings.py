@@ -64,6 +64,7 @@ INSTALLED_APPS.extend(['aldryn_google_analytics'])
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', 'invalid')
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', 'invalid')
+MEMBRA_API_TOKEN = os.environ.get('MEMBRA_API_TOKEN')
 
 PUPUT_AS_PLUGIN = True
 
