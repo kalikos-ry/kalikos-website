@@ -1,0 +1,31 @@
+{% extends "home/normal_page.html" %}
+{% load wagtailcore_tags %}
+{% load bootstrap4 %}
+
+{% block page_content %}
+    <div class="container normal-content">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ page.body }}
+            </div>
+            <div class="col-md-6">
+                {% if form %}
+                    {{ page.form_instructions | richtext }}
+                    <form method="POST" action=".">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <input type="submit" value="{{ page.submit_button_text }}" class="btn btn-primary"/>
+                        {% endbuttons %}
+                    </form>
+                {% endif %}
+                {% if member %}
+                    {{ page.thank_you | richtext }}
+                    <p>Nimi: {{ member.name }}</p>
+                    <p>Sähköpostiosoite: {{ member.email }}</p>
+                    <p>Jäsennumerosi: {{ member.id }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

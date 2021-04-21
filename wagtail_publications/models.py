@@ -78,7 +78,7 @@ class PublicationPage(Page):
         return context
 
 class IssuePage(Page):
-    publication = models.ForeignKey(PublicationPage, on_delete=models.CASCADE)
+    publication = models.ForeignKey(PublicationPage, on_delete=models.PROTECT)
     contents = RichTextField(blank=True)
     cover = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     publication_date = models.DateField(default=timezone.now)
