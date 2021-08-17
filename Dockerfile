@@ -32,7 +32,7 @@ COPY . /app
 
 # <GULP>
 # </GULP>
-
+RUN cat /app/settings.py
 RUN DJANGO_MODE=build python manage.py compilescss
 # <STATIC>
 RUN DJANGO_MODE=build python manage.py collectstatic --noinput
