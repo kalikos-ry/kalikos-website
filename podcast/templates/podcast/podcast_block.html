@@ -6,21 +6,23 @@
     </div>
     <a href="{{ value.podcast.url }}"><h2>{{ value.podcast }}</h2></a>
     <p>{{ value.description }}</p>
-    <h4>Viimeisimmät jaksot:</h4>
-    <ul class="list-unstyled">
-        
-    {% for e in value.podcast.episodes.all %}
-        <li>
-            {{ e.date|date:"SHORT_DATE_FORMAT" }}
-            <a href="{{ e.link }}">
-                <b>{{ e.title }}</b>
-            </a>
-        <div>
-        <small>
-            {{ e.description|truncatewords:20|striptags }}
-        </small>
-        </div>
-        </li>
-    {% endfor %}
+    {% if value.podcast.episodes.count %}
+        <h4>Viimeisimmät jaksot:</h4>
+        <ul class="list-unstyled">
+
+        {% for e in value.podcast.episodes.all %}
+            <li>
+                {{ e.date|date:"SHORT_DATE_FORMAT" }}
+                <a href="{{ e.link }}">
+                    <b>{{ e.title }}</b>
+                </a>
+            <div>
+            <small>
+                {{ e.description|truncatewords:20|striptags }}
+            </small>
+            </div>
+            </li>
+        {% endfor %}
+    {% endif %}
     </ul>
 </div>
