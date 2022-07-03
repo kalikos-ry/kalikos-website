@@ -3,7 +3,7 @@ https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-addons/2.1.0/efad67f8-
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-django/3.0.14.0/36bfd066-908c-496a-bbb0-8f30b7ea7a2b/aldryn-django-3.0.14.0.tar.gz#egg=aldryn-django==3.0.14.0
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-sso/2.1.0/e29cc97c-b0f6-49d9-a46f-ed1a34cc9bf7/aldryn-sso-2.1.0.tar.gz#egg=aldryn-sso==2.1.0
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-sitemap/0.0.2/1bfd498d-9d0d-4737-bb0f-25f713007d1e/aldryn-sitemap-0.0.2.tar.gz#egg=aldryn-sitemap==0.0.2
-https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-wagtail/2.12.4.0/85b36da6-cfac-4781-9b59-118e3f2f5cdd/aldryn-wagtail-2.12.4.0.tar.gz#egg=aldryn-wagtail==2.12.4.0
+https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-wagtail/2.16.2.0/5ef0319e-d645-4645-b6a9-258f08c51929/aldryn-wagtail-2.16.2.0.tar.gz#egg=aldryn-wagtail==2.16.2.0
 # </INSTALLED_ADDONS>
 https://github.com/jrutila/divio-wagtail-puput/archive/1.1.1.1.zip#egg=divio-wagtail-puput==1.1.1.1
 https://github.com/jrutila/aldryn-google-analytics/archive/2.0.0.zip#egg=aldryn-google-analytics==2.0.0
