@@ -24,3 +24,4 @@ Thumbs.db
 # </DEFAULT>
 #
 venv36/
+.env-local
