@@ -32,9 +32,6 @@ INSTALLED_APPS.extend([
     'wagtail_publications',
     'organization',
     
-    'django_social_share',
-    'puput',
-    'colorful',
     'captcha',
     'bootstrap4',
 
