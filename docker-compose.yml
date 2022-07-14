@@ -14,10 +14,9 @@ services:
     env_file: .env-local
 
   db:
-    image: postgres:9.6-alpine
+    image: postgres:13.5-alpine
     environment:
       POSTGRES_DB: "db"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     volumes:
-      - "./data/db:/var/lib/postgresql/data:rw"
       - ".:/app:rw"
