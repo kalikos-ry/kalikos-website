@@ -23,6 +23,11 @@
         </div>
     </div>
     <div class="row">
+        {% if not page.get_issues %}
+        <div class="col-md-3 mb-1">
+            {% image page.image original class="img-fluid"%}
+        </div>
+        {% endif %}
         <div class="col-md-8">
             {{ foo }}
             {{ page.description|richtext }}
@@ -30,24 +35,21 @@
                 {% include "wagtail_publications/sale_buttons.html" with item=page image=page.image %}
             </div>
         </div>
-        <div class="col-md-3 col-md-offset-1">
-            {% image page.image original class="img-responsive"%}
-        </div>
     </div>
     {% for issue in page.get_issues %}
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12">
                 <h3 class="issue-title"><a id="{{ issue.title }}" href="{{ issue.url }}">{{ issue.publication }} #{{ issue.number }}</a></h3>
             </div>
             <div class="col-md-2">
                 <a href="{{ issue.url }}">
-                    {% image issue.cover original class="img-responsive" %}
+                    {% image issue.cover original class="img-fluid" %}
                 </a>
             </div>
             <div class="col-md-10">
                 {{ issue.contents|richtext }}
             </div>
-            <div class="col-xs-12" style="margin-top: 1rem;">
+            <div class="col-12" style="margin-top: 1rem;">
                 {% include "wagtail_publications/sale_buttons.html" with item=issue url=page.get_url image=issue.cover %}
             </div>
         </div>

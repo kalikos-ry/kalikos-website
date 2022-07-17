@@ -2,9 +2,11 @@
 hack
 **/
 
+/*
 .nav .dropdown a {
     display: inline-block;
 }
+*/
 
 /**************
 Bootstrap menu and container overrides
@@ -17,7 +19,7 @@ Bootstrap menu and container overrides
 
     padding: 15px 0;
 }
-.navbar-default .navbar-nav>li>a{
+.navbar-default .navbar-nav a{
     font-size: 15px;
     font-weight: 400;
     color:#666;
@@ -26,16 +28,17 @@ Bootstrap menu and container overrides
     -webkit-transition: none;
     -moz-transition: none;
 }
-.navbar-default .navbar-nav>li>a:hover{
+.navbar-default .navbar-nav .dropdown-menu.show a {
+    color: #fff;
+    background-color: rgba(0,0,0,0.9);
+    white-space: nowrap;
+}
+.navbar-default .navbar-nav a:hover, .navbar-default .navbar-nav .dropdown-menu.show a:hover {
     color:#0bc8f1;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     color: #0bc8f1;
     background-color: transparent;
-}
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: #fff;
-    background-color: rgba(0,0,0,0.9);
 }
 @media(min-width:768px){
     .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
@@ -55,17 +58,17 @@ Bootstrap menu and container overrides
     -o-transition: all 0.3s;
     -ms-transition: all 0.3s;
 }
-.dropdown-menu>li>a{
+.dropdown-menu>.dropdown-item{
     color:#fff;
     padding: 7px 20px;
 }
-.dropdown-menu>li{
+.dropdown-menu>.dropdown-item{
     border-bottom: 1px solid  rgba(255,255,255,0.2);
 }
-.dropdown-menu>li:last-child{
+.dropdown-menu>.dropdown-item:last-child{
     border: 0px;
 }
-.dropdown-menu>li>a:hover{
+.dropdown-menu.dropdown-item a:hover{
     background-color: rgba(255,255,255,0.2);
     color:#fff;
 }

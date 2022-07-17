@@ -4,7 +4,7 @@
     <div class="event_box text-left">
         <div class="event_image">
             <a href="{{ event.url }}">
-            {% image event.image fill-300x150 class="img-responsive" %}
+            {% image event.image fill-300x150 class="img-fluid" %}
             <div class="event_overlay">
                 <div class="event-city">{{ event.location }}</div>
                 <div class="event-date">{{ event.start|date }}</div>
