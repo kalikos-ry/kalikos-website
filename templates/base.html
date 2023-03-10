@@ -105,18 +105,22 @@
             <div class="row margin-bottom-60">
                 <div class="col-sm-4 margin-bottom-30">
                     <div class="footer-inner">
-                        <h3><a href="/">
-                            {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
-                        </a> </h3> 
-                        
-                        <p>
-                        </p>
+                        <h3 class="text-center d-flex justify-content-center justify-content-md-start">
+                            <a href="/">
+                                {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
+                            </a>
+                        </h3> 
                         <div class="divided-30"></div>
-                        <ul class="social list-inline">
+                        <ul class="social list-inline d-flex justify-content-center justify-content-md-start">
                             <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.facebook }}" class="fb"><i class="ion-logo-facebook"></i></a></li> 
                             {% if settings.kalikos_site.SocialMediaSettings.mewe %}
                             <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.mewe }}" class="mewe">
                                 <img src="{% static 'logos/mewe-logo-white.png' %}" width="28" />
+                            </a></li> 
+                            {% endif %}
+                            {% if settings.kalikos_site.SocialMediaSettings.discord %}
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.discord }}" class="discord">
+                                <img src="{% static 'logos/discord-logo-white.png' %}" width="28" />
                             </a></li> 
                             {% endif %}
                             <!--
@@ -128,8 +132,8 @@
                     </div><!--fotter inner-->
                 </div>
 
-                <div class="col-sm-4 margin-bottom-30">
-                    <div class="footer-inner">
+                <div class="col-sm-4 margin-bottom-30 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
                         <h3>Ota yhteyttä</h3>
 
                         <ul class="list-unstyled contact-list">
@@ -138,8 +142,8 @@
                         </ul>
                     </div><!--fotter inner-->
                 </div>
-                <div class="col-sm-4">
-                    <div class="footer-inner">
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
                         <h3>We are all us</h3>
                         
                         <h6>Kuvat</h6>

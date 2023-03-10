@@ -12,6 +12,8 @@ class SocialMediaSettings(BaseSetting):
         help_text='Your MeWe page URL')
     youtube = models.URLField(blank=True,
         help_text='Your YouTube channel or user account URL')
+    discord = models.URLField(blank=True,
+        help_text='Your Discord invite link')
         
 @register_setting
 class BrandingSettings(BaseSetting):

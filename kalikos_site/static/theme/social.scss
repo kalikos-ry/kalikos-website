@@ -6,7 +6,7 @@ social
     margin: 0;
     padding: 0;
 }
-.social li{
+.social li {
     padding: 0px;
     margin: 0;
 
@@ -24,15 +24,18 @@ social
         background-color:  #3b5998;
         color:#fff;
     }
-    a.mewe img {
+    img {
         filter: invert(50%);
     }
-    a.mewe:hover{
-        background-color:  #2799bd;
+    a:hover img {
+        filter: invert(0%);
         color:#fff;
-        img {
-            filter: invert(0%);
-        }
+    }
+    a.mewe:hover {
+        background-color: #2799bd;
+    }
+    a.discord:hover {
+        background-color: #738ADB;
     }
 }
 
