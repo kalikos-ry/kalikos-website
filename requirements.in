@@ -7,7 +7,7 @@ https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-wagtail/4.2.0.0/fb738b
 # </INSTALLED_ADDONS>
 #https://github.com/jrutila/divio-wagtail-puput/archive/1.1.1.1.zip#egg=divio-wagtail-puput==1.1.1.1
 https://github.com/jrutila/aldryn-google-analytics/archive/2.0.0.zip#egg=aldryn-google-analytics==2.0.0
-wagtailmenus==3.0.1
+wagtailmenus==3.1.5
 wagtailnews==2.7.1
 feedparser==6.0.10
 api-client==1.3.1
