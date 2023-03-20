@@ -8,33 +8,52 @@
 <div class="container">
     <div class="row margin-bottom-10">
         <div class="col-sm-12 section-title">
-          <h2>Etsi foorumeilta</h2>
-          Haettu: {{ filter }} (<a href="{% query_string sort=filter.sort %}">nollaa</a>)
-          Sort: {{ sort }}
-          <table>
-            <thead>
-              <th>Kirjoittaja</th>
-              <th>Otsikko</th>
-              <th><a href="{% query_string filter sort="topic_time" %}">Aika</a></th>
-              <th><a href="{% query_string filter sort="topic_replies" %}">Vastausten määrä</a></th>
-              <th>Keskustelualue</th>
-            </thead>
-            <tbody>
-            {% for t in result %}
-              {% if forloop.counter <= page_size %}
-              <tr>
-                <td><a href="{% query_string filter author=t.user_id %}">{{ t.username }}</a></td>
-                <td>{{ t.topic_title }}</td>
-                <td>{{ t.topic_time}}</td>
-                <td>{{ t.topic_replies }}</td>
-                <td><a href="{% query_string filter forum=t.forum_id %}">{{ t.forum_name }}</a></td>
-              </tr>
-              {% else %}
-                <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
-              {% endif %}
-            {% endfor %}
-            </tbody>
-          </table>
+          {% include_block page.body %}
+          Haettu: {{ filter }} (<a href="{% if filter.keys|length > 1 %}{% query_string sort=filter.sort %}{% else %}?{% endif %}">nollaa</a>)
+          {% if 'author' in filter %}
+          <div>
+            Näytetään käyttäjän {{ result.0.username }} {% if filter.scope == "post" %}viestit{% else %}aloittamat keskustelut.{% endif %}
+            {% if filter.scope != "post" %}
+            <a href="{% query_string filter scope="post" %}">Näytä käyttäjän kaikki viestit</a>
+            {% endif %}
+          </div>
+          {% endif %}
+          <div class="table-responsive">
+            <table>
+              <thead>
+                {% if 'author' not in filter %}
+                <th>Kirjoittaja</th>
+                {% endif %}
+                <th>Otsikko</th>
+                {% if result.0.post_text %}
+                  <th>Viesti</th>
+                {% endif %}
+                <th><a href="{% query_string filter sort="topic_time" %}">Aika</a></th>
+                <th><a href="{% query_string filter sort="topic_replies" %}">Vastausten määrä</a></th>
+                <th>Keskustelualue</th>
+              </thead>
+              <tbody>
+              {% for t in result %}
+                {% if forloop.counter <= page_size %}
+                <tr>
+                  {% if 'author' not in filter %}
+                  <td><a href="{% query_string filter author=t.user_id %}">{{ t.username }}</a></td>
+                  {% endif %}
+                  <td><a href="{{ t.topic_id }}/{% if filter.scope == "postDOESNOTWORK" %}#post-{{ t.post_id }}{% endif %}{% query_string filter skip=skip %}">{{ t.topic_title }}</a></td>
+                  {% if result.0.post_text %}
+                    <td>{{ t.post_text|striptags|slice:"50" }}</td>
+                  {% endif %}
+                  <td>{{ t.topic_time}}</td>
+                  <td>{{ t.topic_replies }}</td>
+                  <td><a href="{% query_string filter forum=t.forum_id %}">{{ t.forum_name }}</a></td>
+                </tr>
+                {% else %}
+                  <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
+                {% endif %}
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
     </div>
 </div>
