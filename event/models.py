@@ -1,11 +1,9 @@
 from django.db import models
 from django.utils import timezone
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.models import Page, PageManager
+from wagtail.fields import RichTextField, StreamField
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail import images
 from home.normal_page import NormalPage
 
@@ -32,11 +30,10 @@ class EventIndexPage(Page):
         ])
         
     content_panels = Page.content_panels + [
-        ImageChooserPanel('title_image', classname="full"),
-        StreamFieldPanel('body'),
+        FieldPanel('title_image', classname="full"),
+        FieldPanel('body'),
     ]
 
-from wagtail.core.models import PageManager
 class EventManager(PageManager):
     def get_upcoming(self):
         return self.get_queryset().exclude(end__lt=timezone.now()).order_by('start')
@@ -77,9 +74,9 @@ class EventPage(Page):
             FieldPanel('location'),
             FieldPanel('location_exact'),
         ]),
-        ImageChooserPanel('image'),
+        FieldPanel('image'),
         FieldPanel('intro', classname="full"),
         FieldPanel('description', classname="full"),
-        StreamFieldPanel('urls'),
+        FieldPanel('urls'),
     ]
     parent_page_types=['EventIndexPage']

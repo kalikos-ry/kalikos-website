@@ -1,0 +1,40 @@
+{% extends "home/normal_page.html" %}
+
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
+{% load wgphp_tags %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row margin-bottom-10">
+        <div class="col-sm-12 section-title">
+          <a href="..{% query_string filter skip=skip %}">Takaisin</a>
+          <h2>{{ topic.topic_title }}</h2>
+          <div>{{ topic.forum_name }}</div>
+          <small>{{ topic.username }} {{ topic.topic_time }}</small>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <th>Kirjoittaja</th>
+                <th>Viesti</th>
+              </thead>
+              <tbody>
+              {% for p in result %}
+                <tr id="post-{{ p.post_id }}">
+                  <td class="d-flex flex-column">
+                    <span class="{% if filter.author == p.user_id %}text-danger{% endif %}">{{ p.username }}</span>
+                    <span class="small">{{ p.post_time }}</span>
+                    <a href="{{ page.url }}{{ topic.topic_id }}/#post-{{ p.post_id }}" class="small text-muted">linkki</a>
+                  </td>
+                  <td style="white-space: pre-line">
+                    {{ p.post_text|striptags|safe }}
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -12,9 +12,11 @@
                 <p class="lead">
                     {{ newsitem.intro }}
                 </p>
-                {% image newsitem.image fill-690x460 class="img-responsive" %}
                 {{ newsitem.body|richtext }}
             </div>
+        </div>
+        <div class="col-md-4">
+            {% image newsitem.image fill-690x460 class="img-fluid" %}
         </div>
     </div>
 </div>

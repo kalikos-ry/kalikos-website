@@ -28,12 +28,14 @@ class Form(forms.BaseForm):
             'taggit',
         ])
         settings['MIDDLEWARE'].extend([
-            'wagtail.core.middleware.SiteMiddleware',
+            'wagtail.contrib.legacy.sitemiddleware.SiteMiddleware',
             'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         ])
         # admin and cms urls need to be first, since we're overriding the
         # default admin.
-        settings['ADDON_URLS_I18N'].insert(
+        # These are non-translatable URLs
+        # see: https://docs.wagtail.io/en/stable/advanced_topics/i18n.html#adding-a-language-prefix-to-urls
+        settings['ADDON_URLS'].insert(
             0,
             'aldryn_wagtail.urls',
         )

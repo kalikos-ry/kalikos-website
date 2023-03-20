@@ -2,11 +2,12 @@ from django import forms
 from django.utils import timezone
 from apiclient import APIClient, HeaderAuthentication, JsonResponseHandler
 from captcha.fields import ReCaptchaField
+from django.conf import settings
 
 class MembraClient(APIClient):
     def __init__(self, *args, **kwargs):
         kwargs['authentication_method'] = HeaderAuthentication(
-            token="qFFwMFSHrvg4vpbecEX1yGKRlL32CNNx",
+            token=settings.MEMBRA_API_TOKEN,
             parameter="X-Membra-Api-Key",
             scheme=None,
             )

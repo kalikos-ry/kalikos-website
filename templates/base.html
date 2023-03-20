@@ -3,6 +3,7 @@
 {% load static %}
 {% load wagtailcore_tags %}
 {% load kalikos_image_tags %}
+{% load bootstrap4 %}
 
 <!DOCTYPE html>
 <html lang="fi">
@@ -10,13 +11,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery="full" %}
+    <link href="{% sass_src 'theme/typography.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/footer.scss' %}" rel="stylesheet" type="text/css" />
-    <link href="{% sass_src 'theme/social.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/nav.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/social.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/titles.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/events.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'theme/news.scss' %}" rel="stylesheet" type="text/css" />
@@ -40,22 +40,18 @@
     <!-- snake end -->
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <i class="ion-ios-menu"></i>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                            {% image settings.kalikos_site.BrandingSettings.header_logo width-180 %}
-                        </a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">                
-                    {% main_menu %}
-                </div><!--/.nav-collapse -->
-            </div><!--/.container -->
+    <header class="container">
+        <nav class="navbar navbar-default navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                {% image settings.kalikos_site.BrandingSettings.header_logo width-180 %}
+            </a>
+            <button type="button" class="ml-auto navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="ion-ios-menu"></i>
+            </button>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% main_menu template="menu/kalikos-menu.html"%}
+            </div><!--/.nav-collapse -->
         </nav> <!--main navigation ends up-->
     </header>
     
@@ -75,7 +71,7 @@
                         <ol class="breadcrumb">
                             {% for page in self.get_ancestors %}
                             {% if not page.is_root %}
-                            <li>
+                            <li class="breadcrumb-item">
                             {% if forloop.counter0 == 1 %}
                                 <a href="{% pageurl page %}"><i class="ion-ios-home"></i></a>
                             {% else %}
@@ -84,7 +80,7 @@
                             </li>
                             {% endif %}
                             {% endfor %}
-                            <li class="active">
+                            <li class="active breadcrumb-item">
                                 {{ page.title }}
                             </li>
                         </ol>
@@ -109,18 +105,22 @@
             <div class="row margin-bottom-60">
                 <div class="col-sm-4 margin-bottom-30">
                     <div class="footer-inner">
-                        <h3><a href="/">
-                            {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
-                        </a> </h3> 
-                        
-                        <p>
-                        </p>
+                        <h3 class="text-center d-flex justify-content-center justify-content-md-start">
+                            <a href="/">
+                                {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
+                            </a>
+                        </h3> 
                         <div class="divided-30"></div>
-                        <ul class="social list-inline">
+                        <ul class="social list-inline d-flex justify-content-center justify-content-md-start">
                             <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.facebook }}" class="fb"><i class="ion-logo-facebook"></i></a></li> 
                             {% if settings.kalikos_site.SocialMediaSettings.mewe %}
                             <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.mewe }}" class="mewe">
                                 <img src="{% static 'logos/mewe-logo-white.png' %}" width="28" />
+                            </a></li> 
+                            {% endif %}
+                            {% if settings.kalikos_site.SocialMediaSettings.discord %}
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.discord }}" class="discord">
+                                <img src="{% static 'logos/discord-logo-white.png' %}" width="28" />
                             </a></li> 
                             {% endif %}
                             <!--
@@ -132,8 +132,8 @@
                     </div><!--fotter inner-->
                 </div>
 
-                <div class="col-sm-4 margin-bottom-30">
-                    <div class="footer-inner">
+                <div class="col-sm-4 margin-bottom-30 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
                         <h3>Ota yhteyttä</h3>
 
                         <ul class="list-unstyled contact-list">
@@ -142,8 +142,8 @@
                         </ul>
                     </div><!--fotter inner-->
                 </div>
-                <div class="col-sm-4">
-                    <div class="footer-inner">
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
                         <h3>We are all us</h3>
                         
                         <h6>Kuvat</h6>

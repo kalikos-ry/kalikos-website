@@ -18,24 +18,27 @@ class Command(BaseCommand):
         
         for pc in podcasts:
 
-            feed = feedparser.parse(pc.feed_url)
-
-            for ep in pc.episodes.all():
-                ep.delete()
-
-            loop_max = num_episodes if len(feed['entries']) > num_episodes else len(feed['entries'])
-            
-            pc.name = feed['feed'].title
-            pc.image = feed['feed'].image.href
-            pc.save()
-            
-            for i in range(0, loop_max):
-                if feed['entries'][i]:
-                    e = feed['entries'][i]
-                    ep = Episode()
-                    ep.podcast = pc
-                    ep.title = e.title
-                    ep.link = e.link
-                    ep.description = e.description
-                    ep.date = datetime.fromtimestamp(mktime(e.published_parsed))
-                    ep.save()
+            try:
+                feed = feedparser.parse(pc.feed_url)
+    
+                for ep in pc.episodes.all():
+                    ep.delete()
+    
+                loop_max = num_episodes if len(feed['entries']) > num_episodes else len(feed['entries'])
+                
+                pc.name = feed['feed'].title if 'title' in feed['feed'] else pc.name
+                pc.image = feed['feed'].image.href if 'image' in feed['feed'] else pc.image
+                pc.save()
+                
+                for i in range(0, loop_max):
+                    if feed['entries'][i]:
+                        e = feed['entries'][i]
+                        ep = Episode()
+                        ep.podcast = pc
+                        ep.title = e.title
+                        ep.link = e.link
+                        ep.description = e.description
+                        ep.date = datetime.fromtimestamp(mktime(e.published_parsed))
+                        ep.save()
+            except:
+                pass # TODO: log the error to the podcast model

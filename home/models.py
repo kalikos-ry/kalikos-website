@@ -1,12 +1,10 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.models import Page
+from wagtail.fields import RichTextField, StreamField
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail import images
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
@@ -46,10 +44,10 @@ class HomePage(Page):
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('text_image', classname="full"),
+        FieldPanel('text_image', classname="full"),
         FieldPanel('title_text', classname="full"),
         FieldPanel('title_subtext', classname="full"),
-        StreamFieldPanel('body', classname="full"),
+        FieldPanel('body', classname="full"),
         #FieldPanel('body', classname="full"),
     ]
 
@@ -61,6 +59,6 @@ class ContactsPage(NormalPage):
         return BrandingSettings.objects.first().email
     
     content_panels = Page.content_panels + [
-        ImageChooserPanel('title_image', classname="full"),
+        FieldPanel('title_image', classname="full"),
         FieldPanel('address', classname="full"),
     ]

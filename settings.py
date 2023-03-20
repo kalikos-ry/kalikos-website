@@ -30,11 +30,9 @@ INSTALLED_APPS.extend([
     'news',
     'podcast',
     'wagtail_publications',
+    'wagtail_phpbb',
     'organization',
     
-    'django_social_share',
-    'puput',
-    'colorful',
     'captcha',
     'bootstrap4',
 
@@ -62,8 +60,14 @@ WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 # Do this like this until there is new aldryn_google_analytics
 INSTALLED_APPS.extend(['aldryn_google_analytics'])
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', 'invalid')
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', 'invalid')
+MEMBRA_API_TOKEN = os.environ.get('MEMBRA_API_TOKEN')
+
+import dj_database_url
+forum_url = os.environ.get('FORUM_DATABASE_URL')
+if forum_url:
+  FORUM_DATABASE = dj_database_url.parse(forum_url)
 
 PUPUT_AS_PLUGIN = True
 
