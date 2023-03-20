@@ -1,3 +1,5 @@
 from django.db import models
+from home.normal_page import NormalPage
 
-# Create your models here.
+class ForumSearchPage(NormalPage):
+  pass

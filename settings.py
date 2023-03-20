@@ -30,6 +30,7 @@ INSTALLED_APPS.extend([
     'news',
     'podcast',
     'wagtail_publications',
+    'wagtail_phpbb',
     'organization',
     
     'captcha',
