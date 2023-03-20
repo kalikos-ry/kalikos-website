@@ -1,11 +1,10 @@
 from django.db import models
-from wagtail.core.models import Page
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.models import Page
+from wagtail import blocks
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from django import forms
 from wagtail import images
-from wagtail.images.edit_handlers import ImageChooserPanel
 import feedparser
 
 class Podcast(models.Model):
@@ -65,6 +64,6 @@ class PodcastPage(Page):
         ], null=True)
     
     content_panels = Page.content_panels + [
-        ImageChooserPanel('title_image', classname="full"),
-        StreamFieldPanel('body'),
+        FieldPanel('title_image', classname="full"),
+        FieldPanel('body'),
     ]

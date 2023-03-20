@@ -1,6 +1,6 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 from wagtail import images
 
@@ -22,8 +22,8 @@ class BrandingSettings(BaseSetting):
     email = models.EmailField()
     
     panels = [
-        ImageChooserPanel('header_logo'),
-        ImageChooserPanel('footer_logo'),
+        FieldPanel('header_logo'),
+        FieldPanel('footer_logo'),
         ]
 
 class KalikosImage(AbstractImage):

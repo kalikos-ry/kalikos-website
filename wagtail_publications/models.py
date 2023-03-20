@@ -1,10 +1,9 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, FieldRowPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.models import Page
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, FieldRowPanel
 from wagtail import images
 from home.normal_page import NormalPage
 from home.models import SnipcartSettings
@@ -32,7 +31,7 @@ class PublicationPage(Page):
     weight = models.IntegerField(choices=WEIGHT_TYPES, blank=True, null=True)
     
     content_panels = Page.content_panels + [
-        ImageChooserPanel('image', classname="full"),
+        FieldPanel('image', classname="full"),
         FieldPanel('description', classname="full"),
         FieldPanel('sku', classname="full"),
         FieldRowPanel([
@@ -104,7 +103,7 @@ class IssuePage(Page):
         FieldPanel('publication', classname="full"),
         FieldPanel('number', classname="full"),
         FieldPanel('publication_date', classname="full"),
-        ImageChooserPanel('cover', classname="full"),
+        FieldPanel('cover', classname="full"),
         FieldPanel('contents', classname="full"),
         FieldRowPanel([
             FieldPanel('price', classname="col12"),

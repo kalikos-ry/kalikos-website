@@ -1,13 +1,11 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.core.models import Page
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
+from wagtail.models import Page
+from wagtail.fields import StreamField, RichTextField
+from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail import images
 
 class KalikosPage(models.Model):
@@ -24,7 +22,7 @@ class NormalPage(Page, KalikosPage):
     ], blank=True)
     
     content_panels = Page.content_panels + [
-        ImageChooserPanel('title_image', classname="full"),
-        StreamFieldPanel('body'),
+        FieldPanel('title_image', classname="full"),
+        FieldPanel('body'),
     ]
     
