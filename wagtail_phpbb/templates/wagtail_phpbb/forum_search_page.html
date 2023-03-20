@@ -1,0 +1,41 @@
+{% extends "home/normal_page.html" %}
+
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
+{% load wgphp_tags %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row margin-bottom-10">
+        <div class="col-sm-12 section-title">
+          <h2>Etsi foorumeilta</h2>
+          Haettu: {{ filter }} (<a href="{% query_string sort=filter.sort %}">nollaa</a>)
+          Sort: {{ sort }}
+          <table>
+            <thead>
+              <th>Kirjoittaja</th>
+              <th>Otsikko</th>
+              <th><a href="{% query_string filter sort="topic_time" %}">Aika</a></th>
+              <th><a href="{% query_string filter sort="topic_replies" %}">Vastausten määrä</a></th>
+              <th>Keskustelualue</th>
+            </thead>
+            <tbody>
+            {% for t in result %}
+              {% if forloop.counter <= page_size %}
+              <tr>
+                <td><a href="{% query_string filter author=t.user_id %}">{{ t.username }}</a></td>
+                <td>{{ t.topic_title }}</td>
+                <td>{{ t.topic_time}}</td>
+                <td>{{ t.topic_replies }}</td>
+                <td><a href="{% query_string filter forum=t.forum_id %}">{{ t.forum_name }}</a></td>
+              </tr>
+              {% else %}
+                <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
+              {% endif %}
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -64,6 +64,11 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', 'invalid')
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', 'invalid')
 MEMBRA_API_TOKEN = os.environ.get('MEMBRA_API_TOKEN')
 
+import dj_database_url
+forum_url = os.environ.get('FORUM_DATABASE_URL')
+if forum_url:
+  FORUM_DATABASE = dj_database_url.parse(forum_url)
+
 PUPUT_AS_PLUGIN = True
 
 if DEBUG:
