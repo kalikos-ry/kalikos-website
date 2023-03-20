@@ -116,6 +116,7 @@ SELECT
     context['filter'] = filter
     context['page_size'] = page_size
     context['next_skip'] = skip + page_size
+    context['prev_skip'] = skip - page_size
     context['skip'] = skip
 
     return self.render(request, context_overrides=context,

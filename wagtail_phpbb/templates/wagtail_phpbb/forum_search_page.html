@@ -18,18 +18,26 @@
             {% endif %}
           </div>
           {% endif %}
+          <div>
+            {% if skip > 0 %}
+              <a href="{% query_string filter skip=prev_skip %}">Edellinen sivu</a>
+            {% endif %}
+            {% if result|length > page_size %}
+              <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
+            {% endif %}
+          </div>
           <div class="table-responsive">
             <table class="table table-sm">
               <thead>
                 {% if 'author' not in filter %}
-                <th>Kirjoittaja</th>
+                <th>Aloittaja</th>
                 {% endif %}
                 <th>Otsikko</th>
                 {% if result.0.post_text %}
                   <th>Viesti</th>
                 {% endif %}
                 <th><a href="{% query_string filter sort="topic_time" %}">Aika</a></th>
-                <th><a href="{% query_string filter sort="topic_replies" %}">Vastausten määrä</a></th>
+                <th><a href="{% query_string filter sort="topic_replies" %}">Viestit</a></th>
                 <th>Keskustelualue</th>
               </thead>
               <tbody class="table-striped">
@@ -48,7 +56,12 @@
                   <td><a href="{% query_string filter forum=t.forum_id %}">{{ t.forum_name }}</a></td>
                 </tr>
                 {% else %}
-                  <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
+                  <tr><td>
+                    {% if skip > 0 %}
+                      <a href="{% query_string filter skip=prev_skip %}">Edellinen sivu</a>
+                    {% endif %}
+                    <a href="{% query_string filter skip=next_skip %}">Seuraava sivu</a>
+                  <td><tr>
                 {% endif %}
               {% endfor %}
               </tbody>
