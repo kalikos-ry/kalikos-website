@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 
@@ -20,11 +20,11 @@ class Migration(migrations.Migration):
             name='JoinOrganizationPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('thank_you', wagtail.core.fields.RichTextField(blank=True)),
-                ('form_instructions', wagtail.core.fields.RichTextField(blank=True)),
+                ('thank_you', wagtail.fields.RichTextField(blank=True)),
+                ('form_instructions', wagtail.fields.RichTextField(blank=True)),
                 ('email_help_text', models.CharField(max_length=1024)),
                 ('submit_button_text', models.CharField(max_length=255)),
-                ('body', wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock())], blank=True)),
+                ('body', wagtail.fields.StreamField([('heading', wagtail.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock())], blank=True)),
                 ('title_image', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='kalikos_site.KalikosImage')),
             ],
             options={

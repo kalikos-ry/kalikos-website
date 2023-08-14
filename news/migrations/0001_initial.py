@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import wagtail.core.fields
+import wagtail.fields
 import wagtail.search.index
 import wagtailnews.models
 
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Published date')),
                 ('live', models.BooleanField(default=True, editable=False, verbose_name='Live')),
                 ('has_unpublished_changes', models.BooleanField(default=False, editable=False, verbose_name='Has unpublished changes')),
-                ('body', wagtail.core.fields.RichTextField()),
+                ('body', wagtail.fields.RichTextField()),
                 ('image', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
                 ('newsindex', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Page')),
             ],

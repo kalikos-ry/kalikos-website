@@ -4,8 +4,8 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
 import podcast.models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -34,6 +34,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='podcastpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('podcast', wagtail.core.blocks.StructBlock([('podcast', podcast.models.PodcastChooserBlock()), ('description', wagtail.core.blocks.RichTextBlock())]))], null=True),
+            field=wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('podcast', wagtail.blocks.StructBlock([('podcast', podcast.models.PodcastChooserBlock()), ('description', wagtail.blocks.RichTextBlock())]))], null=True),
         ),
     ]

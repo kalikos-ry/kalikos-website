@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import podcast.models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='podcastpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('podcast', wagtail.core.blocks.StructBlock([('podcast', podcast.models.PodcastChooserBlock()), ('description', wagtail.core.blocks.RichTextBlock())]))], null=True),
+            field=wagtail.fields.StreamField([('heading', wagtail.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.blocks.RichTextBlock()), ('podcast', wagtail.blocks.StructBlock([('podcast', podcast.models.PodcastChooserBlock()), ('description', wagtail.blocks.RichTextBlock())]))], null=True),
         ),
     ]

@@ -2,8 +2,8 @@
 
 from django.db import migrations
 import event.models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='eventindexpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('events', event.models.EventsBlock())]),
+            field=wagtail.fields.StreamField([('heading', wagtail.blocks.CharBlock(classname='full title', template='home/blocks/heading.html')), ('paragraph', wagtail.blocks.RichTextBlock()), ('events', event.models.EventsBlock())]),
         ),
     ]

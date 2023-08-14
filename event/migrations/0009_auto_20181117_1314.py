@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='eventindexpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock())], default=''),
+            field=wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock())], default=''),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='eventpage',
             name='urls',
-            field=wagtail.core.fields.StreamField([('urls', wagtail.core.blocks.StructBlock([('title', wagtail.core.blocks.CharBlock()), ('url', wagtail.core.blocks.URLBlock())], template='event/urls_block.html'))], blank=True),
+            field=wagtail.fields.StreamField([('urls', wagtail.blocks.StructBlock([('title', wagtail.blocks.CharBlock()), ('url', wagtail.blocks.URLBlock())], template='event/urls_block.html'))], blank=True),
         ),
     ]
