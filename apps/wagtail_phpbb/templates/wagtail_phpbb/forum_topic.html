@@ -15,13 +15,20 @@
           <div class="table-responsive">
             <table class="table">
               <thead>
-                <th>Kirjoittaja</th>
+                <th class="d-none d-sm-block">Kirjoittaja</th>
                 <th>Viesti</th>
               </thead>
               <tbody>
               {% for p in result %}
+                <tr class="flex-column d-flex d-sm-none">
+                  <td>
+                    <span class="{% if filter.author == p.user_id %}text-danger{% endif %}">{{ p.username }}</span>
+                    <a href="{{ page.url }}{{ topic.topic_id }}/#post-{{ p.post_id }}" class="small text-muted float-right">linkki</a>
+                    <span class="small">{{ p.post_time }}</span>
+                  </td>
+                </tr>
                 <tr id="post-{{ p.post_id }}">
-                  <td class="d-flex flex-column">
+                  <td class="flex-column d-none d-sm-flex">
                     <span class="{% if filter.author == p.user_id %}text-danger{% endif %}">{{ p.username }}</span>
                     <span class="small">{{ p.post_time }}</span>
                     <a href="{{ page.url }}{{ topic.topic_id }}/#post-{{ p.post_id }}" class="small text-muted">linkki</a>
