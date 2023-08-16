@@ -3,6 +3,7 @@ services:
     environment:
       POSTGRES_DB: db
       POSTGRES_HOST_AUTH_METHOD: trust
+      SERVICE_MANAGER: fsm-postgres
     image: postgres:13.5-alpine
     volumes:
     - .:/app:rw
@@ -11,10 +12,9 @@ services:
     command: python manage.py runserver 0.0.0.0:80
     env_file: .env-local
     links:
-    - db:postgres
+    - db
     ports:
     - 8080:80
     volumes:
     - .:/app:rw
-    - ./data:/data:rw
 version: '2'

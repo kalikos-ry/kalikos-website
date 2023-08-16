@@ -1,0 +1,204 @@
+{% load sass_tags %}
+{% load menu_tags %}
+{% load static %}
+{% load wagtailcore_tags %}
+{% load kalikos_image_tags %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery="full" %}
+    <link href="{% sass_src 'theme/typography.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/footer.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/nav.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/social.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/titles.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/events.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/news.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/buttons.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/frontpage.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'theme/publications.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+    {% if settings.home.SnipcartSettings.api_key %}
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.css" />
+        <link href="{% sass_src 'theme/tweaks.scss' %}" rel="stylesheet" type="text/css" />
+    {% endif %}
+    <title>
+        {% block title %}
+            {{ page.title }}
+        {% endblock title %}
+    </title>
+    {% block extra_head %}
+    {% endblock extra_head %}
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_head }}
+    <!-- snake end -->
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GTAG_ID }}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ GTAG_ID }}');
+    </script>
+    <!-- end Google tag -->
+
+    <header class="container">
+        <nav class="navbar navbar-default navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                {% image settings.kalikos_site.BrandingSettings.header_logo width-180 %}
+            </a>
+            <button type="button" class="ml-auto navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="ion-ios-menu"></i>
+            </button>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% main_menu template="menu/kalikos-menu.html"%}
+            </div><!--/.nav-collapse -->
+        </nav> <!--main navigation ends up-->
+    </header>
+    
+    {% if settings.home.SnipcartSettings.api_key %}
+        <div hidden id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></div>
+        <script src="https://cdn.snipcart.com/themes/v3.0.12/default/snipcart.js"></script>
+    {% endif %}
+    
+    {% block page_title %}
+        <div class="page-title" style="background-image: url({{ title_image.url }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>{{ page.title }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb">
+                            {% for page in self.get_ancestors %}
+                            {% if not page.is_root %}
+                            <li class="breadcrumb-item">
+                            {% if forloop.counter0 == 1 %}
+                                <a href="{% pageurl page %}"><i class="ion-ios-home"></i></a>
+                            {% else %}
+                                <a href="{% pageurl page %}">{{ page.title }}</a>
+                            {% endif %}
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            <li class="active breadcrumb-item">
+                                {{ page.title }}
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock page_title %}
+    
+    <div class="divided-50"></div>
+{% block outer_content %}
+    {% block content %}
+    content
+    {% endblock %}
+{% endblock outer_content %}
+
+    <div class="divided-40"></div>
+    <!--footer -->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row margin-bottom-60">
+                <div class="col-sm-4 margin-bottom-30">
+                    <div class="footer-inner">
+                        <h3 class="text-center d-flex justify-content-center justify-content-md-start">
+                            <a href="/">
+                                {% image settings.kalikos_site.BrandingSettings.footer_logo width-200 %}
+                            </a>
+                        </h3> 
+                        <div class="divided-30"></div>
+                        <ul class="social list-inline d-flex justify-content-center justify-content-md-start">
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.facebook }}" class="fb"><i class="ion-logo-facebook"></i></a></li> 
+                            {% if settings.kalikos_site.SocialMediaSettings.mewe %}
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.mewe }}" class="mewe">
+                                <img src="{% static 'logos/mewe-logo-white.png' %}" width="28" />
+                            </a></li> 
+                            {% endif %}
+                            {% if settings.kalikos_site.SocialMediaSettings.discord %}
+                            <li class="list-inline-item"><a href="{{ settings.kalikos_site.SocialMediaSettings.discord }}" class="discord">
+                                <img src="{% static 'logos/discord-logo-white.png' %}" width="28" />
+                            </a></li> 
+                            {% endif %}
+                            <!--
+                            <li class="list-inline-item"><a href="#" class="twitter"><i class="ion-logo-patreon"></i></a></li> 
+                            <li class="list-inline-item"><a href="#" class="in"><i class="ion-social-linkedin-outline"></i></a></li> 
+                            <li class="list-inline-item"><a href="#" class="dribbble"><i class="ion-social-dribbble-outline"></i></a></li> 
+                            -->
+                        </ul>
+                    </div><!--fotter inner-->
+                </div>
+
+                <div class="col-sm-4 margin-bottom-30 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
+                        <h3>Ota yhteyttä</h3>
+
+                        <ul class="list-unstyled contact-list">
+                            <li><i class="ion-ios-mail"></i> {{ settings.kalikos_site.BrandingSettings.email }}</li>
+
+                        </ul>
+                    </div><!--fotter inner-->
+                </div>
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="footer-inner d-flex flex-column justify-content-start">
+                        <h3>We are all us</h3>
+                        
+                        <h6>Kuvat</h6>
+                        {% for image in rendered_images.values %}
+                            {% if image.attribution %}
+                            <p class="small">{{ image.title }} - 
+                                {% if image.attribution_url %}
+                                <a href="{{ image.attribution_url }}">
+                                {% endif %}
+                            {{ image.attribution }}
+                                {% if image.attribution_url %}
+                                </a>
+                                {% endif %}
+                            </p>
+                            {% endif %}
+                        {% endfor %}
+                        <!--
+                        <p>
+                            Liity postituslistallemme.
+                        </p>
+                        <form role="form" class="subscribe-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter email to subscribe">
+
+                                <button class="btn btn-default" data-toggle="tooltip" title="" data-original-title="Subscribe" type="submit"><i class="ion-ios-paperplane"></i></button>
+
+                            </div>
+                        </form>
+                        -->
+                    </div><!--fotter inner-->
+                </div>
+            </div>
+            <hr>
+            <span class="clearfix copyright">&copy; Kalikos - Suomen Glorantha-seura ry, {% now 'Y' %}</span>
+        </div>
+    </footer>
+
+    <!--footer end-->
+    
+    {% block extra_tail %}
+    {% endblock %}
+    <!-- snake start -->
+    {{ ALDRYN_SNAKE.render_tail }}
+    <!-- snake end -->
+
+</body>
+</html>

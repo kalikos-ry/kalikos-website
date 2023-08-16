@@ -1,27 +1,24 @@
-# <DEFAULT>  # Warning: text inside the DEFAULT tags is auto-generated. Manual changes will be overwritten.
-# OS generated
+# macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
-*~
 
 # Python
 *.pyc
 *.pyo
+db.sqlite3
 
-# Aldryn
-/.env
-.aldryn
+# Divio
 .divio
-/data
 /data.tar.gz
-/static_collected
-/node_modules
-# </DEFAULT>
-#
-venv36/
+/data
+
+# Django
+/staticfiles
+
+# env
 .env-local
+docker-compose-windows.yml
+/dumps/

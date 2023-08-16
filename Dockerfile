@@ -1,45 +1,20 @@
-# <WARNING>
-# Everything within sections like <TAG> is generated and can
-# be automatically replaced on deployment. You can disable
-# this functionality by simply removing the wrapping tags.
-# </WARNING>
+FROM python:3.11-slim-buster
 
-# <DOCKER_FROM>
-FROM divio/base:2.2-py3.9-slim-buster
-# </DOCKER_FROM>
+RUN apt-get update && apt-get install -y libpq-dev build-essential libjpeg-dev zlib1g
 
-# <NPM>
-# </NPM>
+RUN pip install --upgrade pip
+RUN pip install pip-tools
 
-# <BOWER>
-# </BOWER>
-
-# <PYTHON>
-ENV PIP_INDEX_URL=${PIP_INDEX_URL:-https://wheels.aldryn.net/v1/aldryn-extras+pypi/${WHEELS_PLATFORM:-aldryn-baseproject-py3}/+simple/} \
-    WHEELSPROXY_URL=${WHEELSPROXY_URL:-https://wheels.aldryn.net/v1/aldryn-extras+pypi/${WHEELS_PLATFORM:-aldryn-baseproject-py3}/}
-COPY requirements.* /app/
-COPY addons-dev /app/addons-dev/
-RUN pip-reqs compile && \
-    pip-reqs resolve && \
-    pip install \
-        --no-index --no-deps \
-        --requirement requirements.urls
-# </PYTHON>
-
-# <SOURCE>
+WORKDIR /app
 COPY . /app
-# </SOURCE>
 
-# <GULP>
-# </GULP>
-RUN cat /app/settings.py
-RUN python manage.py help
-RUN DJANGO_MODE=build python manage.py help
-RUN DJANGO_MODE=build python manage.py compilescss
-# <STATIC>
-RUN DJANGO_MODE=build python manage.py collectstatic --noinput
-# </STATIC>
+COPY requirements.* /app/
 
-# Remove the css files in development environments (in Live they
-# are already collected)
-RUN DJANGO_MODE=build python manage.py compilescss --delete-files
+RUN pip-compile
+RUN pip install -r requirements.txt
+RUN pip install uwsgi~=2.0.0
+
+RUN python manage.py compilescss
+RUN python manage.py collectstatic --noinput
+
+CMD uwsgi --module kalikos.wsgi --http=0.0.0.0:80
