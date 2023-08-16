@@ -47,7 +47,6 @@ class NewsItemRevision(AbstractNewsItemRevision):
     # be named 'newsitem', and have a related_name='revisions'
     newsitem = models.ForeignKey(NewsItem, related_name='revisions', on_delete=models.CASCADE)
     
-## TODO: Move to kalikos_site this!
 @newsindex
 class NewsIndex(NewsIndexMixin, NormalPage):
     newsitem_model = 'NewsItem'
