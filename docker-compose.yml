@@ -18,6 +18,8 @@ services:
     links:
       - "db"
     env_file:
+      - path: .env-dev
+        required: true
       - path: .env-local
         required: false
 

@@ -11,6 +11,8 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:80
     env_file:
+      - path: .env-dev
+        required: true
       - path: .env-local
         required: false
     links:
