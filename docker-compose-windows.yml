@@ -10,7 +10,9 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:80
-    #env_file: .env-local
+    env_file:
+      - path: .env-local
+        required: false
     links:
     - db
     ports:
