@@ -9,11 +9,11 @@ class ForumSearchPage(RoutablePageMixin, NormalPage):
   def get_connection(self):
     forum_db = settings.FORUM_DATABASE
     forum_db = {k.lower(): v for k, v in forum_db.items()}
+    forum_db['database'] = forum_db['name']
     del forum_db['name']
     del forum_db['conn_max_age']
     del forum_db['conn_health_checks']
     del forum_db['engine']
-    forum_db['database'] = forum_db['user']
     connection = pymysql.connect(**forum_db)
     return connection
 
