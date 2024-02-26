@@ -12,6 +12,6 @@ feedparser==6.0.10
 pymysql==1.1.0
 django-sass-processor==1.2.2
 libsass==0.22.0
-wagtailmenus==3.1.8
+wagtailmenus==3.1.9
 django-bootstrap4==23.2
 django-compressor
