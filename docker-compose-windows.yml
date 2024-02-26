@@ -21,4 +21,5 @@ services:
     - 8080:80
     volumes:
     - .:/app:rw
+    - "./data:/data:rw"
 version: '2'
