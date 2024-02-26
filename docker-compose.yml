@@ -16,14 +16,14 @@ services:
     command: python manage.py runserver 0.0.0.0:80
         # a link to database_default, the application's local database service
     links:
-      - "db"
+      - "database_default"
     env_file:
       - path: .env-dev
         required: true
       - path: .env-local
         required: false
 
-  db:
+  database_default:
     # the application's web service will use an off-the-shelf image
     image: postgres:13.5-alpine
     environment:

@@ -1,5 +1,5 @@
 services:
-  db:
+  database_default:
     environment:
       POSTGRES_DB: db
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -16,7 +16,7 @@ services:
       - path: .env-local
         required: false
     links:
-    - db
+    - "database_default"
     ports:
     - 8080:80
     volumes:

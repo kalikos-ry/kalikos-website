@@ -132,7 +132,7 @@ WSGI_APPLICATION = 'kalikos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# To use in local dev, add to .env file: DATABASE_URL=postgres://postgres@db:5432/db
+# To use in local dev, add to .env file: DATABASE_URL=postgres://postgres@database_default:5432/db
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite://:memory:')
 DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
 
