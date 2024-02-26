@@ -17,7 +17,7 @@ services:
         # a link to database_default, the application's local database service
     links:
       - "db"
-    env_file: .env-local
+    # env_file: .env-local
 
   db:
     # the application's web service will use an off-the-shelf image
