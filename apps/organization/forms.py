@@ -41,7 +41,7 @@ class JoinOrganizationForm(forms.Form):
     first_name = forms.CharField(max_length=255, label='Etunimi')
     last_name = forms.CharField(max_length=255, label='Sukunimi')
     email = forms.EmailField(label='Sähköpostiosoite')
-    city = forms.CharField(max_length=255, label='Kotikaupunki')
+    city = forms.CharField(max_length=255, label='Kotipaikka')
     
     captcha = ReCaptchaField()
     

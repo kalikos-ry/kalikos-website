@@ -14,6 +14,7 @@ class JoinOrganizationPage(Page, KalikosPage):
     thank_you = RichTextField(blank=True)
     form_instructions = RichTextField(blank=True)
     email_help_text = models.CharField(max_length=1024)
+    city_help_text = models.CharField(max_length=1024)
     submit_button_text = models.CharField(max_length=255)
     
     body = StreamField([
@@ -28,6 +29,7 @@ class JoinOrganizationPage(Page, KalikosPage):
         FieldPanel('thank_you'),
         FieldPanel('form_instructions'),
         FieldPanel('email_help_text'),
+        FieldPanel('city_help_text'),
         FieldPanel('submit_button_text'),
     ]
     
@@ -43,6 +45,7 @@ class JoinOrganizationPage(Page, KalikosPage):
             
         form = JoinOrganizationForm()
         form.fields['email'].help_text = self.email_help_text
+        form.fields['city'].help_text = self.city_help_text
         
         return render(request, 'organization/join_form.html', {
             'page': self,
