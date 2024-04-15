@@ -12,7 +12,7 @@ COPY requirements.* /app/
 
 RUN pip-compile
 RUN pip install -r requirements.txt
-RUN pip install uwsgi~=2.0.0
+RUN pip install uwsgi==2.0.24
 
 RUN python manage.py compilescss
 RUN python manage.py collectstatic --noinput
