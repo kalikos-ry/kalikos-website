@@ -22,6 +22,7 @@ class MembraClient(APIClient):
             'mem_email': data['email'],
             'mef_id': '1',
             'mem_street': '-',
+            'mem_city': data['city'],
             'mem_sex': '-',
             'mem_accept_email_invoice': 1,
             'mes_entrydate': timezone.now().strftime('%Y-%m-%d'),
@@ -40,6 +41,7 @@ class JoinOrganizationForm(forms.Form):
     first_name = forms.CharField(max_length=255, label='Etunimi')
     last_name = forms.CharField(max_length=255, label='Sukunimi')
     email = forms.EmailField(label='Sähköpostiosoite')
+    city = forms.CharField(max_length=255, label='Kotikaupunki')
     
     captcha = ReCaptchaField()
     
