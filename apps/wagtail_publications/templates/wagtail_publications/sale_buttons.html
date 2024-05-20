@@ -11,6 +11,7 @@
             data-item-url="{% firstof url item.get_url %}"
             data-item-price="{{ item.pdf_price|unlocalize }}"
             data-item-description="{{ item.shop_title }}, pdf"
+            data-item-categories="kalikos"
             data-item-image="{{ item_image.url }}"
             {% if issue.snipcart_digital_id %}
                 data-item-file-guid="{{ item.snipcart_digital_id }}"
@@ -33,6 +34,7 @@
                 data-item-url="{% firstof url item.get_url %}"
                 data-item-price="{{ item.price|unlocalize }}"
                 data-item-weight="{{ item.weight }}"
+                data-item-categories="kalikos"
                 data-item-description="{{ item.shop_title }}
                 {% if stock.stock < 1 and stock.allowOutOfStockPurchases %}
                 ennakkotilaus. Toimitus voi kestää kauemmin.

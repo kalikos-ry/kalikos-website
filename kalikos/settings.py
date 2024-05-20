@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'wagtailnews',
     'wagtailmenus',
     'wagtail_modeladmin', # For wagtailmenus 3.1.9
+    "wagtail.api.v2",
 
     'modelcluster',
     'taggit',

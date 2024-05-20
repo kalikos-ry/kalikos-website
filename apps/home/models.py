@@ -26,6 +26,12 @@ class SnipcartSettings(BaseGenericSetting):
         null=True,
         blank=True
     )
+    member_discount_name = models.CharField(
+        max_length=255,
+        help_text='The name of the discount code for members',
+        null=True,
+        blank=True
+    )
 
 class HomePage(Page):
     body = StreamField([

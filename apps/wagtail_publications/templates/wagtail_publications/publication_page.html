@@ -11,9 +11,95 @@
 
 {% block content %}
 {% if settings.home.SnipcartSettings.api_key %}
-    <div class="container">
-    <button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
+    <div class="container margin-bottom-10">
+        <button class="snipcart-checkout btn btn-secondary">Ostoskorisi (<span class="snipcart-total-price"></span>)</button>
     </div>
+    {% if settings.home.SnipcartSettings.member_discount_name %}
+        <script type="module">
+        import { createApp, reactive } from 'https://unpkg.com/petite-vue?module'
+
+        const store = reactive({
+            discount: null,
+            applied: null,
+        })
+
+        createApp({
+            $delimiters: ['${', '}'],
+            // exposed to all expressions
+            // store: { get count() { return store.count } },
+            store,
+            email: null,
+            checking: false,
+            checked: false,
+            error: null,
+            // getters
+            // methods
+            check() {
+                this.checking = true
+                this.checked = true
+                this.error = null
+                console.log(this.email)
+                fetch("/api/v2/check_discount/?email=" + this.email, {
+                    headers: {
+                        Accept: "application/json",
+                    }
+                }
+                ).then((result) => {
+                    this.checking = false
+                    result.json().then((body) => {
+                        console.log("Checked", body)
+                        if (body.discount?.code) {
+                            if (!Snipcart) {
+                                this.error = "Snipcart ei ole ladattu"
+                                return
+                            }
+                            this.store.discount = body.discount
+                            Snipcart.api.cart.update({
+                                email: body.email
+                            })
+                            Snipcart.api.cart.applyDiscount(body.discount.code).then(() => {
+                                this.store.applied = body.discount
+                            }).catch((error) => {
+                                // there's no items, necessarily
+                            })
+                        } else {
+                            this.error = "Jäsenyyttä ei löytynyt tai se ei ole aktiivinen, ota yhteys info@kalikos.org"
+                        }
+                    })
+                }).catch((error) => {
+                    this.checking = false
+                    this.error = error
+                })
+            }
+        }).mount("#member-checker")
+        document.addEventListener('snipcart.ready', () => {
+            Snipcart.events.on('discount.applied', (discount) => {
+                store.applied = { id: discount.result.discount.id, code: discount.result.discount.code }
+                console.log("discount applied", store.applied, store.discount);
+            });
+            Snipcart.events.on('item.added', (cartitem) => {
+                if (store.discount && !store.applied) {
+                    console.log("apply discount", store.discount)
+                    Snipcart.api.cart.applyDiscount(store.discount.code).catch((error) => {
+                        if (error.kind == "validation") {
+                            store.applied = store.discount
+                        }
+                    })
+                }
+            });
+        });
+        </script>
+        <div id="member-checker" class="container margin-bottom-10" v-scope>
+            Oletko jäsen ja maksanut jäsenmaksusi? Kirjoita jäsenrekisteristä löytyvä sähköpostiosoitteesi ja paina "Tarkista jäsenyys". Alennus pitäisi tulla automaattisesti. Jos näin ei tapahdu, tarkista jäsenyys uudelleen, kun olet lisännyt tuotteita.
+            <form @submit.prevent="check">
+                <input type="email" id="discount-email" placeholder="Sähköpostiosoite" v-model="email" :disabled="checking">
+                <button v-if="!checking">Tarkista jäsenyys</button>
+                <span v-else>Tarkistetaan...</span>
+            </form>
+            <div v-if="error">Virhe: ${ error }</div>
+            <div v-if="store.discount">Jäsenalennus ladattu</div>
+        </div>
+    {% endif %}
 {% endif %}
 
 <div class="container">
