@@ -11,15 +11,14 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:80
     env_file:
-      - path: .env-dev
-        required: true
-      - path: .env-local
-        required: false
+    - path: .env-dev
+      required: true
+    - path: .env-local
+      required: false
     links:
-    - "database_default"
+    - database_default
     ports:
     - 8080:80
     volumes:
     - .:/app:rw
-    - "./data:/data:rw"
-version: '2'
+    - ./data:/data:rw
