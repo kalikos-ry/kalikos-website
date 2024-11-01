@@ -5,7 +5,7 @@ from datetime import datetime
 
 from django.core.management.base import BaseCommand
 
-from podcast.models import Podcast, Episode
+from apps.podcast.models import Podcast, Episode
 
 class Command(BaseCommand):
     args = ''

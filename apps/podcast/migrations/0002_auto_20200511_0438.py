@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='podcastpage',
             name='body',
-            field=wagtail.fields.StreamField([('podcast', podcast_models.PodcastBlock())], null=True),
+            field=wagtail.fields.StreamField([('podcast', None)], null=True),
         ),
     ]

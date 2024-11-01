@@ -1,11 +1,14 @@
 from django.db import models
 from wagtail.models import Page
 from wagtail import blocks
+from wagtail import hooks
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.admin.viewsets.model import ModelViewSet
 from django import forms
 from wagtail import images
 import feedparser
+from .blocks import PodcastChooserBlock
 
 class Podcast(models.Model):
     name = models.CharField(max_length=255)
@@ -31,7 +34,7 @@ class Podcast(models.Model):
                 ep.podcast = self
                 ep.title = e.title
                 ep.save()
-    
+
 class Episode(models.Model):
     podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, related_name="episodes")
     title = models.CharField(max_length=512)
@@ -43,24 +46,24 @@ class Episode(models.Model):
     class Meta:
         ordering = ['-date']
     
-class PodcastChooserBlock(blocks.ChooserBlock):
-    target_model=Podcast
-    widget=forms.Select
+# This is here because of the circular import
+class PodcastViewSet(ModelViewSet):
+    model = Podcast
+    form_fields = ["name", "url", "feed_url", "image"]
+    icon = "user"
+    add_to_admin_menu = True
+    copy_view_enabled = False
+    inspect_view_enabled = True
 
-class PodcastBlock(blocks.StructBlock):
-    podcast = PodcastChooserBlock()
-    description = blocks.RichTextBlock()
-    
-    class Meta:
-        template = 'podcast/podcast_block.html'
-    
+podcast_viewset = PodcastViewSet("podcast")
+
 class PodcastPage(Page):
     title_image = models.ForeignKey(images.get_image_model_string(), on_delete=models.SET_NULL, related_name='+', null=True)
     
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title", template='home/blocks/heading.html')),
         ('paragraph', blocks.RichTextBlock()),
-        ('podcast', PodcastBlock())
+        ('podcast', PodcastChooserBlock(template='podcast/podcast_block.html')),
         ], use_json_field=True, null=True)
     
     content_panels = Page.content_panels + [

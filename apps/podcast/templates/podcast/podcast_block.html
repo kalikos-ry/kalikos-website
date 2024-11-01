@@ -1,17 +1,17 @@
 <div class="row" style="margin-bottom: 1rem;">
     <div class="col-sm-5">
-        <a href="{{ value.podcast.url }}">
-            <img class="img-thumbnail img-fluid" height="150" src="{{ value.podcast.image }}"/>
+        <a href="{{ value.url }}">
+            <img class="img-thumbnail img-fluid" height="150" src="{{ value.image }}"/>
         </a>
     </div>
     <div class="col-sm-7">
-        <a href="{{ value.podcast.url }}"><h2>{{ value.podcast }}</h2></a>
+        <a href="{{ value.url }}"><h2>{{ value }}</h2></a>
         <p>{{ value.description }}</p>
-        {% if value.podcast.episodes.count %}
+        {% if value.episodes.count %}
             <h4>Viimeisimmät jaksot:</h4>
             <ul class="list-unstyled">
     
-            {% for e in value.podcast.episodes.all %}
+            {% for e in value.episodes.all %}
                 <li>
                     {{ e.date|date:"SHORT_DATE_FORMAT" }}
                     <a href="{{ e.link }}">
