@@ -14,6 +14,7 @@ class ForumSearchPage(RoutablePageMixin, NormalPage):
     del forum_db['conn_max_age']
     del forum_db['conn_health_checks']
     del forum_db['engine']
+    del forum_db["disable_server_side_cursors"]
     connection = pymysql.connect(**forum_db)
     return connection
 
