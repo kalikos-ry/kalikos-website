@@ -8,11 +8,14 @@ from wagtail import images
 
 class EventStructValue(blocks.StructValue):
     def events(self):
-        return EventPage.objects.get_events(self.get('event_type'))[:3]
+        return EventPage.objects.get_events(self.get('event_type'))[:(int)(self.get('default_amount'))]
 
 class EventsBlock(blocks.StructBlock):
     event_type = blocks.ChoiceBlock(choices=(('get_past', "Menneet"), ('get_upcoming', "Tulevat")))
     alt_text = blocks.RichTextBlock()
+    default_amount = blocks.IntegerBlock(default=3)
+    # load_all_allow = blocks.BooleanBlock(default=False, required=False)
+    # load_all_text = blocks.RichTextBlock(required=False)
 
     class Meta:
         template = 'event/events_block.html'

@@ -11,6 +11,11 @@
                 {% include "event/incl_eventbox.html" %}
             </div>
             {% endfor %}
+            {% if value.load_all_allow %}
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <span class="read-more"><a href="?{{ value.event_type }}=all" class="theme-text">{{ value.load_all_text }}</a></span>
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="clearfix"></div>
