@@ -60,14 +60,14 @@ class PublicationPage(Page):
         stocks = {}
         if api_key:
             headers = { 'Accept' : 'application/json' }
-            products = requests.get('https://app.snipcart.com/api/products', auth=(api_key,''), headers=headers)
+            products = requests.get('https://app.snipcart.com/api/products', params=(('limit', 100),), auth=(api_key,''), headers=headers)
             if products.status_code == 200:
                 for p in products.json()['items']:
                     stocks[p['userDefinedId']] = {
                         'stock': p['stock'] if 'stock' in p else 0,
                         'allowOutOfStockPurchases': p['allowOutOfStockPurchases'] if 'allowOutOfStockPurchases' in p else False
                         }
-            discounts = requests.get('https://app.snipcart.com/api/discounts', auth=(api_key,''), headers=headers)
+            discounts = requests.get('https://app.snipcart.com/api/discounts', params=(('limit', 100),), auth=(api_key,''), headers=headers)
             if discounts.status_code == 200:
                 for d in discounts.json():
                     if d['archived'] == False and d['trigger'] == 'Product' and d['productIds'].endswith('-pdf') and d['type'] == "RateOnItems" and d['rate'] == 100:

@@ -25,7 +25,7 @@ class CheckDiscount(APIView):
         if member is None or member['mes_status'] != "1":
             return Response({"email": email, "status": member["mes_status"] if member else "not found"})
         headers = { 'Accept' : 'application/json' }
-        discounts = requests.get('https://app.snipcart.com/api/discounts', auth=(api_key,''), headers=headers)
+        discounts = requests.get('https://app.snipcart.com/api/discounts', params=(('limit', 100),), auth=(api_key,''), headers=headers)
         if discounts.status_code == 200:
           for d in discounts.json():
               if d['name'] == member_discount_name:
