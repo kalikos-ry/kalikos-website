@@ -24,9 +24,7 @@ pip-compile requirements.in
 pip install -r requirements.txt
 ```
 
-1. Set up environment `divio app setup kalikos -s test`
-2. Run the project `divio project up`
-3. Run migrations `docker-compose run --rm web python manage.py migrate`
+## Copy data
+TBD: Copy database data from the production server and media files from the production server.
 
-## Syncing media and db
-`divio app pull media` and `divio app pull db` to pull media and db from the server
+The default location for media files is `media/`.
