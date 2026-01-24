@@ -80,7 +80,7 @@ draftjs-exporter==5.2.0
     # via wagtail
 et-xmlfile==2.0.0
     # via openpyxl
-feedparser==6.0.10
+feedparser==6.0.12
     # via -r requirements.in
 filetype==1.2.0
     # via willow
