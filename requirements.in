@@ -18,5 +18,5 @@ feedparser==6.0.12
 pymysql==1.1.0
 django-sass-processor==1.4.2
 libsass==0.22.0
-django-bootstrap4==23.2
+django-bootstrap4==26.1
 django-compressor
