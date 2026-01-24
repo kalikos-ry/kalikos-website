@@ -12,8 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 import dj_database_url
+import environ
 from django_storage_url import dsn_configured_storage_class
 from pathlib import Path
+
+env = environ.Env(
+    DEBUG=(bool, False),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,27 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-$=5$%+cvr)#!6c7)2u(ld60htsju^79t*!qq_t8f@&8nz)%xtt')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-$=5$%+cvr)#!6c7)2u(ld60htsju^79t*!qq_t8f@&8nz)%xtt')
+DEBUG = env('DEBUG', default=False)
 
-# Allowed hosts in divio
-DIVIO_DOMAIN = os.environ.get('DOMAIN', 'localhost')
-
-DIVIO_DOMAIN_ALIASES = [
-    d.strip()
-    for d in os.environ.get('DOMAIN_ALIASES', '').split(',')
-    if d.strip()
-]
-DIVIO_DOMAIN_REDIRECTS = [
-    d.strip()
-    for d in os.environ.get('DOMAIN_REDIRECTS', '').split(',')
-    if d.strip()
-]
-
-ALLOWED_HOSTS = [DIVIO_DOMAIN] + DIVIO_DOMAIN_ALIASES + DIVIO_DOMAIN_REDIRECTS
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 # SSL redirect
-SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
+SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', default=False)
 
 # Application definition
 
@@ -135,8 +126,7 @@ WSGI_APPLICATION = 'kalikos.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # To use in local dev, add to .env file: DATABASE_URL=postgres://postgres@database_default:5432/db
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite://:memory:')
-DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+DATABASES = {'default': env.db()}
 
 
 # Password validation

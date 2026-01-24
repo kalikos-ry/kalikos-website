@@ -12,7 +12,7 @@ source .venv/bin/activate # on Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Create a `.env-local` file. Copy from `.env-dev` and add the local development specific settings.
+Create a `.env` file. Copy from `.env-dev` and add the local development specific settings.
 
 ## To update dependencies
 
