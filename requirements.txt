@@ -96,7 +96,7 @@ l18n==2021.3
     # via wagtail
 laces==0.1.2
     # via wagtail
-libsass==0.22.0
+libsass==0.23.0
     # via -r requirements.in
 openpyxl==3.1.5
     # via wagtail
@@ -112,7 +112,7 @@ psycopg[binary]==3.3.2
     # via -r requirements.in
 psycopg-binary==3.3.2
     # via psycopg
-pymysql==1.1.0
+pymysql==1.1.2
     # via -r requirements.in
 python-dateutil==2.9.0.post0
     # via botocore
