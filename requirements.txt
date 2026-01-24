@@ -14,12 +14,6 @@ beautifulsoup4==4.12.3
     # via
     #   django-bootstrap4
     #   wagtail
-boto3==1.28.25
-    # via -r requirements.in
-botocore==1.31.85
-    # via
-    #   boto3
-    #   s3transfer
 certifi==2026.1.4
     # via requests
 charset-normalizer==3.4.4
@@ -39,8 +33,6 @@ django==4.2.4
     #   django-modelcluster
     #   django-permissionedforms
     #   django-recaptcha
-    #   django-storage-url
-    #   django-storages
     #   django-taggit
     #   django-treebeard
     #   djangorestframework
@@ -66,10 +58,6 @@ django-recaptcha==4.1.0
     # via -r requirements.in
 django-sass-processor==1.4.2
     # via -r requirements.in
-django-storage-url==0.9.4
-    # via -r requirements.in
-django-storages==1.14.6
-    # via django-storage-url
 django-taggit==5.0.1
     # via wagtail
 django-treebeard==4.8.0
@@ -84,14 +72,8 @@ feedparser==6.0.12
     # via -r requirements.in
 filetype==1.2.0
     # via willow
-furl==2.1.4
-    # via django-storage-url
 idna==3.11
     # via requests
-jmespath==1.1.0
-    # via
-    #   boto3
-    #   botocore
 l18n==2021.3
     # via wagtail
 laces==0.1.2
@@ -100,8 +82,6 @@ libsass==0.23.0
     # via -r requirements.in
 openpyxl==3.1.5
     # via wagtail
-orderedmultidict==1.0.2
-    # via furl
 pillow==10.4.0
     # via
     #   pillow-heif
@@ -114,8 +94,6 @@ psycopg-binary==3.3.2
     # via psycopg
 pymysql==1.1.2
     # via -r requirements.in
-python-dateutil==2.9.0.post0
-    # via botocore
 pytz==2025.2
     # via l18n
 rcssmin==1.2.2
@@ -126,16 +104,10 @@ requests==2.32.5
     #   wagtail
 rjsmin==1.2.5
     # via django-compressor
-s3transfer==0.6.2
-    # via boto3
 sgmllib3k==1.0.0
     # via feedparser
 six==1.17.0
-    # via
-    #   furl
-    #   l18n
-    #   orderedmultidict
-    #   python-dateutil
+    # via l18n
 soupsieve==2.8.3
     # via beautifulsoup4
 sqlparse==0.5.5
@@ -151,9 +123,7 @@ tzdata==2025.3
     #   django
     #   psycopg
 urllib3==2.0.7
-    # via
-    #   botocore
-    #   requests
+    # via requests
 wagtail==6.3.5
     # via
     #   -r requirements.in
