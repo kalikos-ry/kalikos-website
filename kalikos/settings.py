@@ -205,7 +205,7 @@ WAGTAILADMIN_BASE_URL = '/cms/'
 WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 
 # Other
-forum_url = os.environ.get('FORUM_DATABASE_DSN')
+forum_url = os.environ.get('FORUM_DATABASE_URL')
 if forum_url:
   FORUM_DATABASE = dj_database_url.parse(forum_url)
 
