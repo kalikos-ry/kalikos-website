@@ -28,3 +28,8 @@ pip install -r requirements.txt
 TBD: Copy database data from the production server and media files from the production server.
 
 The default location for media files is `media/`.
+
+## Running the project
+```bash
+python manage.py runserver
+```
