@@ -160,9 +160,9 @@ wagtail==6.3.5
     #   wagtail-modeladmin
     #   wagtailmenus
     #   wagtailnews
-wagtail-modeladmin==2.1.0
+wagtail-modeladmin==2.2.0
     # via -r requirements.in
-wagtailmenus==4.0.1
+wagtailmenus==4.0.5
     # via -r requirements.in
 wagtailnews==5.2.0
     # via -r requirements.in
