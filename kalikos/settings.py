@@ -174,6 +174,8 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
     'compressor.finders.CompressorFinder'
 ]
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = DEBUG
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
