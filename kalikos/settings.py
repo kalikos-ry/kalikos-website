@@ -35,7 +35,7 @@ DEBUG = env('DEBUG', default=False)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 # SSL redirect
-SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', default=False)
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
 
 # Application definition
 
@@ -205,11 +205,11 @@ WAGTAILADMIN_BASE_URL = '/cms/'
 WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 
 # Other
-forum_url = os.environ.get('FORUM_DATABASE_URL')
+forum_url = env('FORUM_DATABASE_URL', default=None)
 if forum_url:
   FORUM_DATABASE = dj_database_url.parse(forum_url)
 
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', 'invalid')
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', 'invalid')
-MEMBRA_API_TOKEN = os.environ.get('MEMBRA_API_TOKEN')
-GTAG_ID = os.environ.get('GTAG_ID', 'invalid')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY', default='invalid')
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY', default='invalid')
+MEMBRA_API_TOKEN = env('MEMBRA_API_TOKEN', default=None)
+GTAG_ID = env('GTAG_ID', default='invalid')
