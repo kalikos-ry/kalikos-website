@@ -167,7 +167,6 @@ USE_TZ = True
 
 STATIC_URL = env.str('STATIC_URL', default='static/')
 STATIC_ROOT = env.str('STATIC_ROOT', default=os.path.join(BASE_DIR, 'staticfiles'))
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -177,25 +176,24 @@ STATICFILES_FINDERS = [
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = DEBUG
 
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+    'sass_processor': {
+        'ROOT': os.path.join(BASE_DIR, 'sass_root'),
+    }
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media files
-
-# DEFAULT_FILE_STORAGE is configured using DEFAULT_STORAGE_DSN
-
-# read the setting value from the environment variable
-DEFAULT_STORAGE_DSN = os.environ.get('DEFAULT_STORAGE_DSN', 'file:///data/media/?url=%2Fmedia%2F')
-
-# dsn_configured_storage_class() requires the name of the setting
-DefaultStorageClass = dsn_configured_storage_class('DEFAULT_STORAGE_DSN')
-
-# Django's DEFAULT_FILE_STORAGE requires the class name
-DEFAULT_FILE_STORAGE = 'kalikos.settings.DefaultStorageClass'
-
-# Local
 MEDIA_URL = env('MEDIA_URL', default='media/')
 MEDIA_ROOT = env('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 
