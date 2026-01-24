@@ -62,7 +62,7 @@ django-modelcluster==6.4.1
     # via wagtail
 django-permissionedforms==0.1
     # via wagtail
-django-recaptcha==3.0.0
+django-recaptcha==4.1.0
     # via -r requirements.in
 django-sass-processor==1.4.2
     # via -r requirements.in

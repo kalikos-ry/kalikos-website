@@ -83,7 +83,7 @@ INSTALLED_APPS = [
     'sass_processor',
 
     # other
-    'captcha',
+    'django_recaptcha',
     'bootstrap4',
 ]
 

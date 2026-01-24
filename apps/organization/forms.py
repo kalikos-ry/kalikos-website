@@ -1,5 +1,5 @@
 from django import forms
-from captcha.fields import ReCaptchaField
+from django_recaptcha.fields import ReCaptchaField
 from .membra import MembraClient
 
 class JoinOrganizationForm(forms.Form):
