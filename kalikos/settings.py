@@ -181,7 +181,8 @@ STORAGES = {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
     },
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        #'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
     'sass_processor': {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
