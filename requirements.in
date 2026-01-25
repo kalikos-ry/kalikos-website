@@ -1,4 +1,4 @@
-django==4.2.4
+django==4.2.27
 django-environ
 dj-database-url>=2.0.0
 
