@@ -136,7 +136,7 @@ wagtailmenus==4.0.5
     # via -r requirements.in
 wagtailnews==5.2.0
     # via -r requirements.in
-whitenoise==6.5.0
+whitenoise==6.11.0
     # via -r requirements.in
 willow[heif]==1.11.0
     # via

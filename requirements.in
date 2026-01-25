@@ -3,7 +3,7 @@ django-environ
 dj-database-url>=2.0.0
 
 psycopg[binary]
-whitenoise==6.5.0
+whitenoise==6.11.0
 
 wagtail==6.3.5
 wagtailnews==5.2.0
