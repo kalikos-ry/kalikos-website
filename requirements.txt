@@ -39,6 +39,7 @@ django==5.2.10
     #   django-treebeard
     #   djangorestframework
     #   laces
+    #   modelsearch
     #   wagtail
 django-appconf==1.2.0
     # via django-compressor
@@ -64,8 +65,10 @@ django-stubs-ext==5.2.9
     # via django-tasks
 django-taggit==5.0.1
     # via wagtail
-django-tasks==0.6.1
-    # via wagtail
+django-tasks==0.8.1
+    # via
+    #   modelsearch
+    #   wagtail
 django-treebeard==4.8.0
     # via wagtail
 djangorestframework==3.16.1
@@ -84,6 +87,8 @@ laces==0.1.2
     # via wagtail
 libsass==0.23.0
     # via -r requirements.in
+modelsearch==1.1.1
+    # via wagtail
 openpyxl==3.1.5
     # via wagtail
 pillow==10.4.0
@@ -127,7 +132,7 @@ tzdata==2025.3
     #   psycopg
 urllib3==2.0.7
     # via requests
-wagtail==6.4.2
+wagtail==7.2.1
     # via
     #   -r requirements.in
     #   wagtail-modeladmin
