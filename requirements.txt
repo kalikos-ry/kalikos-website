@@ -33,7 +33,9 @@ django==5.2.10
     #   django-modelcluster
     #   django-permissionedforms
     #   django-recaptcha
+    #   django-stubs-ext
     #   django-taggit
+    #   django-tasks
     #   django-treebeard
     #   djangorestframework
     #   laces
@@ -58,7 +60,11 @@ django-recaptcha==4.1.0
     # via -r requirements.in
 django-sass-processor==1.4.2
     # via -r requirements.in
+django-stubs-ext==5.2.9
+    # via django-tasks
 django-taggit==5.0.1
+    # via wagtail
+django-tasks==0.6.1
     # via wagtail
 django-treebeard==4.8.0
     # via wagtail
@@ -74,8 +80,6 @@ filetype==1.2.0
     # via willow
 idna==3.11
     # via requests
-l18n==2021.3
-    # via wagtail
 laces==0.1.2
     # via wagtail
 libsass==0.23.0
@@ -94,8 +98,6 @@ psycopg-binary==3.3.2
     # via psycopg
 pymysql==1.1.2
     # via -r requirements.in
-pytz==2025.2
-    # via l18n
 rcssmin==1.2.2
     # via django-compressor
 requests==2.32.5
@@ -106,8 +108,6 @@ rjsmin==1.2.5
     # via django-compressor
 sgmllib3k==1.0.0
     # via feedparser
-six==1.17.0
-    # via l18n
 soupsieve==2.8.3
     # via beautifulsoup4
 sqlparse==0.5.5
@@ -117,14 +117,17 @@ telepath==0.3.1
 tenacity==9.1.2
     # via api-client
 typing-extensions==4.15.0
-    # via psycopg
+    # via
+    #   django-stubs-ext
+    #   django-tasks
+    #   psycopg
 tzdata==2025.3
     # via
     #   django
     #   psycopg
 urllib3==2.0.7
     # via requests
-wagtail==6.3.5
+wagtail==6.4.2
     # via
     #   -r requirements.in
     #   wagtail-modeladmin
