@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 import datetime
 from django.db import migrations, models
-from django.utils.timezone import utc
 
 
 class Migration(migrations.Migration):
@@ -27,6 +26,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='issuepage',
             name='publication_date',
-            field=models.DateField(default=datetime.datetime(2018, 11, 3, 17, 25, 36, 157344, tzinfo=utc)),
+            field=models.DateField(default=datetime.datetime(2018, 11, 3, 17, 25, 36, 157344, tzinfo=datetime.timezone.utc)),
         ),
     ]
