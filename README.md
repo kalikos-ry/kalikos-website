@@ -6,22 +6,28 @@ This is the code for the Kalikos website, a community-driven platform for sharin
 
 ## Local development setup
 
+Install [uv](https://docs.astral.sh/uv/), then sync dependencies:
+
 ```bash
-python -m venv .venv
-source .venv/bin/activate # on Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+uv sync
 ```
 
 Create a `.env` file. Copy from `.env-dev` and add the local development specific settings.
 
 ## To update dependencies
 
-Update `requirements.in` with the new dependencies.
+Add or change dependencies in [`pyproject.toml`](pyproject.toml), or use:
 
 ```bash
-pip install pip-tools
-pip-compile requirements.in
-pip install -r requirements.txt
+uv add package-name
+uv add 'package-name==1.2.3'
+```
+
+Then refresh the lockfile and environment:
+
+```bash
+uv lock
+uv sync
 ```
 
 ## Copy data
@@ -31,5 +37,5 @@ The default location for media files is `media/`.
 
 ## Running the project
 ```bash
-python manage.py runserver
+uv run python manage.py runserver
 ```
