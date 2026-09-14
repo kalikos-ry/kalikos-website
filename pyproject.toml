@@ -8,7 +8,7 @@ dependencies = [
     "dj-database-url>=2.0.0",
     "psycopg[binary]",
     "whitenoise==6.11.0",
-    "wagtail==7.2.*",
+    "wagtail==7.4.3",
     "wagtailnews==5.2.0",
     "wagtailmenus==4.0.5",
     "wagtail-modeladmin==2.2.0",
