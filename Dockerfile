@@ -1,4 +1,4 @@
-FROM python:3.12-bullseye
+FROM python:3.13-bullseye
 SHELL ["/bin/bash", "-c"]
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 0
