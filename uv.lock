@@ -514,17 +514,17 @@ requires-dist = [
     { name = "django-bootstrap4", specifier = "==26.1" },
     { name = "django-compressor" },
     { name = "django-environ" },
-    { name = "django-recaptcha", specifier = "==4.1.0" },
+    { name = "django-recaptcha", specifier = "==4.1.*" },
     { name = "django-sass-processor", specifier = "==1.4.2" },
-    { name = "feedparser", specifier = "==6.0.12" },
+    { name = "feedparser", specifier = "==6.0.*" },
     { name = "libsass", specifier = "==0.23.0" },
     { name = "psycopg", extras = ["binary"] },
     { name = "pymysql", specifier = "==1.1.2" },
     { name = "wagtail", specifier = "==7.4.3" },
-    { name = "wagtail-modeladmin", specifier = "==2.2.0" },
-    { name = "wagtailmenus", specifier = "==4.0.5" },
+    { name = "wagtail-modeladmin", specifier = "==2.4.*" },
+    { name = "wagtailmenus", specifier = "==4.1.*" },
     { name = "wagtailnews", specifier = "==5.2.0" },
-    { name = "whitenoise", specifier = "==6.11.0" },
+    { name = "whitenoise", specifier = "==6.12.0" },
 ]
 
 [[package]]
@@ -899,27 +899,27 @@ wheels = [
 
 [[package]]
 name = "wagtail-modeladmin"
-version = "2.2.0"
+version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "wagtail" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/44/72/e687aa58e21708655ceaa731586803031385be82eea0876e4268665e8dc4/wagtail_modeladmin-2.2.0.tar.gz", hash = "sha256:41e12f9a79f8c1595fce73bd6b51007422f258089564f9df8e09a82246a8e133", size = 140057, upload-time = "2025-04-25T12:17:26.925Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4d/fc/572d102ffddbb1cdc8ee57f89e110999979dcfb19346dea4270591f87a59/wagtail_modeladmin-2.4.0.tar.gz", hash = "sha256:11b051e4595242cec5f71b9e30acf1ca6b08809d27e3fa148d7f8e77cf60d9fe", size = 141163, upload-time = "2026-06-07T11:37:08.604Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/29/0f5f4e7ce521836092ad878d032410dd7563e1ac2b06af0deb9e19032ef0/wagtail_modeladmin-2.2.0-py3-none-any.whl", hash = "sha256:60ea08b128761b5b6a1cbfe3c8ab828fba13e41ff3d7563a0b8c62c8fe36c4ce", size = 265632, upload-time = "2025-04-25T12:17:25.538Z" },
+    { url = "https://files.pythonhosted.org/packages/b1/bc/564c02172c3ee1717ebb69b8565f1cacadd59914a5c4b330741a9a9b9705/wagtail_modeladmin-2.4.0-py3-none-any.whl", hash = "sha256:3ddf8d099c402610ac9a5d668c72a0743463395316b23abcb4f9fbf2ddd2984f", size = 265759, upload-time = "2026-06-07T11:37:07.152Z" },
 ]
 
 [[package]]
 name = "wagtailmenus"
-version = "4.0.5"
+version = "4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django-cogwheels" },
     { name = "wagtail" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/b5/08bd15bc5d6ed8f2823df2a870349e7e7d3263bdae67715c001b88ce6670/wagtailmenus-4.0.5.tar.gz", hash = "sha256:a71e70bd3aa0697dc04947d1af8ce402d69c67f1040cd2ad601c797d67ae1681", size = 116810, upload-time = "2025-11-29T20:34:23.138Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/25/96/5dd48ec0caf249d869dd7c05319632c7b8edd1ed2a807f13ec355c921baa/wagtailmenus-4.1.tar.gz", hash = "sha256:71c8d2a84e2e85d56aca30ea18d445d7d6101b9763e660793e52589357e0d43d", size = 120497, upload-time = "2026-07-22T13:28:25.627Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/36/86/ce0e2c429357ab3013fdb59234096dbb8111e14ed8ca06b8d69b7e08531b/wagtailmenus-4.0.5-py3-none-any.whl", hash = "sha256:d34f4846a7a452d14bbf52c7b14bc4215e90bf271aea2f7ed616bea23389b313", size = 200484, upload-time = "2025-11-29T20:34:21.319Z" },
+    { url = "https://files.pythonhosted.org/packages/83/75/a02387a8908c2dfeb91ae10137ec5deed3017b388d7212168265df5bdc92/wagtailmenus-4.1-py3-none-any.whl", hash = "sha256:0a5c0dd3f64892b0dc438dd1b123289514105928b968af9142acfc9e89708ab1", size = 204229, upload-time = "2026-07-22T13:28:24.107Z" },
 ]
 
 [[package]]
@@ -936,11 +936,11 @@ wheels = [
 
 [[package]]
 name = "whitenoise"
-version = "6.11.0"
+version = "6.12.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/15/95/8c81ec6b6ebcbf8aca2de7603070ccf37dbb873b03f20708e0f7c1664bc6/whitenoise-6.11.0.tar.gz", hash = "sha256:0f5bfce6061ae6611cd9396a8231e088722e4fc67bc13a111be74c738d99375f", size = 26432, upload-time = "2025-09-18T09:16:10.995Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cb/2a/55b3f3a4ec326cd077c1c3defeee656b9298372a69229134d930151acd01/whitenoise-6.12.0.tar.gz", hash = "sha256:f723ebb76a112e98816ff80fcea0a6c9b8ecde835f8ddda25df7a30a3c2db6ad", size = 26841, upload-time = "2026-02-27T00:05:42.028Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/e9/4366332f9295fe0647d7d3251ce18f5615fbcb12d02c79a26f8dba9221b3/whitenoise-6.11.0-py3-none-any.whl", hash = "sha256:b2aeb45950597236f53b5342b3121c5de69c8da0109362aee506ce88e022d258", size = 20197, upload-time = "2025-09-18T09:16:09.754Z" },
+    { url = "https://files.pythonhosted.org/packages/db/eb/d5583a11486211f3ebd4b385545ae787f32363d453c19fffd81106c9c138/whitenoise-6.12.0-py3-none-any.whl", hash = "sha256:fc5e8c572e33ebf24795b47b6a7da8da3c00cff2349f5b04c02f28d0cc5a3cc2", size = 20302, upload-time = "2026-02-27T00:05:40.086Z" },
 ]
 
 [[package]]
