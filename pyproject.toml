@@ -3,7 +3,7 @@ name = "kalikos"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "django==5.2.*",
+    "django==6.0.*",
     "django-environ",
     "dj-database-url>=2.0.0",
     "psycopg[binary]",
