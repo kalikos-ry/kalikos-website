@@ -202,7 +202,7 @@ MEDIA_ROOT = env('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 
 # Wagtail
 WAGTAIL_SITE_NAME = 'Kalikos'
-WAGTAILADMIN_BASE_URL = '/cms/'
+WAGTAILADMIN_BASE_URL = env('WAGTAILADMIN_BASE_URL', default='http://localhost:8000')
 WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 
 # Other

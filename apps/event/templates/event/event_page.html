@@ -10,7 +10,7 @@
 
 {% block extra_head %}
     {% image page.image max-320x240 as og_image %}
-    <meta poperty="og:image" content="{{ og_image.url }}" />
+    <meta property="og:image" content="{{ og_image.full_url }}" />
 {% endblock %}
 
 {% block content %}
