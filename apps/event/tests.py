@@ -4,6 +4,7 @@ from unittest.mock import Mock, patch
 from zoneinfo import ZoneInfo
 
 import requests
+from django.core.files.images import ImageFile
 from django.test import TestCase, override_settings
 from PIL import Image as PILImage
 from rest_framework.test import APIClient
@@ -102,7 +103,7 @@ class UpsertEventAPITest(TestCase):
             datetime(2026, 10, 17, 10, 0, tzinfo=HELSINKI),
         )
         self.assertIsNotNone(page.image)
-        self.assertEqual(page.image.attribution_url, IMAGE_URL)
+        self.assertEqual(page.image.title, 'tampere-syksy-26')
         self.mock_get.assert_called_once()
 
     def test_update_event_page_by_slug(self):
@@ -127,7 +128,7 @@ class UpsertEventAPITest(TestCase):
         page.refresh_from_db()
         self.assertEqual(page.revisions.count(), revision_count)
 
-    def test_reuses_existing_image_for_same_url(self):
+    def test_fetches_image_per_event_slug(self):
         self._post(EVENT_PAYLOAD)
         other = {
             **EVENT_PAYLOAD,
@@ -139,18 +140,43 @@ class UpsertEventAPITest(TestCase):
         self.assertEqual(response.json()['status'], 'created')
 
         image_model = get_image_model()
-        self.assertEqual(image_model.objects.filter(attribution_url=IMAGE_URL).count(), 1)
-        self.assertEqual(self.mock_get.call_count, 1)
+        self.assertEqual(image_model.objects.filter(title='tampere-syksy-26').count(), 1)
+        self.assertEqual(image_model.objects.filter(title='other-event').count(), 1)
+        self.assertEqual(self.mock_get.call_count, 2)
 
         first = EventPage.objects.get(slug='tampere-syksy-26')
         second = EventPage.objects.get(slug='other-event')
-        self.assertEqual(first.image_id, second.image_id)
+        self.assertNotEqual(first.image_id, second.image_id)
 
     def test_image_fetch_failure_returns_400(self):
         self.mock_get.side_effect = requests.RequestException('network down')
         response = self._post(EVENT_PAYLOAD)
         self.assertEqual(response.status_code, 400)
         self.assertIn('image', response.json())
+
+    def test_uses_existing_image_by_title(self):
+        image_model = get_image_model()
+        existing = image_model(
+            title='20251223_152727',
+            file=ImageFile(BytesIO(_png_bytes()), name='20251223_152727.png'),
+        )
+        existing.save()
+
+        payload = {**EVENT_PAYLOAD, 'image': '20251223_152727'}
+        response = self._post(payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'created')
+
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        self.assertEqual(page.image_id, existing.id)
+        self.mock_get.assert_not_called()
+
+    def test_missing_image_title_returns_400(self):
+        payload = {**EVENT_PAYLOAD, 'image': '20251223_152727'}
+        response = self._post(payload)
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('image', response.json())
+        self.mock_get.assert_not_called()
 
     def test_create_event_with_urls(self):
         payload = {

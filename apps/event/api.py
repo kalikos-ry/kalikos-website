@@ -51,7 +51,7 @@ class UpsertEventSerializer(serializers.Serializer):
     start = serializers.DateTimeField()
     end = serializers.DateTimeField()
     go_live_at = serializers.DateTimeField(required=False, allow_null=True)
-    image = serializers.URLField()
+    image = serializers.CharField(max_length=255)
     urls = EventUrlSerializer(many=True, required=False)
 
 
@@ -188,6 +188,17 @@ def _filename_from_slug(slug, url, response):
     return f'event-image-{slug}{ext}'
 
 
+def _is_image_url(value):
+    return value.startswith(('http://', 'https://'))
+
+
+def _get_image_by_title(title):
+    image = get_image_model().objects.filter(title=title).first()
+    if image is None:
+        raise serializers.ValidationError({'image': f'No image found with title "{title}"'})
+    return image
+
+
 def _get_or_create_image(slug, url):
     image_model = get_image_model()
     existing = image_model.objects.filter(title=slug).first()
@@ -210,6 +221,12 @@ def _get_or_create_image(slug, url):
     except Exception as exc:
         raise serializers.ValidationError({'image': f'Could not save image: {exc}'}) from exc
     return image
+
+
+def _resolve_image(slug, value):
+    if _is_image_url(value):
+        return _get_or_create_image(slug, value)
+    return _get_image_by_title(value)
 
 
 class UpsertEvent(APIView):
@@ -241,7 +258,7 @@ class UpsertEvent(APIView):
         slug = data['slug']
 
         try:
-            data['image'] = _get_or_create_image(slug, data['image'])
+            data['image'] = _resolve_image(slug, data['image'])
         except serializers.ValidationError as exc:
             return Response(exc.detail, status=400)
 
