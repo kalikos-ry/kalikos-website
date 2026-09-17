@@ -36,6 +36,11 @@ CONTENT_TYPE_EXTENSIONS = {
 }
 
 
+class EventUrlSerializer(serializers.Serializer):
+    title = serializers.CharField(allow_null=True)
+    url = serializers.URLField()
+
+
 class UpsertEventSerializer(serializers.Serializer):
     slug = serializers.SlugField(max_length=255)
     title = serializers.CharField(max_length=255)
@@ -47,6 +52,7 @@ class UpsertEventSerializer(serializers.Serializer):
     end = serializers.DateTimeField()
     go_live_at = serializers.DateTimeField(required=False, allow_null=True)
     image = serializers.URLField()
+    urls = EventUrlSerializer(many=True, required=False)
 
 
 def _normalize_value(name, value):
@@ -98,6 +104,54 @@ def _fields_changed(page, data):
         if _normalize_value(name, incoming[name]) != _normalize_value(name, current[name]):
             return True
     return False
+
+
+def _url_items_from_page(page):
+    items = []
+    for block in page.urls:
+        if block.block_type == 'urls':
+            items.append({'title': block.value['title'], 'url': block.value['url']})
+    return items
+
+
+def _merge_url_ops(existing, ops):
+    if not ops:
+        return existing, False
+
+    by_url = {item['url']: dict(item) for item in existing}
+    order = [item['url'] for item in existing]
+    changed = False
+
+    for op in ops:
+        url = op['url']
+        title = op['title']
+        if title is None:
+            if url in by_url:
+                del by_url[url]
+                order = [u for u in order if u != url]
+                changed = True
+        elif url in by_url:
+            if by_url[url]['title'] != title:
+                by_url[url]['title'] = title
+                changed = True
+        else:
+            by_url[url] = {'title': title, 'url': url}
+            order.append(url)
+            changed = True
+
+    return [by_url[u] for u in order], changed
+
+
+def _set_page_urls(page, blocks):
+    page.urls = [('urls', block) for block in blocks]
+
+
+def _apply_url_ops(page, ops):
+    existing = _url_items_from_page(page)
+    new_blocks, changed = _merge_url_ops(existing, ops)
+    if changed:
+        _set_page_urls(page, new_blocks)
+    return changed
 
 
 def _apply_fields(page, data):
@@ -208,13 +262,23 @@ class UpsertEvent(APIView):
                 )
                 if 'go_live_at' in data:
                     page.go_live_at = data['go_live_at']
+                if 'urls' in data:
+                    new_blocks, _ = _merge_url_ops([], data['urls'])
+                    if new_blocks:
+                        _set_page_urls(page, new_blocks)
                 parent.add_child(instance=page)
                 page.save_revision().publish()
                 return Response(_response_payload(page, 'created'))
 
-            if not _fields_changed(page, data):
+            fields_changed = _fields_changed(page, data)
+            url_changed = False
+            if 'urls' in data:
+                url_changed = _apply_url_ops(page, data['urls'])
+
+            if not fields_changed and not url_changed:
                 return Response(_response_payload(page, 'unchanged'))
 
-            _apply_fields(page, data)
+            if fields_changed:
+                _apply_fields(page, data)
             page.save_revision().publish()
             return Response(_response_payload(page, 'updated'))

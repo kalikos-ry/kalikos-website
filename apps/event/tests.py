@@ -44,6 +44,14 @@ def _mock_image_response(*args, **kwargs):
     return response
 
 
+def _url_items(page):
+    return [
+        {'title': block.value['title'], 'url': block.value['url']}
+        for block in page.urls
+        if block.block_type == 'urls'
+    ]
+
+
 @override_settings(EVENT_API_TOKEN='test-event-token')
 class UpsertEventAPITest(TestCase):
     def setUp(self):
@@ -143,3 +151,125 @@ class UpsertEventAPITest(TestCase):
         response = self._post(EVENT_PAYLOAD)
         self.assertEqual(response.status_code, 400)
         self.assertIn('image', response.json())
+
+    def test_create_event_with_urls(self):
+        payload = {
+            **EVENT_PAYLOAD,
+            'urls': [
+                {'title': 'Facebook', 'url': 'https://facebook.com/events/123'},
+                {'title': 'Ilmoittautuminen', 'url': 'https://example.com/signup'},
+            ],
+        }
+        response = self._post(payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'created')
+
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        self.assertEqual(
+            _url_items(page),
+            [
+                {'title': 'Facebook', 'url': 'https://facebook.com/events/123'},
+                {'title': 'Ilmoittautuminen', 'url': 'https://example.com/signup'},
+            ],
+        )
+
+    def test_update_urls_add_update_remove(self):
+        create_payload = {
+            **EVENT_PAYLOAD,
+            'urls': [
+                {'title': 'Facebook', 'url': 'https://facebook.com/events/123'},
+                {'title': 'Poistettava', 'url': 'https://example.com/remove-me'},
+            ],
+        }
+        self._post(create_payload)
+
+        update_payload = {
+            **EVENT_PAYLOAD,
+            'urls': [
+                {'title': 'FB', 'url': 'https://facebook.com/events/123'},
+                {'title': 'Uusi linkki', 'url': 'https://example.com/new'},
+                {'title': None, 'url': 'https://example.com/remove-me'},
+            ],
+        }
+        response = self._post(update_payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'updated')
+
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        self.assertEqual(
+            _url_items(page),
+            [
+                {'title': 'FB', 'url': 'https://facebook.com/events/123'},
+                {'title': 'Uusi linkki', 'url': 'https://example.com/new'},
+            ],
+        )
+
+    def test_omitting_urls_leaves_existing_links(self):
+        self._post(
+            {
+                **EVENT_PAYLOAD,
+                'urls': [{'title': 'Facebook', 'url': 'https://facebook.com/events/123'}],
+            }
+        )
+        response = self._post(EVENT_PAYLOAD)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'unchanged')
+
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        self.assertEqual(
+            _url_items(page),
+            [{'title': 'Facebook', 'url': 'https://facebook.com/events/123'}],
+        )
+
+    def test_unchanged_when_urls_ops_are_no_ops(self):
+        payload = {
+            **EVENT_PAYLOAD,
+            'urls': [{'title': 'Facebook', 'url': 'https://facebook.com/events/123'}],
+        }
+        self._post(payload)
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        revision_count = page.revisions.count()
+
+        response = self._post(
+            {
+                **payload,
+                'urls': [{'title': 'Facebook', 'url': 'https://facebook.com/events/123'}],
+            }
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'unchanged')
+        page.refresh_from_db()
+        self.assertEqual(page.revisions.count(), revision_count)
+
+    def test_url_only_change_returns_updated(self):
+        payload = {
+            **EVENT_PAYLOAD,
+            'urls': [{'title': 'Facebook', 'url': 'https://facebook.com/events/123'}],
+        }
+        self._post(payload)
+        page = EventPage.objects.get(slug='tampere-syksy-26')
+        revision_count = page.revisions.count()
+
+        response = self._post(
+            {
+                **EVENT_PAYLOAD,
+                'urls': [{'title': 'FB', 'url': 'https://facebook.com/events/123'}],
+            }
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'updated')
+        page.refresh_from_db()
+        self.assertEqual(page.revisions.count(), revision_count + 1)
+        self.assertEqual(
+            _url_items(page),
+            [{'title': 'FB', 'url': 'https://facebook.com/events/123'}],
+        )
+
+    def test_invalid_urls_payload_returns_400(self):
+        response = self._post({**EVENT_PAYLOAD, 'urls': [{'url': 'https://example.com/'}]})
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('urls', response.json())
+
+        response = self._post({**EVENT_PAYLOAD, 'urls': [{'title': 'Bad', 'url': 'not-a-url'}]})
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('urls', response.json())
