@@ -90,7 +90,8 @@
         });
         </script>
         <div id="member-checker" class="container margin-bottom-10" v-scope>
-            Oletko jäsen ja maksanut jäsenmaksusi? Kirjoita jäsenrekisteristä löytyvä sähköpostiosoitteesi ja paina "Tarkista jäsenyys". Alennus pitäisi tulla automaattisesti. Jos näin ei tapahdu, tarkista jäsenyys uudelleen, kun olet lisännyt tuotteita.
+            Oletko jäsen ja maksanut jäsenmaksusi? Vain tällöin voit käyttää alennuskoodia KALIKOS_JASEN_0713 ostaessasi tuotteita. Syötä se "Promo code" -kenttään.
+            <!--
             <form @submit.prevent="check">
                 <input type="email" id="discount-email" placeholder="Sähköpostiosoite" v-model="email" :disabled="checking">
                 <button v-if="!checking">Tarkista jäsenyys</button>
@@ -98,6 +99,7 @@
             </form>
             <div v-if="error">Virhe: ${ error }</div>
             <div v-if="store.discount">Jäsenalennus ladattu</div>
+            -->
         </div>
     {% endif %}
 {% endif %}
