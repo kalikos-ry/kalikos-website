@@ -22,6 +22,7 @@ from django.views.generic import TemplateView
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from apps.event.api import UpsertEvent
 from apps.wagtail_publications.api import CheckDiscount
 from .api import api_router
 
@@ -30,6 +31,7 @@ urlpatterns = [
     path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
     path('api/v2/check_discount/', CheckDiscount.as_view(), name='discount_code'),
+    path('api/v2/upsert_event/', UpsertEvent.as_view(), name='upsert_event'),
     path('api/v2/', api_router.urls),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     path('', include(wagtail_urls)),

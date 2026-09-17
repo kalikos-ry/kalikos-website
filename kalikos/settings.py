@@ -215,4 +215,5 @@ if forum_url:
 RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY', default='invalid')
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY', default='invalid')
 MEMBRA_API_TOKEN = env('MEMBRA_API_TOKEN', default=None)
+EVENT_API_TOKEN = env('EVENT_API_TOKEN', default=None)
 GTAG_ID = env('GTAG_ID', default='invalid')
