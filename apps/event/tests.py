@@ -1,14 +1,20 @@
 from datetime import datetime
+from io import BytesIO
+from unittest.mock import Mock, patch
 from zoneinfo import ZoneInfo
 
+import requests
 from django.test import TestCase, override_settings
+from PIL import Image as PILImage
 from rest_framework.test import APIClient
+from wagtail.images import get_image_model
 from wagtail.models import Page
 
 from apps.event.models import EventIndexPage, EventPage
 from apps.home.models import HomePage
 
 HELSINKI = ZoneInfo('Europe/Helsinki')
+IMAGE_URL = 'https://example.com/events/tampere.png'
 
 EVENT_PAYLOAD = {
     'slug': 'tampere-syksy-26',
@@ -20,7 +26,22 @@ EVENT_PAYLOAD = {
     'start': '2026-10-17T10:00:00+03:00',
     'end': '2026-10-17T21:00:00+03:00',
     'go_live_at': '2026-08-31T15:47:26.742000+03:00',
+    'image': IMAGE_URL,
 }
+
+
+def _png_bytes():
+    buf = BytesIO()
+    PILImage.new('RGB', (1, 1), color='red').save(buf, format='PNG')
+    return buf.getvalue()
+
+
+def _mock_image_response(*args, **kwargs):
+    response = Mock()
+    response.content = _png_bytes()
+    response.headers = {'Content-Type': 'image/png'}
+    response.raise_for_status = Mock()
+    return response
 
 
 @override_settings(EVENT_API_TOKEN='test-event-token')
@@ -43,6 +64,10 @@ class UpsertEventAPITest(TestCase):
         self.event_index = EventIndexPage(title='Tapahtumat', slug='tapahtumat', body=[])
         home.add_child(instance=self.event_index)
         self.event_index.save_revision().publish()
+
+        self.image_patcher = patch('apps.event.api.requests.get', side_effect=_mock_image_response)
+        self.mock_get = self.image_patcher.start()
+        self.addCleanup(self.image_patcher.stop)
 
     def _post(self, data, **extra_headers):
         headers = {**self.auth_headers, **extra_headers}
@@ -68,6 +93,9 @@ class UpsertEventAPITest(TestCase):
             page.start,
             datetime(2026, 10, 17, 10, 0, tzinfo=HELSINKI),
         )
+        self.assertIsNotNone(page.image)
+        self.assertEqual(page.image.attribution_url, IMAGE_URL)
+        self.mock_get.assert_called_once()
 
     def test_update_event_page_by_slug(self):
         self._post(EVENT_PAYLOAD)
@@ -90,3 +118,28 @@ class UpsertEventAPITest(TestCase):
         self.assertEqual(response.json()['status'], 'unchanged')
         page.refresh_from_db()
         self.assertEqual(page.revisions.count(), revision_count)
+
+    def test_reuses_existing_image_for_same_url(self):
+        self._post(EVENT_PAYLOAD)
+        other = {
+            **EVENT_PAYLOAD,
+            'slug': 'other-event',
+            'title': 'Toinen tapahtuma',
+        }
+        response = self._post(other)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'created')
+
+        image_model = get_image_model()
+        self.assertEqual(image_model.objects.filter(attribution_url=IMAGE_URL).count(), 1)
+        self.assertEqual(self.mock_get.call_count, 1)
+
+        first = EventPage.objects.get(slug='tampere-syksy-26')
+        second = EventPage.objects.get(slug='other-event')
+        self.assertEqual(first.image_id, second.image_id)
+
+    def test_image_fetch_failure_returns_400(self):
+        self.mock_get.side_effect = requests.RequestException('network down')
+        response = self._post(EVENT_PAYLOAD)
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('image', response.json())
