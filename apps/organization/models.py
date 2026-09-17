@@ -6,6 +6,7 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.api import APIField
 from apps.home.normal_page import NormalPage, KalikosPage
 from .forms import JoinOrganizationForm
 from django.db import models
@@ -22,6 +23,15 @@ class JoinOrganizationPage(Page, KalikosPage):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
     ], use_json_field=True, blank=True)
+
+    api_fields = KalikosPage.api_fields + [
+        APIField('thank_you'),
+        APIField('form_instructions'),
+        APIField('email_help_text'),
+        APIField('city_help_text'),
+        APIField('submit_button_text'),
+        APIField('body'),
+    ]
     
     content_panels = Page.content_panels + [
         FieldPanel('title_image', classname="full"),

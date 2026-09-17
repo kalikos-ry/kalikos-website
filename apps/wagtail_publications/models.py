@@ -4,6 +4,7 @@ from django.utils import timezone
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, FieldRowPanel
+from wagtail.api import APIField
 from wagtail import images
 from apps.home.normal_page import NormalPage
 from apps.home.models import SnipcartSettings
@@ -29,6 +30,16 @@ class PublicationPage(Page):
     pdf_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     snipcart_digital_id = models.UUIDField(blank=True, null=True)
     weight = models.IntegerField(choices=WEIGHT_TYPES, blank=True, null=True)
+
+    api_fields = [
+        APIField('image'),
+        APIField('description'),
+        APIField('sku'),
+        APIField('price'),
+        APIField('pdf_price'),
+        APIField('weight'),
+        APIField('snipcart_digital_id'),
+    ]
     
     content_panels = Page.content_panels + [
         FieldPanel('image', classname="full"),
@@ -98,6 +109,19 @@ class IssuePage(Page):
     
     def url(self):
         return self.publication.url + "#" + self.title
+
+    api_fields = [
+        APIField('publication'),
+        APIField('contents'),
+        APIField('cover'),
+        APIField('publication_date'),
+        APIField('number'),
+        APIField('price'),
+        APIField('pdf_price'),
+        APIField('weight'),
+        APIField('sku'),
+        APIField('snipcart_digital_id'),
+    ]
     
     content_panels = Page.content_panels + [
         FieldPanel('publication', classname="full"),

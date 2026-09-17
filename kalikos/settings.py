@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'wagtailmenus',
     'wagtail_modeladmin', # For wagtailmenus
     "wagtail.api.v2",
+    'rest_framework',
 
     'modelcluster',
     'taggit',
@@ -203,6 +204,7 @@ MEDIA_ROOT = env('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 # Wagtail
 WAGTAIL_SITE_NAME = 'Kalikos'
 WAGTAILADMIN_BASE_URL = env('WAGTAILADMIN_BASE_URL', default='http://localhost:8000')
+WAGTAILAPI_BASE_URL = env('WAGTAILAPI_BASE_URL', default=WAGTAILADMIN_BASE_URL)
 WAGTAILIMAGES_IMAGE_MODEL = 'kalikos_site.KalikosImage'
 
 # Other

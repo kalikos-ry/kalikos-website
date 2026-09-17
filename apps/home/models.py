@@ -5,6 +5,7 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.api import APIField
 from wagtail import images
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
@@ -47,6 +48,13 @@ class HomePage(Page):
     #body = RichTextField(blank=True)
     # Editor panels configuration
 
+    api_fields = [
+        APIField('body'),
+        APIField('text_image'),
+        APIField('title_text'),
+        APIField('title_subtext'),
+    ]
+
     content_panels = Page.content_panels + [
         FieldPanel('text_image', classname="full"),
         FieldPanel('title_text', classname="full"),
@@ -61,6 +69,11 @@ class ContactsPage(NormalPage):
     @property
     def email(self):
         return BrandingSettings.objects.first().email
+
+    api_fields = NormalPage.api_fields + [
+        APIField('address'),
+        APIField('email'),
+    ]
     
     content_panels = Page.content_panels + [
         FieldPanel('title_image', classname="full"),

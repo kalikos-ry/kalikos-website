@@ -1,6 +1,7 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.admin.panels import FieldPanel
+from wagtail.api import APIField
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 from wagtail import images
 
@@ -29,6 +30,11 @@ class BrandingSettings(BaseGenericSetting):
 class KalikosImage(AbstractImage):
     attribution = models.CharField(max_length=500, blank=True)
     attribution_url = models.URLField(blank=True)
+
+    api_fields = [
+        APIField('attribution'),
+        APIField('attribution_url'),
+    ]
 
     admin_form_fields = Image.admin_form_fields + (
         # Then add the field names here to make them appear in the form:

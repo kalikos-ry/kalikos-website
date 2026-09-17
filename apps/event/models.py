@@ -4,6 +4,7 @@ from wagtail.models import Page, PageManager
 from wagtail.fields import RichTextField, StreamField
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.api import APIField
 from wagtail import images
 
 class EventStructValue(blocks.StructValue):
@@ -30,6 +31,11 @@ class EventIndexPage(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('events', EventsBlock()),
         ], use_json_field=True)
+
+    api_fields = [
+        APIField('title_image'),
+        APIField('body'),
+    ]
         
     content_panels = Page.content_panels + [
         FieldPanel('title_image', classname="full"),
@@ -63,7 +69,17 @@ class EventPage(Page):
     ], use_json_field=True, blank=True)
     
     objects = EventManager()
-    
+
+    api_fields = [
+        APIField('start'),
+        APIField('end'),
+        APIField('intro'),
+        APIField('description'),
+        APIField('image'),
+        APIField('location'),
+        APIField('location_exact'),
+        APIField('urls'),
+    ]
 
     # Editor panels configuration
 

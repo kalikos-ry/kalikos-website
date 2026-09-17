@@ -4,6 +4,7 @@ from wagtail import blocks
 from wagtail import hooks
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.api import APIField
 from wagtail.admin.viewsets.model import ModelViewSet
 from django import forms
 from wagtail import images
@@ -65,6 +66,11 @@ class PodcastPage(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('podcast', PodcastChooserBlock(template='podcast/podcast_block.html')),
         ], use_json_field=True, null=True)
+
+    api_fields = [
+        APIField('title_image'),
+        APIField('body'),
+    ]
     
     content_panels = Page.content_panels + [
         FieldPanel('title_image', classname="full"),
