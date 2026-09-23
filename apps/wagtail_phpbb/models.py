@@ -120,8 +120,10 @@ SELECT
     context['prev_skip'] = skip - page_size
     context['skip'] = skip
 
-    return self.render(request, context_overrides=context,
+    response = self.render(request, context_overrides=context,
       template='wagtail_phpbb/forum_search_page.html')
+    response['X-Robots-Tag'] = 'noindex, nofollow'
+    return response
 
   @path('<int:topic_id>/')
   def single_topic(self, request, topic_id):
@@ -166,8 +168,10 @@ SELECT
         cursor.execute(sql, params)
         result = cursor.fetchall()
         context['result'] = result
-    return self.render(request, context_overrides=context,
+    response = self.render(request, context_overrides=context,
       template='wagtail_phpbb/forum_topic.html')
+    response['X-Robots-Tag'] = 'noindex, nofollow'
+    return response
 
   def get_context(self, request, *args, **kwargs):
     context = super().get_context(request, *args, **kwargs)

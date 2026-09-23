@@ -1,3 +1,63 @@
+# Forum search (/foorumi/) is an unbounded crawl: each visit mints a new
+# sort seed, and author, forum, skip, and scope links multiply from there.
+# Disallow rules come first. A leading "Allow: /" lets first-match crawlers
+# treat the whole site as allowed and never apply the forum blocks.
+# These query keys are only used by the forum archive.
+
 User-agent: *
-Allow: /
 Disallow: /foorumi
+Disallow: /foorumi/
+Disallow: /foorumi?
+Disallow: /foorumi/?
+Disallow: /foorumi/*
+Disallow: /foorumi*?
+Disallow: /*?sort=
+Disallow: /*&sort=
+Disallow: /*?author=
+Disallow: /*&author=
+Disallow: /*?forum=
+Disallow: /*&forum=
+Disallow: /*?skip=
+Disallow: /*&skip=
+Disallow: /*?scope=
+Disallow: /*&scope=
+
+# Crawlers that often ignore the "*" group unless they are named.
+# Same forum blocks, plus a crawl delay so a miss still stays cheap.
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: MJ12bot
+User-agent: DotBot
+User-agent: BLEXBot
+User-agent: PetalBot
+User-agent: Bytespider
+User-agent: DataForSeoBot
+User-agent: SeekportBot
+User-agent: SEOkicks
+User-agent: MegaIndex
+User-agent: serpstatbot
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: PerplexityBot
+Crawl-delay: 20
+Disallow: /foorumi
+Disallow: /foorumi/
+Disallow: /foorumi?
+Disallow: /foorumi/?
+Disallow: /foorumi/*
+Disallow: /foorumi*?
+Disallow: /*?sort=
+Disallow: /*&sort=
+Disallow: /*?author=
+Disallow: /*&author=
+Disallow: /*?forum=
+Disallow: /*&forum=
+Disallow: /*?skip=
+Disallow: /*&skip=
+Disallow: /*?scope=
+Disallow: /*&scope=
