@@ -212,6 +212,8 @@ forum_url = env('FORUM_DATABASE_URL', default=None)
 if forum_url:
   FORUM_DATABASE = dj_database_url.parse(forum_url)
 
+KALIKOS_FORUM_DISABLED = env.bool('KALIKOS_FORUM_DISABLED', default=False)
+
 RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY', default='invalid')
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY', default='invalid')
 MEMBRA_API_TOKEN = env('MEMBRA_API_TOKEN', default=None)

@@ -2,10 +2,16 @@ from django.db import models
 from apps.home.normal_page import NormalPage
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from django.conf import settings
+from django.http import Http404
 import random
 import pymysql.cursors
 
 class ForumSearchPage(RoutablePageMixin, NormalPage):
+  def serve(self, request, *args, **kwargs):
+    if settings.KALIKOS_FORUM_DISABLED:
+      raise Http404()
+    return super().serve(request, *args, **kwargs)
+
   def get_connection(self):
     forum_db = settings.FORUM_DATABASE
     forum_db = {k.lower(): v for k, v in forum_db.items()}
